@@ -1,7 +1,4 @@
-package sample;
-
 import javafx.application.Application;
-import javafx.fxml.FXMLLoader;
 import javafx.scene.Group;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -17,7 +14,7 @@ import javafx.scene.image.Image;
 
 import java.awt.*;
 
-public class Main extends Application {
+public class Game extends Application {
 
     private static final int WIDTH = 800;
     private static final int HEIGHT = WIDTH;
@@ -25,7 +22,7 @@ public class Main extends Application {
     private static final int COLUMNS = ROWS;
     private static final int SQUARE_SIZE = WIDTH / ROWS;
 
-    private static final String pikachu = "/img/pikachu.png";
+    private static final String pikachu = "/resources/pikachu.png";
     private Image engimonImage;
     private final int engimonX = 7;
     private final int engimonY = 12;
