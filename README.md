@@ -1,2 +1,3 @@
 # engimon-java
-engimon, lagi
+Cara ngebuild:
+``` gradlew run``` atau ```./gradlew run```
