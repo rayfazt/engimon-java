@@ -1,7 +1,7 @@
-import java.util.*;
-import java.util.ArrayList;
-import java.util.List;
 import javafx.util.Pair;
+import java.util.*;
+import java.util.List;
+import java.util.ArrayList;
 
 public class Engimon {
     protected String name;
@@ -40,12 +40,11 @@ public class Engimon {
     }
 
     public Engimon(String name_, Species speciesName_, String namaPapa, String namaMama,
-                   Skill skill_, int X_, int Y_){
+                   ArrayList<Skill> skill_, int X_, int Y_){
         this.name = name_;
         this.speciesName = speciesName_;
         this.parent = new ArrayList<Pair<String, Species>>();
-        this.skills = new ArrayList<Skill>();
-        this.skills.add(skill_);
+        this.skills = skill_;
         this.level = 1;
         this.currExp = 0;
         this.maxExp = 100;
@@ -202,7 +201,7 @@ public class Engimon {
     public void setSkills(Skill newSkill){
         this.skills.add(newSkill);
     }
-    public List<Skill> getSkills(){
+    public ArrayList<Skill> getSkills(){
         return this.skills;
     }
 
@@ -210,7 +209,7 @@ public class Engimon {
     public void setElements(ElementType newElement){
         this.elements.add(newElement);
     }
-    public List<ElementType> getElements(){
+    public ArrayList<ElementType> getElements(){
         return this.elements;
     }
 
@@ -348,51 +347,19 @@ public class Engimon {
         System.out.println("Y: " + this.location.getY());
         System.out.println("Icon: " + this.icon);
     }
-    
-    @Override
-    public String toString() {
-        String engimonName = "Engimon Name: " + this.name;
-        String speciesName = "\nSpecies: " + this.speciesName;
-        String teksUnik = "\nTeksUnik: " + this.teksUnik;
-        String skills = "\nSkill(s): " + this.skills.get(0).getSkillName();
-        String elements = "\nElement(s): " + this.elements;
-        String level = "\nLevel: " + this.level;
-        String currentExp = "\nCurrent EXP: " + this.currExp;
-        String maxExp = "\nMax EXP: " + this.maxExp;
-        return engimonName+speciesName+teksUnik+skills+elements+level+currentExp+maxExp;
-    }
-    public ElementType getFirstElement() {
-        return this.elements.get(0);
-    }
-    public static Comparator<Engimon> engimonComparator = new Comparator<Engimon>() {
 
-        @Override
-        public int compare(Engimon e1, Engimon e2) {
-            // sort by level
-            Integer level1 = e1.getLevel();
-            Integer level2 = e2.getLevel();
-            // descending order
-            return level2.compareTo(level1);
-        }};
-    public boolean isSkillFull() {
-        return this.skills.size() == 4;
-    }
-    public void useSkill(Skill sk) {
-        this.skills.remove(sk);
-    }
-    public void replace(Skill skillLama, Skill skillBaru) {
-        for (Skill skill : this.skills) {
-            if (skill.getSkillName().equals(skillLama.getSkillName())) {
-                skillLama = skillBaru;
-            }
-        }
-    }
-    // public static void main(String args[]){
-    //     Engimon A = new Engimon();
-    //     A.printInfo();
-    //     A.setX(3);
-    //     A.printInfo();
-//        System.out.println("NEW ENGIMON");
+//    public static void main(String args[]){
+////        Engimon A = new Engimon();
+////        A.printInfo();
+////        A.setX(3);
+////        A.printInfo();
+////        System.out.println();
+//        Skill fireSkill = new Skill("FireSkill", 100, 1, ElementType.FIRE);
+////        A.learnSkill(fireSkill);
+////        System.out.println();
+////        A.printInfo();
+////        System.out.println("NEW ENGIMON");
+//        Skill waterSkill = new Skill("WaterSkill", 100, 1, ElementType.WATER);
 //        Engimon B = new Engimon("Haihai", Species.Mudtle, "New Daddy", "New Mommy",
 //                waterSkill,1, 1);
 //        B.printInfo();

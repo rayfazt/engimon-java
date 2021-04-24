@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+
 public class WildEngimon extends Engimon{
     protected int life;
     protected EngimonStatus status;
@@ -9,7 +11,7 @@ public class WildEngimon extends Engimon{
     }
 
     public WildEngimon(String name_, Species species_, String namaPapa_, String namaMama,
-                       Skill skill_, int X_, int Y_){
+                       ArrayList<Skill> skill_, int X_, int Y_){
         super(name_, species_, namaPapa_, namaMama, skill_, X_, Y_);
         this.life = 1;
         this.status = EngimonStatus.WILD;
@@ -34,8 +36,30 @@ public class WildEngimon extends Engimon{
         System.out.println("Species: " + this.speciesName);
         System.out.println("TeksUnik: " + this.teksUnik);
         System.out.println("Parent: " + this.parent);
-        System.out.println("Skill(s): " + this.skills.get(0).getSkillName());
-        System.out.println("Element(s): " + this.elements);
+        System.out.print("Skill(s): ");
+        for (int i = 0; i < this.skills.size(); i++){
+            if (i != this.skills.size()-1){
+                System.out.print(this.skills.get(i).getSkillName()+" (lv. " + this.skills.get(i).getMasteryLevel() + ")" +", ");
+            }
+            else{
+                System.out.print(this.skills.get(i).getSkillName()+" (lv. " + this.skills.get(i).getMasteryLevel() + ")");
+            }
+
+        }
+        System.out.println();
+
+        System.out.print("Element(s): ");
+        for (int i = 0; i < this.elements.size(); i++){
+            if (i != this.elements.size()-1){
+                System.out.print(this.elements.get(i)+", ");
+            }
+            else{
+                System.out.print(this.elements.get(i));
+            }
+
+        }
+        System.out.println();
+
         System.out.println("Level: " + this.level);
         System.out.println("Current EXP: " + this.currExp);
         System.out.println("Max EXP: " + this.maxExp);
