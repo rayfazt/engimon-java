@@ -49,6 +49,18 @@ public class Map {
         }
     }
 
+    public ArrayList<Point> getMap() {
+        return map;
+    }
+
+    public int getRow() {
+        return row;
+    }
+
+    public int getCol() {
+        return col;
+    }
+
     public void printMapPoints() {
         for (Point point : map) {
             point.printPoint();
