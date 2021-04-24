@@ -6,9 +6,9 @@ public class Map {
     private int col;
 
     public Map(String filename, String separator){
-        this.map = new ArrayList<Point>();
-        int i,j;
         try {
+            this.map = new ArrayList<Point>();
+            int i,j;
             MapReader mapRead = new MapReader(filename, separator);
             List<String[]> lines = mapRead.read();
             i = 0;
