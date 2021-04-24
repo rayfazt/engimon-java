@@ -1,5 +1,7 @@
 import java.util.*;
+import java.util.stream.Collectors;
 import javafx.util.Pair;
+
 
 public class Player {
     private Point location;
@@ -96,7 +98,7 @@ public class Player {
     public void setActiveEngimon(Engimon engi) {
         // Cari engimon
         boolean found = false;
-        List<Engimon> listEngimon = this.getEngimonInventory();
+        ArrayList<Engimon> listEngimon = this.getEngimonInventory();
         
         for (Engimon engimon : listEngimon) {
             if (engimon.getName().equals(engi.getName())){
@@ -110,7 +112,7 @@ public class Player {
             // tambahin current active engimon ke inventory
             listEngimon.addItem(this.getActiveEngimon());
             // remove active engimon yang baru dari inventory
-            listEngimon.delItem(engi);
+            listEngimon.
             // set active engimon baru
             this.activeEngimon = engi;
         }
@@ -135,22 +137,23 @@ public class Player {
         // Penentuan elemen dan spesies anak
         if(e1.getElements().get(0).getElementName() == e2.getElements().get(0).getElementName()){
             elAnak.add(e1.getElements().get(0));
-            spAnak = e1.getSpeciesName();
+            Species spAnak = e1.getSpeciesName();
+            
         }
         else{
             if(e1.getElements().get(0).getElementAdvantage(e2.getElements().get(0)) > 1){
                 elAnak.add(e1.getElements().get(0));
-                spAnak = e1.getSpeciesName();
+                Species spAnak = e1.getSpeciesName();
             }
             else{
                 if(e1.getElements().get(0).getElementAdvantage(e2.getElements().get(0)) == 1){
                     elAnak.add(e1.getElements().get(0));
                     elAnak.add(e2.getElements().get(0));
-                    spAnak = e1.findDualSpecies(e2.getElements().get(0));
+                    Species spAnak = e1.findDualSpecies(e2.getElements().get(0));
                 }
                 else{
                     elAnak.add(e2.getElements().get(0));
-                    spAnak = e2.getSpeciesName();
+                    Species spAnak = e2.getSpeciesName();
                 }
             }
         }
@@ -274,11 +277,21 @@ public class Player {
     }
 
     public void replaceSkillEngimon(Engimon engi, Skill skillLama, Skill skillBaru) {
-        //
+        if (engi.isSkillFull()) {
+            engi.replace(skillLama, skillBaru);
+        }
+        else {
+            cout << "Skill slot belum penuh" << endl;
+        }
     }
+
+    // TODO useSkillItem
     public void useSkillItem(Engimon engi, SkillItem s) {
         listSkill.delItem(s);
         // engimon learn skill
+        // remove dari Inventory terus pake ke engimonnya
+        // listSkill.removeItem(s);
+        // e.learnSkill(s);
     }
 
     public void sortSkillItem() {
@@ -286,6 +299,36 @@ public class Player {
     }
 
     public void sortEngimon() {
-        
+        // belom dites
+        listEngimon.inventoryList.sort(Engimon.engimonComparator);
+        Map<Integer,List<Engimon>> groupEngimonByElement = listEngimon.inventoryList.stream(Collectors.groupingBy(Engimon::getFirstElement));
+
+    }
+
+    // TODO delXSkillItem
+    public void delXSkillItem(Skill s, int x) {
+
+    }
+    
+    public void delEngimon(Engimon engi) {
+        listEngimon.delItem(engi);
+    }
+    
+    public void printCommands() {
+        System.out.println("Command yang tersedia: ");
+        System.out.println("w: bergerak satu petak ke atas");
+        System.out.println("a: bergerak satu petak ke kiri");
+        System.out.println("s: bergerak satu petak ke bawah");
+        System.out.println("d: bergerak satu petak ke kanan");
+        System.out.println("1: Menampilkan list engimon yang dimiliki");
+        System.out.println("2: Menampilkan data lengkap suatu engimon");
+        System.out.println("3: Mengecek active engimon");
+        System.out.println("4: Mengganti active engimon");
+        System.out.println("5: Menggunakan skill item pada suatu engimon");
+        System.out.println("6: Melaksanakan breeding antara dua engimon");
+        System.out.println("7: Membuang X amount dari suatu skill item atau melepaskan engimon inventory");
+        System.out.println("8: Mengganti nama dari suatu engimon yang ada di inventory");
+        System.out.println("9: Save game");
+
     }
 }

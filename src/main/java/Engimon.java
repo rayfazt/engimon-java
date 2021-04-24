@@ -302,11 +302,11 @@ public class Engimon {
         String maxExp = "\nMax EXP: " + this.maxExp;
         return engimonName+speciesName+teksUnik+skills+elements+level+currentExp+maxExp;
     }
-
+    public ElementType getFirstElement() {
+        return this.elements.get(0);
+    }
     public static Comparator<Engimon> engimonComparator = new Comparator<Engimon>() {
 
-<<<<<<< HEAD
-        @Override
         @Override
         public int compare(Engimon e1, Engimon e2) {
             // sort by level
@@ -315,20 +315,24 @@ public class Engimon {
             // descending order
             return level2.compareTo(level1);
         }};
-    
-    public static void main(String args[]){
-        Engimon A = new Engimon();
-        A.printInfo();
-        A.setX(3);
-        A.printInfo();
-=======
-//    public static void main(String args[]){
-//        Engimon A = new Engimon();
-//        A.printInfo();
-//        A.setX(3);
-//        A.printInfo();
-//        Skill defSkill = new Skill();
->>>>>>> 0be5b7f7728f3780924e0c45a352dd516e99bf1d
+    public boolean isSkillFull() {
+        return this.skills.size() == 4;
+    }
+    public void useSkill(Skill sk) {
+        this.skills.remove(sk);
+    }
+    public void replace(Skill skillLama, Skill skillBaru) {
+        for (Skill skill : this.skills) {
+            if (skill.getSkillName().equals(skillLama.getSkillName())) {
+                skillLama = skillBaru;
+            }
+        }
+    }
+    // public static void main(String args[]){
+    //     Engimon A = new Engimon();
+    //     A.printInfo();
+    //     A.setX(3);
+    //     A.printInfo();
 //        System.out.println("NEW ENGIMON");
 //        Engimon B = new Engimon("Haihai", Species.Mudtle, "New Daddy", "New Mommy",
 //                defSkill,1, 1);
