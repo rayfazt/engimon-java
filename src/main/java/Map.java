@@ -2,15 +2,19 @@ import java.util.*;
 
 public class Map {
     private ArrayList<Point> map; //Masih bingung ke game.java nya gmn
+    private int row;
+    private int col;
 
     public Map(String filename, String separator){
         this.map = new ArrayList<Point>();
+        int i,j;
         MapReader mapRead = new MapReader(filename, separator);
         try {
             List<String[]> lines = mapRead.read();
-            int i = 0;
+            i = 0;
+            j = 0; // supaya ga compile error
             for (String[] line : lines) {
-                int j = 0;
+                j = 0;
                 for (String point : line) {
                     int x = i;
                     int y = j;
@@ -36,6 +40,10 @@ public class Map {
                 }
                 i++;
             }
+
+            this.row = i;
+            this.col = j;
+
         } catch (Exception e) {
             System.out.println("File not found");
         }

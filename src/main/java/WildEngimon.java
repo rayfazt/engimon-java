@@ -1,0 +1,57 @@
+public class WildEngimon extends Engimon{
+    protected int life;
+    protected EngimonStatus status;
+
+    public WildEngimon(){
+        super();
+        this.life = 1;
+        this.status = EngimonStatus.WILD;
+    }
+
+    public WildEngimon(String name_, Species species_, String namaPapa_, String namaMama,
+                       Skill skill_, int X_, int Y_){
+        super(name_, species_, namaPapa_, namaMama, skill_, X_, Y_);
+        this.life = 1;
+        this.status = EngimonStatus.WILD;
+    }
+
+    // Setter & Getter life
+    public void setLife(int newLife){
+        this.life = newLife;
+    }
+    public int getLife(){
+        return this.life;
+    }
+
+    // Getter Status
+    public EngimonStatus getStatus(){
+        return this.status;
+    }
+
+    @Override
+    public void printInfo() {
+        System.out.println("Engimon Name: " + this.name);
+        System.out.println("Species: " + this.speciesName);
+        System.out.println("TeksUnik: " + this.teksUnik);
+        System.out.println("Parent: " + this.parent);
+        System.out.println("Skill(s): " + this.skills.get(0).getSkillName());
+        System.out.println("Element(s): " + this.elements);
+        System.out.println("Level: " + this.level);
+        System.out.println("Current EXP: " + this.currExp);
+        System.out.println("Max EXP: " + this.maxExp);
+        System.out.println("X: " + this.location.getX());
+        System.out.println("Y: " + this.location.getY());
+        System.out.println("Icon: " + this.icon);
+        System.out.println("Life: " + this.life);
+        System.out.println("Status: " + this.status);
+    }
+//    public static void main(String args[]){
+//        WildEngimon A = new WildEngimon();
+//        A.printInfo();
+//        System.out.println("NEW ENGIMON");
+//        Skill defSkill = new Skill();
+//        WildEngimon B = new WildEngimon("Haihai", Species.Mudtle, "New Daddy", "New Mommy",
+//                defSkill,1, 1);
+//        B.printInfo();
+//    }
+}
