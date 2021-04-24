@@ -20,10 +20,11 @@ public class Player {
     public Point getPlayerLocation() {
         return this.location;
     }
-    public void setPlayerLocation(Point p) {
-        // if (p.getX() < 0 || p.getX() > 9 || p.getY() < 0 || p.getY() > 11) {
-        //     throw "Tidak bisa keluar dari map";
-        // }
+    public void setPlayerLocation(Point p) throws OutOfMapException{
+        if (p.getX() < 0 || p.getX() > 9 || p.getY() < 0 || p.getY() > 11) // NOTE : angkanya nyesuain map
+        {
+            throw new OutOfMapException("Tidak bisa keluar dari map"); // ini kyknya diganti sama kelas exception
+        }
         this.location.setX(p.getX());
         this.location.setY(p.getY());
     }
@@ -37,7 +38,58 @@ public class Player {
     }
 
     public void move(char dir) {
-
+        if (dir == 'w') {
+            try
+            {
+                int x = getPlayerLocation().getX();
+                int y = getPlayerLocation().getY() - 1;
+                Point p = new Point(); // NOTE : ini blm  fix karena blum nyesuain ke map nya
+                setPlayerLocation(p); // Kalo ga valid dia throw
+            }
+            catch(OutOfMapException e)
+            {
+                System.out.println(e.getMessage());
+            }
+        }
+        else if (dir == 'a') {
+            try
+            {
+                int x = getPlayerLocation().getX() - 1;
+                int y = getPlayerLocation().getY();
+                Point p = new Point();
+                setPlayerLocation(p);
+            }
+            catch(OutOfMapException e)
+            {
+                System.out.println(e.getMessage());
+            }      
+        }
+        else if (dir == 's') {
+            try
+            {
+                int x = getPlayerLocation().getX();
+                int y = getPlayerLocation().getY() + 1;
+                Point p = new Point();
+                setPlayerLocation(p);            
+            }
+            catch(OutOfMapException e)
+            {
+                System.out.println(e.getMessage());
+            }
+        }
+        else if (dir == 'd') {
+            try
+            {
+                int x = getPlayerLocation().getX() + 1;
+                int y = getPlayerLocation().getY();
+                Point p = new Point(); 
+                setPlayerLocation(p);            
+            }
+            catch(OutOfMapException e)
+            {
+                System.out.println(e.getMessage());
+            }
+        }
     }
 
     public Engimon getActiveEngimon() {
@@ -45,7 +97,26 @@ public class Player {
     }
 
     public void setActiveEngimon(Engimon engi) {
-
+        // Cari engimon
+        bool found = false;
+        List<Engimon> listEngimon = this.getEngimonInventory();
+        
+        for (Engimon engimon : listEngimon) {
+            if (engimon.getName().equals(engi.getName())){
+                found = true;
+            }
+        }
+        if (!found) {
+            System.out.println("Engimon pilihan tidak ada di dalam inventory");;
+        }
+        else {
+            // tambahin current active engimon ke inventory
+            listEngimon.addItem(this.getActiveEngimon());
+            // remove active engimon yang baru dari inventory
+            listEngimon.removeItem(engi);
+            // set active engimon baru
+            this.activeEngimon = engi;
+        }
     }
 
     public void breed(Engimon e1, Engimon e2) {
@@ -86,8 +157,7 @@ public class Player {
         //
     }
     public void useSkillItem(Engimon engi, Skill s) {
-        // 
+        listSkill.delItem(s);
+        // engimon learn skill
     }
-    
-
 }
