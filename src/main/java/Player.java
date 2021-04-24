@@ -331,4 +331,26 @@ public class Player {
         System.out.println("9: Save game");
 
     }
+    public static void main(String[] args) {
+        // TODO testing groupby dan sort
+        Player pemain = new Player();
+        Skill fireSkill = new Skill("FireSkill", 100, 1, ElementType.FIRE);
+        Skill waterSkill = new Skill("WaterSkill", 50, 1, ElementType.WATER);
+        Skill electricSkill = new Skill("electric",250,1, ElementType.ELECTRIC);
+        SkillItem sk1 = new SkillItem(fireSkill,1);
+        SkillItem sk2 = new SkillItem(waterSkill,1);
+        SkillItem sk3 = new SkillItem(electricSkill,1);
+//        Inventory<SkillItem> invSkill = new Inventory<>();
+//        invSkill.addItem(sk1);
+//        invSkill.addItem(sk2);
+//        invSkill.addItem(sk3);
+        pemain.listSkill.addItem(sk1);
+        pemain.listSkill.addItem(sk2);
+        pemain.listSkill.addItem(sk3);
+        pemain.sortSkillItem();
+        pemain.printListSkillItem();
+
+
+
+    }
 }

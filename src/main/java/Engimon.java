@@ -271,6 +271,26 @@ public class Engimon {
             setMaxExp(getLevel()*100);
         }
     }
+    public boolean isSkillFull() {
+        return this.skills.size() == 4;
+    }
+    public void replace(Skill skillLama, Skill skillBaru) {
+        for (Skill skill:this.skills) {
+            if (skill.getSkillName().equals(skillLama.getSkillName())) {
+                skillLama = skillBaru;
+            }
+        }
+    }
+
+    public static Comparator<Engimon> engimonComparator = new Comparator<Engimon>() {
+
+        @Override
+        public int compare(Engimon e1, Engimon e2) {
+            Integer level1 = e1.getLevel();
+            Integer level2 = e2.getLevel();
+            // descending order
+            return level2.compareTo(level1);
+        }};
 
     public void learnSkill(Skill s){
         int count = 0;

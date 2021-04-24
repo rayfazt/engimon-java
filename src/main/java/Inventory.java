@@ -22,4 +22,5 @@ public class Inventory<T> {
     }
 
     // TODO groupBy
+
 }
