@@ -8,8 +8,8 @@ public class Map {
     public Map(String filename, String separator){
         this.map = new ArrayList<Point>();
         int i,j;
-        MapReader mapRead = new MapReader(filename, separator);
         try {
+            MapReader mapRead = new MapReader(filename, separator);
             List<String[]> lines = mapRead.read();
             i = 0;
             j = 0; // supaya ga compile error
@@ -45,7 +45,7 @@ public class Map {
             this.col = j;
 
         } catch (Exception e) {
-            System.out.println("File not found");
+            System.out.println(e.getMessage());
         }
     }
 
