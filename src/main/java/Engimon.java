@@ -1,6 +1,7 @@
 import javafx.util.Pair;
 import java.util.*;
 import java.util.List;
+import java.util.ArrayList;
 
 enum species {Charizard, Squirtle, Pikachu, Mudkip, Gabumon, Charkachu, Squirmon, Mudtle};
 
@@ -9,13 +10,13 @@ public class Engimon {
     protected species speciesName;
     protected String teksUnik;
     protected List<Pair<String, species>> parent;
-    protected List<String> skills;
+    protected List<Skill> skills;
     protected List<ElementType> elements;
 
     protected int level;
     protected int currExp;
     protected int maxExp;
-    protected List<Integer> location;
+    protected Point location;
     protected char icon;
 
     public Engimon(){
@@ -25,36 +26,33 @@ public class Engimon {
         this.parent = new ArrayList<Pair<String, species>>();
         this.parent.add(new Pair<String, species>("Daddy", species.Charizard));
         this.parent.add(new Pair<String, species>("Mommy", species.Charizard));
-        this.skills = new ArrayList<String>();
-        this.skills.add("Boom");
+        this.skills = new ArrayList<Skill>();
+        Skill defaultSkill = new Skill();
+        this.skills.add(defaultSkill);
         this.elements = new ArrayList<ElementType>();
         this.elements.add(ElementType.FIRE);
         this.level = 1;
         this.currExp = 0;
         this.maxExp = 100;
-        this.location = new ArrayList<Integer>();
-        this.location.add(0);
-        this.location.add(0);
+        this.location = new Point();
         this.icon = 'f';
     }
 
     public Engimon(String name_, species speciesName_, String namaPapa, species speciesPapa, String namaMama, species speciesMama,
-                   String skill_, ElementType elemen, int X_, int Y_){
+                   Skill skill_, ElementType elemen, int X_, int Y_){
         this.name = name_;
         this.speciesName = speciesName_;
         this.parent = new ArrayList<Pair<String, species>>();
         this.parent.add(new Pair<String, species>(namaPapa, speciesPapa));
         this.parent.add(new Pair<String, species>(namaMama, speciesMama));
-        this.skills = new ArrayList<String>();
+        this.skills = new ArrayList<Skill>();
         this.skills.add(skill_);
         this.elements = new ArrayList<ElementType>();
         this.elements.add(elemen);
         this.level = 1;
         this.currExp = 0;
         this.maxExp = 100;
-        this.location = new ArrayList<Integer>();
-        this.location.add(X_);
-        this.location.add(Y_);
+        this.location = new Point();
         if (this.speciesName == species.Charizard)
         {
             this.icon = 'f';
@@ -154,10 +152,10 @@ public class Engimon {
     }
 
     // Setter & Getter Skills
-    public void setSkills(String newSkill){
+    public void setSkills(Skill newSkill){
         this.skills.add(newSkill);
     }
-    public List<String> getSkills(){
+    public List<Skill> getSkills(){
         return this.skills;
     }
 
@@ -196,18 +194,18 @@ public class Engimon {
 
     // Setter & Getter X
     public void setX(int newX){
-        this.location.set(0, newX);
+        this.location.setX(newX);
     }
     public int getX(){
-        return this.location.get(0);
+        return this.location.getX();
     }
 
     // Setter & Getter Y
     public void setY(int newY){
-        this.location.set(1, newY);
+        this.location.setY(newY);
     }
     public int getY(){
-        return this.location.get(1);
+        return this.location.getY();
     }
 
     // Setter & Getter Icon
@@ -233,18 +231,21 @@ public class Engimon {
         System.out.println("Species: " + this.speciesName);
         System.out.println("TeksUnik: " + this.teksUnik);
         System.out.println("Parent: " + this.parent);
-        System.out.println("Skill(s): " + this.skills);
+        System.out.println("Skill(s): " + this.skills.get(0).getSkillName());
         System.out.println("Element(s): " + this.elements);
         System.out.println("Level: " + this.level);
         System.out.println("Current EXP: " + this.currExp);
         System.out.println("Max EXP: " + this.maxExp);
-        System.out.println("Location: " + this.location);
+        System.out.println("X: " + this.location.getX());
+        System.out.println("Y: " + this.location.getY());
         System.out.println("Icon: " + this.icon);
     }
 
-//    public static void main(String args[]){
-//        Engimon A = new Engimon();
-//        A.printInfo();
+    public static void main(String args[]){
+        Engimon A = new Engimon();
+        A.printInfo();
+        A.setX(3);
+        A.printInfo();
 //        System.out.println("NEW ENGIMON");
 //        Engimon B = new Engimon("Haihai", species.Charkachu, "New Daddy", species.Charkachu, "New Mommy", species.Charkachu,
 //                "BoomyBoom", ElementType.ELECTRIC,1, 1);
@@ -253,5 +254,5 @@ public class Engimon {
 //        B.updateEngimonLevel();
 //        System.out.println("AFTER LEVEL UP");
 //        B.printInfo();
-//    }
+    }
 }
