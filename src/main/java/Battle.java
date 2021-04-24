@@ -1,4 +1,3 @@
-import java.util.ArrayList;
 import java.util.*;
 
 public class Battle {
@@ -33,7 +32,7 @@ public class Battle {
         this.engimonWild.printInfo();
         System.out.println("!!!!!!!!!!POWER COMPARISON!!!!!!!!!!");
         System.out.println("Your Engimon's Power : " + this.powerPlayer);
-        System.out.print("Enemy Engimon's Power : " + this.powerWild);
+        System.out.println("Enemy Engimon's Power : " + this.powerWild);
     }
 
     public double battleAdvantage(Engimon engimonPlayer, Engimon engimonWild) {
@@ -41,10 +40,11 @@ public class Battle {
         List<ElementType> elementsWild = engimonWild.getElements();
 
         double maxAdv = 0;
+        double currAdv;
         for (ElementType elementPlayer : elementsPlayer) {
             Element elP = new Element(elementPlayer);
             for (ElementType elementWild : elementsWild) {
-                double currAdv = elP.getAdvantage(elementWild);
+                currAdv = elP.getAdvantage(elementWild);
                 if (currAdv > maxAdv) {
                     maxAdv = currAdv;
                 }
@@ -78,23 +78,24 @@ public class Battle {
             playerWin = true;
         }
 
-        System.out.println("Tes");
-
         if (playerWin) {
             // Jika engimon player menang, player akan mendapatkan engimon yang menjadi lawan jika inventory masih cukup.
             // Active engimon juga akan menerima experience point dengan besaran yang bebas (boleh statik atau menggunakan rumus tertentu).
             // Player juga akan mendapatkan Skill Item yang berada skill di slot pertama dari engimon musuh.
+            //System.out.println("Player wins");
         }
         else {
             int newLife = this.engimonPlayer.getLife() - 1;
             this.engimonPlayer.setLife(newLife);
+            //System.out.println("Sisa life player : " + newLife);
         }
     }
 
-    public static void main(String[] args) {
-        Player a = new Player();
-        WildEngimon w = new WildEngimon();
-        Battle b = new Battle(a, w);
-    }
+//    public static void main(String[] args) {
+//        Player a = new Player();
+//        WildEngimon w = new WildEngimon();
+//        Battle b = new Battle(a, w);
+//        b.commenceBattle();
+//    }
 
 }
