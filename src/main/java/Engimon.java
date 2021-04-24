@@ -1,11 +1,10 @@
-import javafx.util.Pair;
-import java.util.*;
-import java.util.List;
 import java.util.ArrayList;
+import java.util.List;
+import javafx.util.Pair;
 
 enum species {Charizard, Squirtle, Pikachu, Mudkip, Gabumon, Charkachu, Squirmon, Mudtle};
 
-public class Engimon {
+public class Engimon extends InventoryItem {
     protected String name;
     protected species speciesName;
     protected String teksUnik;
