@@ -22,7 +22,7 @@ public class Game extends Application {
     private static final int COLUMNS = ROWS;
     private static final int SQUARE_SIZE = WIDTH / ROWS;
 
-    private static final String pikachu = "/resources/pikachu.png";
+    private static final String pikachu = "main/resources/pikachu.png";
     private Image engimonImage;
     private final int engimonX = 7;
     private final int engimonY = 12;
