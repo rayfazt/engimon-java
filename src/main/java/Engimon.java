@@ -1,17 +1,15 @@
+import java.util.*;
 import java.util.ArrayList;
-import java.util.Comparator;
 import java.util.List;
 import javafx.util.Pair;
-
-enum species {Charizard, Squirtle, Pikachu, Mudkip, Gabumon, Charkachu, Squirmon, Mudtle};
 
 public class Engimon {
     protected String name;
     protected Species speciesName;
     protected String teksUnik;
-    protected List<Pair<String, Species>> parent;
-    protected List<Skill> skills;
-    protected List<ElementType> elements;
+    protected ArrayList<Pair<String, Species>> parent;
+    protected ArrayList<Skill> skills;
+    protected ArrayList<ElementType> elements;
     protected Species speciesPapa;
     protected Species speciesMama;
     protected int level;
@@ -275,13 +273,74 @@ public class Engimon {
         }
     }
 
+    public void learnSkill(Skill s){
+        int count = 0;
+        boolean found = false;
+        boolean learned = false;
+        boolean compatible = false;
+        while (count < this.skills.size() && !learned){
+            if (this.skills.get(count).getSkillName() == s.getSkillName()){
+                learned = true;
+            }
+            count++;
+        }
+
+        if (!learned){
+            for (int i = 0; i < s.getLearnableElements().size(); i++){
+                for (int j = 0; j < this.elements.size(); j++){
+                    if (this.elements.get(j) == s.getLearnableElements().get(i)){
+                        compatible = true;
+                    }
+                }
+            }
+        }
+
+        if (!learned){
+            if (compatible == true){
+                learned = true;
+                s.setMasteryLevel(1);
+                setSkills(s);
+                System.out.println("Skill dipelajari");
+            }
+            else{
+                System.out.println("Elemen tidak kompatibel");
+            }
+        }
+        else{
+            System.out.println("Skill sudah dipelajari");
+        }
+
+    }
+
     public void printInfo() {
         System.out.println("Engimon Name: " + this.name);
         System.out.println("Species: " + this.speciesName);
         System.out.println("TeksUnik: " + this.teksUnik);
         System.out.println("Parent: " + this.parent);
-        System.out.println("Skill(s): " + this.skills.get(0).getSkillName());
-        System.out.println("Element(s): " + this.elements);
+        System.out.print("Skill(s): ");
+        for (int i = 0; i < this.skills.size(); i++){
+            if (i != this.skills.size()-1){
+                System.out.print(this.skills.get(i).getSkillName()+" (lv. " + this.skills.get(i).getMasteryLevel() + ")" +", ");
+            }
+            else{
+                System.out.print(this.skills.get(i).getSkillName()+" (lv. " + this.skills.get(i).getMasteryLevel() + ")");
+            }
+
+        }
+        System.out.println();
+
+        System.out.print("Element(s): ");
+        for (int i = 0; i < this.elements.size(); i++){
+            if (i != this.elements.size()-1){
+                System.out.print(this.elements.get(i)+", ");
+            }
+            else{
+                System.out.print(this.elements.get(i));
+            }
+
+        }
+        System.out.println();
+
         System.out.println("Level: " + this.level);
         System.out.println("Current EXP: " + this.currExp);
         System.out.println("Max EXP: " + this.maxExp);
@@ -335,12 +394,12 @@ public class Engimon {
     //     A.printInfo();
 //        System.out.println("NEW ENGIMON");
 //        Engimon B = new Engimon("Haihai", Species.Mudtle, "New Daddy", "New Mommy",
-//                defSkill,1, 1);
+//                waterSkill,1, 1);
 //        B.printInfo();
-////        B.printInfo();
-////        B.setCurrExp(102);
-////        B.updateEngimonLevel();
-////        System.out.println("AFTER LEVEL UP");
-////        B.printInfo();
-    }
-//}
+//        B.setCurrExp(102);
+//        B.updateEngimonLevel();
+//        B.learnSkill(fireSkill);
+//        System.out.println("AFTER LEVEL UP & LEARN NEW SKILL");
+//        B.printInfo();
+//    }
+}
