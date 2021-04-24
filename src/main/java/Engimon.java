@@ -1,10 +1,11 @@
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 import javafx.util.Pair;
 
 enum species {Charizard, Squirtle, Pikachu, Mudkip, Gabumon, Charkachu, Squirmon, Mudtle};
 
-public class Engimon extends InventoryItem {
+public class Engimon {
     protected String name;
     protected species speciesName;
     protected String teksUnik;
@@ -239,7 +240,31 @@ public class Engimon extends InventoryItem {
         System.out.println("Y: " + this.location.getY());
         System.out.println("Icon: " + this.icon);
     }
+    
+    @Override
+    public String toString() {
+        String engimonName = "Engimon Name: " + this.name;
+        String speciesName = "\nSpecies: " + this.speciesName;
+        String teksUnik = "\nTeksUnik: " + this.teksUnik;
+        String skills = "\nSkill(s): " + this.skills.get(0).getSkillName();
+        String elements = "\nElement(s): " + this.elements;
+        String level = "\nLevel: " + this.level;
+        String currentExp = "\nCurrent EXP: " + this.currExp;
+        String maxExp = "\nMax EXP: " + this.maxExp;
+        return engimonName+speciesName+teksUnik+skills+elements+level+currentExp+maxExp;
+    }
 
+    public static Comparator<Engimon> engimonComparator = new Comparator<Engimon>() {
+
+        @Override
+        public int compare(Engimon e1, Engimon e2) {
+            // sort by level
+            Integer level1 = e1.getLevel();
+            Integer level2 = e2.getLevel();
+            // descending order
+            return level2.compareTo(level1);
+        }};
+    
     public static void main(String args[]){
         Engimon A = new Engimon();
         A.printInfo();

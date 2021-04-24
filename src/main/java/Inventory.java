@@ -1,6 +1,6 @@
 import java.util.ArrayList;
 
-public class Inventory<T extends InventoryItem> {
+public class Inventory<T> {
     ArrayList<T> inventoryList;
     public Inventory() {
         inventoryList = new ArrayList<T>();
@@ -13,13 +13,13 @@ public class Inventory<T extends InventoryItem> {
         inventoryList.add(item);
     }
     public void delItem(T item) {
-        inventoryList.remove(item); // kenapa ambiguous
+        inventoryList.remove(item); // kenapa ambiguous tadi
     }
     public void printInventory() {
         for (T t : inventoryList) {
-            System.out.println(t.printInfo());
+            System.out.println(t.toString());
         }
     }
 
-    // TODO groupBy, sortBy
+    // TODO groupBy
 }

@@ -98,7 +98,7 @@ public class Player {
 
     public void setActiveEngimon(Engimon engi) {
         // Cari engimon
-        bool found = false;
+        boolean found = false;
         List<Engimon> listEngimon = this.getEngimonInventory();
         
         for (Engimon engimon : listEngimon) {
@@ -107,13 +107,13 @@ public class Player {
             }
         }
         if (!found) {
-            System.out.println("Engimon pilihan tidak ada di dalam inventory");;
+            System.out.println("Engimon pilihan tidak ada di dalam inventory");
         }
         else {
             // tambahin current active engimon ke inventory
             listEngimon.addItem(this.getActiveEngimon());
             // remove active engimon yang baru dari inventory
-            listEngimon.removeItem(engi);
+            listEngimon.delItem(engi);
             // set active engimon baru
             this.activeEngimon = engi;
         }
@@ -157,7 +157,15 @@ public class Player {
         //
     }
     public void useSkillItem(Engimon engi, Skill s) {
-        listSkill.delItem(s);
+        // listSkill.delItem(s);
         // engimon learn skill
+    }
+
+    public void sortSkillItem() {
+        listSkill.inventoryList.sort(SkillItem.skillItemComparator);
+    }
+
+    public void sortEngimon() {
+        
     }
 }
