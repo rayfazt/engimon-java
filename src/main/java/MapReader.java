@@ -6,6 +6,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class MapReader {
+    /* 
+    Format File txt
+    m --> Mountains
+    s --> Sea
+    g --> Grassland
+    t --> Tundra
+    */
+
     private File txtFile;
     private String separator;
     
