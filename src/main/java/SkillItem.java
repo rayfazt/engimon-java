@@ -1,4 +1,4 @@
-public class SkillItem {
+public class SkillItem extends InventoryItem {
     private Skill skill;
     private int amount;
 
@@ -17,7 +17,7 @@ public class SkillItem {
     public void delSkillItem(int amount) {
         this.amount -= amount;
     }
-    public void printSkillItemInfo() {
+    public void printInfo() {
         System.out.println("Skill: "+ this.getSkill().getSkillName());
         System.out.println("Jumlah: "+ this.getSkillAmount());
     }
