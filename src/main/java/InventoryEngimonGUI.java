@@ -9,6 +9,8 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import javafx.util.Pair;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 
 import java.util.ArrayList;
 
@@ -82,6 +84,24 @@ public class InventoryEngimonGUI extends Application {
         nameEngimonColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
         // Species name column
         // ini nanti pengennya pake gambar gitu sih
+//        TableColumn<Engimon, ImageView> photoEngimonColumn = new TableColumn<Engimon, ImageView>("Photo");
+//        photoEngimonColumn.setMinWidth(200);
+//        photoEngimonColumn.setCellValueFactory(new PropertyValueFactory<Engimon,ImageView>("photo"));
+//        photoEngimonColumn.setPrefWidth(100);
+//        /* initialize two CustomImage objects and add them to the observable list */
+//        ObservableList<CustomImage> imgList = FXCollections.observableArrayList();
+//        CustomImage item_1 = new CustomImage(new ImageView(new Image("Icon_AddNewPatient.png")));
+//        CustomImage item_2 = new CustomImage(new ImageView(new Image("Icon_EditPatient.png")));
+//        imgList.addAll(item_1, item_2);
+//
+//        /* initialize and specify table column */
+//        TableColumn<CustomImage, ImageView> firstColumn = new TableColumn<CustomImage, ImageView>("Images");
+//        firstColumn.setCellValueFactory(new PropertyValueFactory<CustomImage, ImageView>("image"));
+//        firstColumn.setPrefWidth(60);
+
+//        /* add column to the tableview and set its items */
+//        tableview.getColumns().add(firstColumn);
+//        tableview.setItems(imgList);
 
         // Teksunik (?) gausah sih
         TableColumn<Engimon, String> teksUnikColumn = new TableColumn<>("Teks Unik");

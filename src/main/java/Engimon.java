@@ -1,7 +1,8 @@
 import java.util.*;
 import java.util.ArrayList;
 import javafx.util.Pair;
-
+import javafx.scene.image.ImageView;
+import javafx.scene.image.Image;
 public class Engimon {
     protected String name;
     protected Species speciesName;
@@ -16,6 +17,8 @@ public class Engimon {
     protected int maxExp;
     protected Point location;
     protected char icon;
+    protected String imagePath;
+    protected ImageView photo;
 
     public Engimon(){
         this.name = "Engimomon";
@@ -36,10 +39,14 @@ public class Engimon {
         this.maxExp = 100;
         this.location = new Point();
         this.icon = 'f';
+        this.imagePath = "main/resources/pikachu.png";
+        this.photo = new ImageView(new Image(imagePath));
     }
 
     public Engimon(String name_, Species speciesName_, String namaPapa, String namaMama,
                    ArrayList<Skill> skill_, int X_, int Y_){
+        String path = "main/resources/";
+        String png = ".png";
         this.name = name_;
         this.speciesName = speciesName_;
         this.parent = new ArrayList<Pair<String, Species>>();
@@ -58,6 +65,7 @@ public class Engimon {
             this.speciesMama = Species.Charizard;
             this.parent.add(new Pair<String, Species>(namaPapa, this.speciesPapa));
             this.parent.add(new Pair<String, Species>(namaMama, this.speciesMama));
+            this.imagePath = path+"charizard"+png;
         }
         else if (this.speciesName == Species.Squirtle)
         {
@@ -69,6 +77,8 @@ public class Engimon {
             this.speciesMama = Species.Squirtle;
             this.parent.add(new Pair<String, Species>(namaPapa, this.speciesPapa));
             this.parent.add(new Pair<String, Species>(namaMama, this.speciesMama));
+            this.imagePath = path+"squirtle"+png;
+
         }
         else if (this.speciesName == Species.Pikachu)
         {
@@ -80,6 +90,8 @@ public class Engimon {
             this.speciesMama = Species.Pikachu;
             this.parent.add(new Pair<String, Species>(namaPapa, this.speciesPapa));
             this.parent.add(new Pair<String, Species>(namaMama, this.speciesMama));
+            this.imagePath = path+"pikachu"+png;
+
         }
         else if (this.speciesName == Species.Mudkip)
         {
@@ -91,6 +103,8 @@ public class Engimon {
             this.speciesMama = Species.Mudkip;
             this.parent.add(new Pair<String, Species>(namaPapa, this.speciesPapa));
             this.parent.add(new Pair<String, Species>(namaMama, this.speciesMama));
+            this.imagePath = path+"mudkip"+png;
+
         }
         else if (this.speciesName == Species.Gabumon)
         {
@@ -102,6 +116,7 @@ public class Engimon {
             this.speciesMama = Species.Gabumon;
             this.parent.add(new Pair<String, Species>(namaPapa, this.speciesPapa));
             this.parent.add(new Pair<String, Species>(namaMama, this.speciesMama));
+            this.imagePath = path+"gabumon"+png;
         }
         else if (this.speciesName == Species.Charkachu)
         {
@@ -113,6 +128,8 @@ public class Engimon {
             this.speciesPapa = Species.Charizard;
             this.speciesMama = Species.Pikachu;
             this.parent.add(new Pair<String, Species>(namaPapa, this.speciesPapa));
+            this.imagePath = path+"charkachu"+png;
+
         }
         else if (this.speciesName == Species.Squirmon)
         {
@@ -125,6 +142,8 @@ public class Engimon {
             this.speciesMama = Species.Gabumon;
             this.parent.add(new Pair<String, Species>(namaPapa, this.speciesPapa));
             this.parent.add(new Pair<String, Species>(namaMama, this.speciesMama));
+            this.imagePath = path+"squirmon"+png;
+
         }
         else if (this.speciesName == Species.Mudtle)
         {
@@ -137,7 +156,11 @@ public class Engimon {
             this.speciesMama = Species.Squirtle;
             this.parent.add(new Pair<String, Species>(namaPapa, this.speciesPapa));
             this.parent.add(new Pair<String, Species>(namaMama, this.speciesMama));
+            this.imagePath = path+"mudtle"+png;
+
         }
+        this.photo = new ImageView(new Image(imagePath));
+
     }
 
     public Engimon(String name_, Species speciesName_, String namaPapa, String namaMama, 
@@ -150,12 +173,16 @@ public class Engimon {
         this.currExp = 0;
         this.maxExp = 100;
         this.location = new Point();
+        String path = "main/resources/";
+        String png = ".png";
         if (this.speciesName == Species.Charizard)
         {
             this.icon = 'f';
             this.teksUnik = "charrrizard_";
             this.elements = new ArrayList<ElementType>();
             this.elements.add(ElementType.FIRE);
+            this.imagePath = path+"charizard"+png;
+
         }
         else if (this.speciesName == Species.Squirtle)
         {
@@ -163,6 +190,8 @@ public class Engimon {
             this.teksUnik = "squirtle_";
             this.elements = new ArrayList<ElementType>();
             this.elements.add(ElementType.WATER);
+            this.imagePath = path+"squirtle"+png;
+
         }
         else if (this.speciesName == Species.Pikachu)
         {
@@ -170,6 +199,8 @@ public class Engimon {
             this.teksUnik = "pikachu_";
             this.elements = new ArrayList<ElementType>();
             this.elements.add(ElementType.ELECTRIC);
+            this.imagePath = path+"pikachu"+png;
+
         }
         else if (this.speciesName == Species.Mudkip)
         {
@@ -177,6 +208,8 @@ public class Engimon {
             this.teksUnik = "mudkip_";
             this.elements = new ArrayList<ElementType>();
             this.elements.add(ElementType.GROUND);
+            this.imagePath = path+"mudkip"+png;
+
         }
         else if (this.speciesName == Species.Gabumon)
         {
@@ -184,6 +217,8 @@ public class Engimon {
             this.teksUnik = "gabumon_";
             this.elements = new ArrayList<ElementType>();
             this.elements.add(ElementType.ICE);
+            this.imagePath = path+"gabumon"+png;
+
         }
         else if (this.speciesName == Species.Charkachu)
         {
@@ -192,6 +227,8 @@ public class Engimon {
             this.elements = new ArrayList<ElementType>();
             this.elements.add(ElementType.FIRE);
             this.elements.add(ElementType.ELECTRIC);
+            this.imagePath = path+"charkachu"+png;
+
         }
         else if (this.speciesName == Species.Squirmon)
         {
@@ -200,6 +237,8 @@ public class Engimon {
             this.elements = new ArrayList<ElementType>();
             this.elements.add(ElementType.WATER);
             this.elements.add(ElementType.ICE);
+            this.imagePath = path+"squirmon"+png;
+
         }
         else if (this.speciesName == Species.Mudtle)
         {
@@ -208,9 +247,13 @@ public class Engimon {
             this.elements = new ArrayList<ElementType>();
             this.elements.add(ElementType.WATER);
             this.elements.add(ElementType.GROUND);
+            this.imagePath = path+"mudtle"+png;
+
         }
         this.parent.add(new Pair<String, Species>(namaPapa, speciesPapa));
         this.parent.add(new Pair<String, Species>(namaMama, speciesMama));
+        this.photo = new ImageView(new Image(imagePath));
+
     }
 
     // Setter & Getter name
@@ -338,7 +381,10 @@ public class Engimon {
     public char getIcon(){
         return this.icon;
     }
-
+    // Getter imagePath
+    public String getImagePath() {
+        return this.imagePath;
+    }
     public void updateEngimonLevel(){
         if (this.currExp > this.maxExp){
             // int currExp_ = this.currExp % this.maxExp;
@@ -472,68 +518,68 @@ public class Engimon {
         System.out.println("Icon: " + this.icon);
     }
 
-    public Species findDualSpecies(ElementType elType){
-        switch (this.elements.get(0))
-        {
-            case ElementType.FIRE:
-                switch (elType)
-                {
-                case ElementType.ELECTRIC:
-                    return Species.Charkachu;
-                
-                default:
-                    break;
-                }
-                break;
-            
-            case ElementType.WATER:
-                switch (elType)
-                {
-                case ElementType.GROUND:
-                    return Species.Mudtle;
-                
-                case ElementType.ICE:
-                    return Species.Squirmon;
-    
-                default:
-                    break;
-                }
-            
-            case ElementType.ElType.ELECTRIC:
-                switch (elType)
-                {
-                case ElementType.FIRE:
-                    return Species.Charkachu;
-    
-                default:
-                    break;
-                }
-    
-            case ElementType.ICE:
-                switch (elType)
-                {
-                case ElementType.WATER:
-                    return Species.Squirmon;
-    
-                default:
-                    break;
-                }
-    
-            case ElementType.GROUND:
-                switch (elType)
-                {
-                case ElementType.WATER:
-                    return Species.Mudtle;
-    
-                default:
-                    break;
-                }
-            
-            //default: return NULL; null gakebaca di spesies
-            default: return Species.Charkachu;
-        }
-        //default: return NULL
-    }
+//    public Species findDualSpecies(ElementType elType){
+//        switch (this.elements.get(0))
+//        {
+//            case FIRE:
+//                switch (elType)
+//                {
+//                case ELECTRIC:
+//                    return Species.Charkachu;
+//
+//                default:
+//                    break;
+//                }
+//                break;
+//
+//            case WATER:
+//                switch (elType)
+//                {
+//                case GROUND:
+//                    return Species.Mudtle;
+//
+//                case ICE:
+//                    return Species.Squirmon;
+//
+//                default:
+//                    break;
+//                }
+//
+//            case ELECTRIC:
+//                switch (elType)
+//                {
+//                case FIRE:
+//                    return Species.Charkachu;
+//
+//                default:
+//                    break;
+//                }
+//
+//            case ICE:
+//                switch (elType)
+//                {
+//                case WATER:
+//                    return Species.Squirmon;
+//
+//                default:
+//                    break;
+//                }
+//
+//            case GROUND:
+//                switch (elType)
+//                {
+//                case WATER:
+//                    return Species.Mudtle;
+//
+//                default:
+//                    break;
+//                }
+//
+//            //default: return NULL; null gakebaca di spesies
+//            default: return Species.Charkachu;
+//        }
+//        //default: return NULL
+//    }
 
     public static void main(String args[]){
 //        Engimon A = new Engimon();
