@@ -68,4 +68,11 @@ public class Element {
                 return 0;
         }
     }
+
+    @Override
+    public String toString() {
+        return "Element{" +
+                "type=" + type +
+                '}';
+    }
 }

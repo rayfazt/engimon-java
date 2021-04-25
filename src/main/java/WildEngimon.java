@@ -69,13 +69,23 @@ public class WildEngimon extends Engimon{
         System.out.println("Life: " + this.life);
         System.out.println("Status: " + this.status);
     }
-//    public static void main(String args[]){
-//        WildEngimon A = new WildEngimon();
-//        A.printInfo();
-//        System.out.println("NEW ENGIMON");
+
+    @Override
+    public String toString() {
+        String engimonString = super.toString();
+        return engimonString + "\nWildEngimon{" +
+                "life=" + life +
+                ", status=" + status +
+                '}';
+    }
+        public static void main(String args[]){
+        WildEngimon A = new WildEngimon();
+        // A.printInfo();
+            System.out.println(A.toString());
+            System.out.println("NEW ENGIMON");
 //        Skill defSkill = new Skill();
 //        WildEngimon B = new WildEngimon("Haihai", Species.Mudtle, "New Daddy", "New Mommy",
 //                defSkill,1, 1);
 //        B.printInfo();
-//    }
+    }
 }

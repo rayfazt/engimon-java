@@ -43,4 +43,14 @@ public class Point {
         System.out.println("Coordinate: " + "(" + this.x + "," + this.y + ")");
         System.out.println("Type: " + this.type);
     }
+
+    @Override
+    public String toString() {
+        return "Coordinate: (" + x + "," + y + ")\nType: " + type;
+    }
+
+    public static void main(String[] args) {
+        Point a = new Point();
+        System.out.println(a.toString());
+    }
 }

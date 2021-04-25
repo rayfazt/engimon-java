@@ -90,8 +90,17 @@ public class PlayerEngimon extends Engimon{
         System.out.println("Status: " + this.status);
     }
 
+    @Override
+    public String toString() {
+        String engimonString = super.toString();
+        return engimonString + "\nPlayerEngimon{" +
+                "life=" + life +
+                ", status=" + status +
+                ", active=" + active +
+                '}';
+    }
 
-//    public static void main(String args[]){
+    //    public static void main(String args[]){
 ////        PlayerEngimon A = new PlayerEngimon();
 ////        A.printInfo();
 ////        System.out.println("NEW ENGIMON");

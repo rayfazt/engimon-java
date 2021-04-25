@@ -18,7 +18,7 @@ public class Engimon {
     protected Point location;
     protected char icon;
     protected String imagePath;
-    protected ImageView photo;
+//    protected ImageView photo;
 
     public Engimon(){
         this.name = "Engimomon";
@@ -40,7 +40,7 @@ public class Engimon {
         this.location = new Point();
         this.icon = 'f';
         this.imagePath = "main/resources/pikachu.png";
-        this.photo = new ImageView(new Image(imagePath));
+//        this.photo = new ImageView(new Image(imagePath));
     }
 
     public Engimon(String name_, Species speciesName_, String namaPapa, String namaMama,
@@ -159,7 +159,7 @@ public class Engimon {
             this.imagePath = path+"mudtle"+png;
 
         }
-        this.photo = new ImageView(new Image(imagePath));
+//        this.photo = new ImageView(new Image(imagePath));
 
     }
 
@@ -252,7 +252,7 @@ public class Engimon {
         }
         this.parent.add(new Pair<String, Species>(namaPapa, speciesPapa));
         this.parent.add(new Pair<String, Species>(namaMama, speciesMama));
-        this.photo = new ImageView(new Image(imagePath));
+//        this.photo = new ImageView(new Image(imagePath));
 
     }
 
@@ -489,6 +489,7 @@ public class Engimon {
                 ", maxExp=" + maxExp +
 //                ", location=" + location +
 //                ", icon=" + icon +
+//                ", imagePath='" + imagePath + '\'' +
                 '}';
     }
 

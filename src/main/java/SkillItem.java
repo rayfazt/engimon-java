@@ -20,7 +20,7 @@ public class SkillItem {
     }
     @Override
     public String toString() {
-        return "Skill: " + this.getSkill().getSkillName() + "\n Jumlah: "+this.getSkillAmount();
+        return "Skill: " + this.getSkill().getSkillName() + "\nJumlah: "+this.getSkillAmount();
     }
     // public void printInfo() {
     //     System.out.println("Skill: "+ this.getSkill().getSkillName());
@@ -51,6 +51,8 @@ public class SkillItem {
         }};
 
     public static void main(String[] args) {
+        SkillItem a = new SkillItem();
+        System.out.println(a.toString());
 
     }
 }

@@ -376,7 +376,6 @@ public class Player {
         }
     }
 
-    // TODO useSkillItem
     public void useSkillItem(Engimon engi, SkillItem s) {
         // remove dari Inventory terus pake ke engimonnya
         delXSkillItem(s.getSkill().getSkillName(),1);
@@ -415,6 +414,22 @@ public class Player {
         System.out.println("9: Save game");
 
     }
+    public String commandsString() {
+        // TODO commandsString
+        return "";
+    }
+    @Override
+    public String toString() {
+        return "Player{" +
+                "location=" + location +
+                ", icon=" + icon +
+                ", activeEngimon=" + activeEngimon +
+                ", listSkill=" + listSkill +
+                ", listEngimon=" + listEngimon +
+                ", maxCapacity=" + maxCapacity +
+                '}';
+    }
+
     public static void main(String[] args) {
         Player pemain = new Player();
         Skill fireSkill = new Skill("FireSkill", 100, 1, ElementType.FIRE);

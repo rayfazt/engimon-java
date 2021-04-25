@@ -36,6 +36,21 @@ public class Battle {
 
     }
 
+//    @Override
+//    public String toString() {
+//        return "Battle{" +
+//                "player=" + player +
+//                ", engimonPlayer=" + engimonPlayer +
+//                ", engimonWild=" + engimonWild +
+//                ", levelPlayer=" + levelPlayer +
+//                ", levelWild=" + levelWild +
+//                ", powerPlayer=" + powerPlayer +
+//                ", powerWild=" + powerWild +
+//                ", advantagePlayer=" + advantagePlayer +
+//                ", advantageWild=" + advantageWild +
+//                '}';
+//    }
+
     public String getChoice() {
         Scanner sc = new Scanner(System.in);
         System.out.println("Would you like to commence battle(y/n)?");

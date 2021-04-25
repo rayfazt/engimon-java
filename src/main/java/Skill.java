@@ -50,4 +50,9 @@ public class Skill {
                 ", learnableElements=" + learnableElements +
                 '}';
     }
+
+    public static void main(String[] args) {
+        Skill a = new Skill();
+        System.out.println(a.toString());
+    }
 }
