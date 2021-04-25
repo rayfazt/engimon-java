@@ -20,7 +20,7 @@ import java.util.ArrayList;
 
 public class Game extends Application {
 
-    private String mapFile = "main/resources/test.txt";
+    private String mapFile = "src/main/resources/test.txt";
     private Map map = new Map(mapFile, "");
 
     private final int ROWS = map.getRow();
@@ -31,8 +31,8 @@ public class Game extends Application {
 
     private static final String pikachu = "main/resources/pikachu.png";
     private Image engimonImage;
-    private int engimonX = 7;
-    private int engimonY = 12;
+    private int engimonX = 5;
+    private int engimonY = 7;
 
     private GraphicsContext gc;
 
