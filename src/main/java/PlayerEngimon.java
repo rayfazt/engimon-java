@@ -10,6 +10,7 @@ public class PlayerEngimon extends Engimon{
         this.life = 3;
         this.status = EngimonStatus.PLAYER;
         this.active = false;
+        this.imagePath = ""; // TODO image buat playerEngimon
     }
 
     public PlayerEngimon(String name_, Species species_, String namaPapa_, String namaMama,

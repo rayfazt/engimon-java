@@ -1,5 +1,6 @@
 import java.util.*;
 import java.util.Map;
+import java.util.Map.Entry;
 import java.util.stream.Collectors;
 import javafx.util.Pair;
 public class Player {
@@ -289,6 +290,23 @@ public class Player {
         System.out.println(this.getActiveEngimon().getName()+": "+this.getActiveEngimon().getTeksUnik());
     }
 
+    public String stringListEngimon() {
+        return listEngimon.toString();
+    }
+    public String stringDataEngimon(Engimon engi) {
+        return engi.toString();
+    }
+    public String stringListSkillItem() {
+        return listSkill.toString();
+    }
+    public String stringActiveEngimon() {
+        return this.getActiveEngimon().toString();
+    }
+    // TODO getName() getTeksUnik() ga kedetect
+    public String stringInteract() {
+        return this.getActiveEngimon().getName()+ ": "+ this.getActiveEngimon().getTeksUnik();
+    }
+
     public void replaceSkillEngimon(Engimon engi, Skill skillLama, Skill skillBaru) {
         if (engi.isSkillFull()) {
             engi.replace(skillLama, skillBaru);
@@ -300,12 +318,24 @@ public class Player {
 
     /* LIST ENGIMON */
 
-    public Map<ElementType,List<Engimon>> sortEngimon() {
+    public Map<ArrayList<ElementType>,List<Engimon>> sortEngimon() {
         listEngimon.inventoryList.sort(Engimon.engimonLevelComparator);
-        Map<ElementType,List<Engimon>> byElement = listEngimon.inventoryList.stream().collect(Collectors.groupingBy(Engimon::getFirstElement));
+        Map< ArrayList<ElementType>,List<Engimon>> byElement = listEngimon.inventoryList.stream().collect(Collectors.groupingBy(Engimon::getElements));
         return byElement;
     }
-
+    public void printSortedEngimon() {
+        Map<ArrayList<ElementType>,List<Engimon>> sortedEngimon = sortEngimon();
+        sortedEngimon.forEach((key, value) -> System.out.println(key + ":" + value));
+    }
+    public String stringSortedEngimon() {
+        String result = "";
+        Map<ArrayList<ElementType>,List<Engimon>> sortedEngimon = sortEngimon();
+        for (Map.Entry<ArrayList<ElementType>, List<Engimon>> entry : sortedEngimon.entrySet()) {
+            String entryString = entry.toString();
+            result += entryString+'\n';
+        }
+        return result;
+    }
     public void addEngimon(Engimon engi) {
         listEngimon.addItem(engi);
     }
@@ -357,6 +387,22 @@ public class Player {
             System.out.println("Inventory sudah penuh");
         }
 
+    }
+
+    public void addSkillItem(Skill sk, int x) {
+        if (!isCapacityFull()) {
+            if (searchSkill(sk.getSkillName())) {
+                int idx = searchSkillIdx(sk.getSkillName());
+                SkillItem entry = listSkill.getInventoryList().get(idx);
+                entry.addSkillAmount(x);
+            }
+            else {
+                listSkill.addItem(new SkillItem(sk,x));
+            }
+        }
+        else {
+            System.out.println("Inventory sudah penuh");
+        }
     }
     // Delete suatu skill sebanyak X amount
     public void delXSkillItem(String skillName, int x) {
@@ -414,15 +460,29 @@ public class Player {
         System.out.println("9: Save game");
 
     }
-    public String commandsString() {
-        // TODO commandsString
-        return "";
+    public String stringCommands() {
+        String command = "Command yang tersedia: ";
+        String commandW = "\nw/up: bergerak satu petak ke atas";
+        String commandA = "\na/left: bergerak satu petak ke kiri";
+        String commandS = "\ns/down: bergerak satu petak ke bawah";
+        String commandD = "\nd/right: bergerak satu petak ke kanan";
+        String command1 = "\n1: Menampilkan list engimon yang dimiliki";
+        String command2 = "\n2: Menampilkan data lengkap suatu engimon";
+        String command3 = "\n3: Mengecek active engimon";
+        String command4 = "\n4: Mengganti active engimon";
+        String command5 = "\n5: Menggunakan skill item pada suatu engimon";
+        String command6 = "\n6: Melaksanakan breeding antara dua engimon";
+        String command7 = "\n7: Membuang X amount dari suatu skill item atau melepaskan engimon inventory";
+        String command8 = "\n8: Mengganti nama dari suatu engimon yang ada di inventory";
+        String command9 = "\n9: Save game\n";
+        return command+commandW+commandA+commandS+commandD+command1+command2+command3+command4
+                +command5+command6+command7+command8+command9;
     }
     @Override
     public String toString() {
         return "Player{" +
                 "location=" + location +
-                ", icon=" + icon +
+//                ", icon=" + icon +
                 ", activeEngimon=" + activeEngimon +
                 ", listSkill=" + listSkill +
                 ", listEngimon=" + listEngimon +
@@ -442,16 +502,19 @@ public class Player {
 //        invSkill.addItem(sk1);
 //        invSkill.addItem(sk2);
 //        invSkill.addItem(sk3);
-        pemain.listSkill.addItem(sk1);
-        pemain.listSkill.addItem(sk2);
-        pemain.listSkill.addItem(sk3);
+        pemain.addSkillItem(sk1.getSkill(),sk1.getSkillAmount());
+        pemain.addSkillItem(sk2.getSkill(),sk2.getSkillAmount());
+        pemain.addSkillItem(sk3.getSkill(),sk3.getSkillAmount());
         pemain.sortSkillItem();
-        pemain.printListSkillItem();
+        // pemain.printListSkillItem();
+        System.out.println(pemain.stringListSkillItem());
         System.out.println("Capacity full? "+pemain.isCapacityFull());
         pemain.delXSkillItem("FireSkill",2);
         System.out.println("Setelah di delete satu FireSkill: ");
-        pemain.printListSkillItem();
+        // pemain.printListSkillItem();
+        System.out.println(pemain.stringListSkillItem());
         // pemain.printCommands();
+        //System.out.print(pemain.stringCommands());
         ArrayList<Skill> arrSkillWater = new ArrayList<>();
         arrSkillWater.add(waterSkill);
         ArrayList<Skill> arrSkillFire = new ArrayList<>();
@@ -471,8 +534,7 @@ public class Player {
         pemain.addEngimon(e3);
         pemain.addEngimon(e4);
         pemain.delEngimon(e2);
-        Map<ElementType,List<Engimon>> sortedEngimon = pemain.sortEngimon();
-        sortedEngimon.forEach((key, value) -> System.out.println(key + ":" + value));
-
+        pemain.stringDataEngimon(e1);
+        System.out.println(pemain.stringSortedEngimon());
     }
 }

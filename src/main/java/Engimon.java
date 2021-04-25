@@ -332,6 +332,7 @@ public class Engimon {
     public ElementType getFirstElement() {
         return this.getElements().get(0);
     }
+
     // Setter & Getter Level
     public void setLevel(int newLevel){
         this.level = newLevel;
@@ -392,10 +393,14 @@ public class Engimon {
     public char getIcon(){
         return this.icon;
     }
-    // Getter imagePath
+    // Setter & Getter imagePath
+    public void setImagePath(String path) {
+        this.imagePath = path;
+    }
     public String getImagePath() {
         return this.imagePath;
     }
+
     public void updateEngimonLevel(){
         if (this.currExp > this.maxExp){
             // int currExp_ = this.currExp % this.maxExp;
@@ -593,6 +598,8 @@ public class Engimon {
         //default: return NULL
         return  Species.Charizard;
     }
+
+
 
     public static void main(String args[]){
 //        Engimon A = new Engimon();

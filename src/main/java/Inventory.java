@@ -20,4 +20,10 @@ public class Inventory<T> {
         }
     }
 
+    @Override
+    public String toString() {
+        return "Inventory{" +
+                "inventoryList=" + inventoryList +
+                '}';
+    }
 }

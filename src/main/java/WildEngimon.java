@@ -8,6 +8,7 @@ public class WildEngimon extends Engimon{
         super();
         this.life = 1;
         this.status = EngimonStatus.WILD;
+        // this.imagePath = ""; //  image buat wildEngimon gausah deng
     }
 
     public WildEngimon(String name_, Species species_, String namaPapa_, String namaMama,
@@ -15,6 +16,8 @@ public class WildEngimon extends Engimon{
         super(name_, species_, namaPapa_, namaMama, skill_, X_, Y_);
         this.life = 1;
         this.status = EngimonStatus.WILD;
+        // this.imagePath = ""; //  image buat wildEngimon (gausah deng)
+
     }
 
     // Setter & Getter life
