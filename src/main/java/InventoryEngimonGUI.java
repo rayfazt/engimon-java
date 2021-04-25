@@ -4,6 +4,7 @@ import javafx.collections.ObservableList;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.ComboBoxListCell;
+import javafx.scene.control.cell.MapValueFactory;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
@@ -13,6 +14,9 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
 import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 public class InventoryEngimonGUI extends Application {
 
@@ -61,7 +65,9 @@ public class InventoryEngimonGUI extends Application {
         pemain.addEngimon(e2);
         pemain.addEngimon(e3);
         pemain.addEngimon(e4);
+        // pemain.sortEngimon();
         // pemain.delEngimon(e2);
+
 
         ObservableList<Engimon> engimons = FXCollections.observableArrayList();
         for (Engimon engi : pemain.getEngimonInventory()) {
@@ -86,7 +92,10 @@ public class InventoryEngimonGUI extends Application {
         TableColumn<Engimon, Species> speciesNameColumn = new TableColumn<>("Species Name");
         speciesNameColumn.setMinWidth(200);
         speciesNameColumn.setCellValueFactory(new PropertyValueFactory<>("speciesName"));
-
+        // Species name column
+        TableColumn<Engimon, ArrayList<ElementType>> elementsColumn = new TableColumn<>("Elements");
+        speciesNameColumn.setMinWidth(200);
+        speciesNameColumn.setCellValueFactory(new PropertyValueFactory<>("elements"));
         // ini nanti pengennya pake gambar gitu sih
 //        TableColumn<Engimon, ImageView> photoEngimonColumn = new TableColumn<Engimon, ImageView>("Photo");
 //        photoEngimonColumn.setMinWidth(200);
@@ -134,10 +143,21 @@ public class InventoryEngimonGUI extends Application {
         maxExpColumn.setMinWidth(200);
         maxExpColumn.setCellValueFactory(new PropertyValueFactory<>("maxExp"));
 
+//        /* COBA */
+//        Map< ArrayList<ElementType>, List<Engimon>> sortedEngimon = pemain.sortEngimon();
+//        ObservableList engimonsMap = FXCollections.observableArrayList();
+//        TableColumn<Map< ArrayList<ElementType>,List<Engimon>>> engimonColumn = new TableColumn<Map,Engimon>("Engimon");
+//        engimonColumn.setCellValueFactory(new MapValueFactory<Engimon>("engimon"));
+
+//        TableColumn<Map, List> firstNameColumn = new TableColumn<Map, String>("First Name");
+//        firstNameColumn.setCellValueFactory(new MapValueFactory<String>("firstName"));
+
+//        TableView table = new TableView(personMapList);
+//        tableView.getColumns().setAll(firstNameColumn);
 
         tableEngimon = new TableView<>();
         tableEngimon.setItems(getEngimons());
-        tableEngimon.getColumns().addAll(nameEngimonColumn, speciesNameColumn, speciesPapaColumn, speciesMamaColumn, levelColumn, currExpColumn, maxExpColumn);
+        tableEngimon.getColumns().addAll(nameEngimonColumn, speciesNameColumn, elementsColumn, speciesPapaColumn, speciesMamaColumn, levelColumn, currExpColumn, maxExpColumn);
         VBox vBox = new VBox();
         vBox.getChildren().addAll(tableEngimon);
         Scene scene = new Scene(vBox);

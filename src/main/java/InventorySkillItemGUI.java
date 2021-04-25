@@ -57,19 +57,44 @@ public class InventorySkillItemGUI extends Application {
         window = primaryStage;
         window.setTitle("Inventory SkillItem");
 
-
-
         // Skill column
-        TableColumn<SkillItem, String> skillColumn = new TableColumn<>("Skill");
+        TableColumn<SkillItem, String> skillColumn = new TableColumn<>("Skill Name");
         skillColumn.setCellValueFactory(new PropertyValueFactory<>("skill"));
         // Amount column
         TableColumn<SkillItem, Integer> amountColumn = new TableColumn<>("Amount");
         amountColumn.setMinWidth(200);
         amountColumn.setCellValueFactory(new PropertyValueFactory<>("skillAmount"));
-
+        // TODO Skill icon column gimana caranya ya
+        TableColumn<SkillItem, Image> skillIconColumn = new TableColumn<>("Icon");
+        skillIconColumn.setMinWidth(200);
+//        skillIconColumn.setCellFactory(new Image());
+//        skillIconColumn.setCellFactory(tc -> {
+//            imageView.setImage();
+//            setGraphic(imageView);
+//            final Image activeImage = new Image(...);
+//            final Image passiveImage = new Image(...);
+//            TableCell<User, Boolean> cell = new TableCell<User, Boolean>() {
+//                private ImageView imageView = new ImageView();
+//                @Override
+//                protected void updateItem(Boolean active, boolean empty) {
+//                    super.updateItem(active, empty);
+//                    if (empty) {
+//                        setGraphic(null);
+//                    } else {
+//                        if (active) {
+//                            imageView.setImage(activeImage);
+//                        } else {
+//                            imageView.setImage(passiveImage);
+//                        }
+//                        setGraphic(imageView);
+//                    }
+//                }
+//            };
+//            return cell ;
+//        });
         tableSkillItem = new TableView<>();
         tableSkillItem.setItems(getSkillItems());
-        tableSkillItem.getColumns().addAll(skillColumn,amountColumn);
+        tableSkillItem.getColumns().addAll(skillColumn,amountColumn,skillIconColumn);
         VBox vBox = new VBox();
         vBox.getChildren().addAll(tableSkillItem);
         Scene scene = new Scene(vBox);
