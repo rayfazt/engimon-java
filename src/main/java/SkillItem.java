@@ -39,11 +39,12 @@ public class SkillItem {
         public int compare(SkillItem s1, SkillItem s2) {
             Integer basePower1 = s1.getSkill().getBasePower();
             Integer basePower2 = s2.getSkill().getBasePower();
-
-           //ascending order
-           //return StudentName1.compareTo(StudentName2);
     
            // descending order
            return basePower2.compareTo(basePower1);
         }};
+
+    public static void main(String[] args) {
+
+    }
 }

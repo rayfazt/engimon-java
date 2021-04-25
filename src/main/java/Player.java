@@ -9,6 +9,7 @@ public class Player {
     private PlayerEngimon activeEngimon;
     private Inventory<SkillItem> listSkill;
     private Inventory<Engimon> listEngimon;
+    private int maxCapacity;
 
     public Player() {
         // default constructor
@@ -17,6 +18,7 @@ public class Player {
         activeEngimon = new PlayerEngimon();
         listSkill = new Inventory<SkillItem>();
         listEngimon = new Inventory<Engimon>();
+        maxCapacity = 20;
     }
 
     // Getter & Setter location
@@ -318,8 +320,69 @@ public class Player {
         engi.setName(newName);
     }
 
+
     public boolean isListEngimonEmpty() {
         return listEngimon.inventoryList.isEmpty();
+    }
+
+    /* LIST SKILLITEM */
+    // TODO Kenapa getSkillName() nya gak berfungsi
+    public int searchSkillIdx(String skillName) {
+        int i = 0;
+        for (SkillItem skill : listSkill.getInventoryList()) {
+            if (skillName.equals(skill.getSkill().getSkillName())) {
+                i = listSkill.getInventoryList().indexOf(skill);
+            }
+        }
+        return i;
+    }
+    public boolean searchSkill(String skillName) {
+        boolean found = false;
+        for (SkillItem skill : listSkill.getInventoryList()) {
+            if (skill.getSkill().getSkillName().equals(skillName)){
+                found = true;
+            }
+        }
+        return found;
+    }
+    public void addSkill(Skill sk) {
+        // kalo udah ada
+        if (searchSkill(sk.getSkillName())) {
+            int idx = searchSkillIdx(sk.getSkillName());
+            SkillItem entry = listSkill.getInventoryList().get(idx);
+            int entryAmount = entry.getSkillAmount();
+            entryAmount += 1;
+        }
+        else {
+            listSkill.addItem(new SkillItem(sk,1));
+        }
+    }
+    // Delete skill sk sebanyak 1
+    public void delSkill(String skillName) {
+        if (searchSkill(skillName)) {
+            int idx = searchSkillIdx(skillName);
+            SkillItem entry = listSkill.getInventoryList().get(idx);
+            System.out.println(entry.toString());
+            int entryAmount = entry.getSkillAmount();
+            if (entryAmount == 1) {
+                listSkill.getInventoryList().remove(idx);
+            }
+            else {
+                entryAmount -= 1;
+            }
+        }
+        else {
+            System.out.println("Tidak ada skill tersebut di dalam inventory.");
+        }
+    }
+
+    public boolean isCapacityFull() {
+        int listSkillSize = 0;
+        for (SkillItem skill : listSkill.getInventoryList()) {
+            listSkillSize += skill.getSkillAmount();
+        }
+        int listEngimonSize = listEngimon.getInventoryList().size();
+        return ((listEngimonSize + listSkillSize) == this.maxCapacity);
     }
     public void printCommands() {
         System.out.println("Command yang tersedia: ");
@@ -339,14 +402,13 @@ public class Player {
 
     }
     public static void main(String[] args) {
-        // TODO testing groupby dan sort
         Player pemain = new Player();
         Skill fireSkill = new Skill("FireSkill", 100, 1, ElementType.FIRE);
         Skill waterSkill = new Skill("WaterSkill", 50, 1, ElementType.WATER);
         Skill electricSkill = new Skill("electric",250,1, ElementType.ELECTRIC);
-        SkillItem sk1 = new SkillItem(fireSkill,1);
-        SkillItem sk2 = new SkillItem(waterSkill,1);
-        SkillItem sk3 = new SkillItem(electricSkill,1);
+        SkillItem sk1 = new SkillItem(fireSkill,3);
+        SkillItem sk2 = new SkillItem(waterSkill,5);
+        SkillItem sk3 = new SkillItem(electricSkill,2);
 //        Inventory<SkillItem> invSkill = new Inventory<>();
 //        invSkill.addItem(sk1);
 //        invSkill.addItem(sk2);
@@ -355,6 +417,10 @@ public class Player {
         pemain.listSkill.addItem(sk2);
         pemain.listSkill.addItem(sk3);
         pemain.sortSkillItem();
+        pemain.printListSkillItem();
+        System.out.println("Capacity full? "+pemain.isCapacityFull());
+        pemain.delSkill("FireSkill");
+        System.out.println("Setelah di delete satu FireSkill: ");
         pemain.printListSkillItem();
         // pemain.printCommands();
         ArrayList<Skill> arrSkillWater = new ArrayList<>();
