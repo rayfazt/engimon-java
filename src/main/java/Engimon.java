@@ -212,6 +212,10 @@ public class Engimon {
         return this.elements;
     }
 
+    // Getter First Element
+    public ElementType getFirstElement() {
+        return this.getElements().get(0);
+    }
     // Setter & Getter Level
     public void setLevel(int newLevel){
         this.level = newLevel;
@@ -348,6 +352,13 @@ public class Engimon {
                 ", parent=" + parent +
                 ", skills=" + skills +
                 ", elements=" + elements +
+                ", speciesPapa=" + speciesPapa +
+                ", speciesMama=" + speciesMama +
+                ", level=" + level +
+                ", currExp=" + currExp +
+                ", maxExp=" + maxExp +
+//                ", location=" + location +
+//                ", icon=" + icon +
                 '}';
     }
 

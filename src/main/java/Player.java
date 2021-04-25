@@ -1,6 +1,8 @@
 import java.util.*;
-
-
+import java.util.stream.Collectors;
+import java.util.stream.Collectors.*;
+import java.util.Map;
+import javafx.util.Pair;
 public class Player {
     private Point location;
     private char icon;
@@ -116,133 +118,133 @@ public class Player {
         }
     }
 
-//    public void breed(Engimon e1, Engimon e2) throws BreedException {
-//        if (e1.getLevel() < 4 || e2.getLevel() < 4){
-//            throw new BreedException("Level parent tidak cukup untuk melakukan breeding");
-//        }
-//
-//        e1.setLevel(e1.getLevel() - 3);
-//        e2.setLevel(e2.getLevel() - 3);
-//
-//        Scanner sc = new Scanner(System.in);
-//        System.out.print("Masukkan nama Engimon anak: ");
-//        String namaAnak = sc.nextLine();
-//
-//        ArrayList<ElementType> elAnak = new ArrayList<ElementType>();
-//        ArrayList<Skill> candidateSkill = new ArrayList<Skill>();
-//        ArrayList<Skill> skillAnak = new ArrayList<Skill>();
-//
-//        // Penentuan elemen dan spesies anak
-//        if(e1.getElements().get(0) == e2.getElements().get(0)){
-//            elAnak.add(e1.getElements().get(0));
-//            Species spAnak = e1.getSpeciesName();
-//
-//        }
-////        else{
-////            if(e1.getElements().get(0).getAdvantage(e2.getElements().get(0)) > 1){
-////                elAnak.add(e1.getElements().get(0));
-////                Species spAnak = e1.getSpeciesName();
-////            }
-////            else{
-////                if(e1.getElements().get(0).getAdvantage(e2.getElements().get(0)) == 1){
-////                    elAnak.add(e1.getElements().get(0));
-////                    elAnak.add(e2.getElements().get(0));
-////                    Species spAnak = e1.findDualSpecies(e2.getElements().get(0));
-////                }
-////                else{
-////                    elAnak.add(e2.getElements().get(0));
-////                    Species spAnak = e2.getSpeciesName();
-////                }
-////            }
-////        }
-//
-//        //Inherit skill
-//        for(int i=0; i<e1.getSkills().size()+e2.getSkills().size(); i++){
-//            // candidate skill berisi skill parent A
-//            if(i<e1.getSkills().size()){
-//                candidateSkill.add(e1.getSkills().get(i));
-//            }
-//
-//            else{
-//                // Pemilihan candidate skill dari parent B
-//                for (int j = 0; j < candidateSkill.size(); j++){
-//                    // Skill sama
-//                    if (e2.getSkills().get(i-e1.getSkills().size()).getSkillName() == candidateSkill.get(j).getSkillName()){
-//                        // Mastery level sama
-//
-//                        if(e2.getSkills().get(i-e1.getSkills().size()).getMasteryLevel() == candidateSkill.get(j).getMasteryLevel()){
-//                            Skill updatedSkill = candidateSkill.get(j);
-//                            updatedSkill.setMasteryLevel(candidateSkill.get(j).getMasteryLevel() + 1);
-//                            candidateSkill.set(j, updatedSkill);
-//                        }
-//                        //Mastery level berbeda
-//                        else{
-//                            if(e2.getSkills().get(i-e1.getSkills().size()).getMasteryLevel() > candidateSkill.get(j).getMasteryLevel()){
-//                                Skill updatedSkill = candidateSkill.get(j);
-//                                updatedSkill.setMasteryLevel(e2.getSkills().get(i-e1.getSkills().size()).getMasteryLevel());
-//                                candidateSkill.set(j, updatedSkill);
-//                            }
-//                        }
-//                    }
-//                    else{
-//                        candidateSkill.add(e2.getSkills().get(i-e1.getSkills().size()));
-//                    }
-//                }
-//            }
-//        }
-//        List<Pair<Integer, Integer>> masteryAndIndex = new ArrayList<Pair<Integer, Integer>>();
-//
-//        for(int j=0; j<candidateSkill.size(); j++){
-//            Pair<Integer, Integer> pairMasteryIndex = new Pair<Integer, Integer>(candidateSkill.get(j).getMasteryLevel(), j);
-//            masteryAndIndex.add(pairMasteryIndex);
-//        }
-//
-//        Collections.sort(masteryAndIndex, Comparator.comparing(p -> -p.getKey()));
-//
-//        for(int i=0; i<4; i++){
-//            skillAnak.add(candidateSkill.get(masteryAndIndex.get(i).getValue()));
-//        }
-//
-//        char iconAnak;
-//        if(elAnak.size()>1){
-//            if((elAnak.get(0)==ElementType.FIRE && elAnak.get(1)==ElementType.ELECTRIC) || (elAnak.get(1)==ElementType.FIRE && elAnak.get(0)==ElementType.ELECTRIC)){
-//                iconAnak = 'l';
+    public void breed(Engimon e1, Engimon e2) throws BreedException {
+        if (e1.getLevel() < 4 || e2.getLevel() < 4){
+            throw new BreedException("Level parent tidak cukup untuk melakukan breeding");
+        }
+
+        e1.setLevel(e1.getLevel() - 3);
+        e2.setLevel(e2.getLevel() - 3);
+
+        Scanner sc = new Scanner(System.in);
+        System.out.print("Masukkan nama Engimon anak: ");
+        String namaAnak = sc.nextLine();
+
+        ArrayList<ElementType> elAnak = new ArrayList<ElementType>();
+        ArrayList<Skill> candidateSkill = new ArrayList<Skill>();
+        ArrayList<Skill> skillAnak = new ArrayList<Skill>();
+
+        // Penentuan elemen dan spesies anak
+        if(e1.getElements().get(0) == e2.getElements().get(0)){
+            elAnak.add(e1.getElements().get(0));
+            Species spAnak = e1.getSpeciesName();
+
+        }
+//        else{
+//            if(e1.getElements().get(0).getAdvantage(e2.getElements().get(0)) > 1){
+//                elAnak.add(e1.getElements().get(0));
+//                Species spAnak = e1.getSpeciesName();
 //            }
 //            else{
-//                if((elAnak.get(0)==ElementType.WATER && elAnak.get(1)==ElementType.ICE)){
-//                    iconAnak = 's';
+//                if(e1.getElements().get(0).getAdvantage(e2.getElements().get(0)) == 1){
+//                    elAnak.add(e1.getElements().get(0));
+//                    elAnak.add(e2.getElements().get(0));
+//                    Species spAnak = e1.findDualSpecies(e2.getElements().get(0));
 //                }
 //                else{
-//                    iconAnak = 'n';
+//                    elAnak.add(e2.getElements().get(0));
+//                    Species spAnak = e2.getSpeciesName();
 //                }
 //            }
 //        }
-//        else{
-//            switch (elAnak.get(0))
-//            {
-//            case FIRE:
-//                iconAnak = 'f';
-//                break;
-//            case WATER:
-//                iconAnak = 'w';
-//                break;
-//            case ELECTRIC:
-//                iconAnak = 'e';
-//                break;
-//            case ICE:
-//                iconAnak = 'i';
-//                break;
-//            case GROUND:
-//                iconAnak = 'g';
-//                break;
-//            }
-//        }
-////        Point loc = e1.getEngimonLocation();
-////        Engimon anak = new Engimon(namaAnak, spAnak, e1.getEngimonName(), e2.getEngimonName(), e1.getSpeciesName(), e2.getSpeciesName(), skillAnak[0], elAnak, 0 , loc);
-////        anak.setEngimonSkill(skillAnak);
-////        anak.setIcon(iconAnak);
-////        this.listEngimon.addItem(anak);
-//    }
+
+        //Inherit skill
+        for(int i=0; i<e1.getSkills().size()+e2.getSkills().size(); i++){
+            // candidate skill berisi skill parent A
+            if(i<e1.getSkills().size()){
+                candidateSkill.add(e1.getSkills().get(i));
+            }
+
+            else{
+                // Pemilihan candidate skill dari parent B
+                for (int j = 0; j < candidateSkill.size(); j++){
+                    // Skill sama
+                    if (e2.getSkills().get(i-e1.getSkills().size()).getSkillName() == candidateSkill.get(j).getSkillName()){
+                        // Mastery level sama
+
+                        if(e2.getSkills().get(i-e1.getSkills().size()).getMasteryLevel() == candidateSkill.get(j).getMasteryLevel()){
+                            Skill updatedSkill = candidateSkill.get(j);
+                            updatedSkill.setMasteryLevel(candidateSkill.get(j).getMasteryLevel() + 1);
+                            candidateSkill.set(j, updatedSkill);
+                        }
+                        //Mastery level berbeda
+                        else{
+                            if(e2.getSkills().get(i-e1.getSkills().size()).getMasteryLevel() > candidateSkill.get(j).getMasteryLevel()){
+                                Skill updatedSkill = candidateSkill.get(j);
+                                updatedSkill.setMasteryLevel(e2.getSkills().get(i-e1.getSkills().size()).getMasteryLevel());
+                                candidateSkill.set(j, updatedSkill);
+                            }
+                        }
+                    }
+                    else{
+                        candidateSkill.add(e2.getSkills().get(i-e1.getSkills().size()));
+                    }
+                }
+            }
+        }
+        List<Pair<Integer, Integer>> masteryAndIndex = new ArrayList<Pair<Integer, Integer>>();
+
+        for(int j=0; j<candidateSkill.size(); j++){
+            Pair<Integer, Integer> pairMasteryIndex = new Pair<Integer, Integer>(candidateSkill.get(j).getMasteryLevel(), j);
+            masteryAndIndex.add(pairMasteryIndex);
+        }
+
+        Collections.sort(masteryAndIndex, Comparator.comparing(p -> -p.getKey()));
+
+        for(int i=0; i<4; i++){
+            skillAnak.add(candidateSkill.get(masteryAndIndex.get(i).getValue()));
+        }
+
+        char iconAnak;
+        if(elAnak.size()>1){
+            if((elAnak.get(0)==ElementType.FIRE && elAnak.get(1)==ElementType.ELECTRIC) || (elAnak.get(1)==ElementType.FIRE && elAnak.get(0)==ElementType.ELECTRIC)){
+                iconAnak = 'l';
+            }
+            else{
+                if((elAnak.get(0)==ElementType.WATER && elAnak.get(1)==ElementType.ICE)){
+                    iconAnak = 's';
+                }
+                else{
+                    iconAnak = 'n';
+                }
+            }
+        }
+        else{
+            switch (elAnak.get(0))
+            {
+            case FIRE:
+                iconAnak = 'f';
+                break;
+            case WATER:
+                iconAnak = 'w';
+                break;
+            case ELECTRIC:
+                iconAnak = 'e';
+                break;
+            case ICE:
+                iconAnak = 'i';
+                break;
+            case GROUND:
+                iconAnak = 'g';
+                break;
+            }
+        }
+//        Point loc = e1.getEngimonLocation();
+//        Engimon anak = new Engimon(namaAnak, spAnak, e1.getEngimonName(), e2.getEngimonName(), e1.getSpeciesName(), e2.getSpeciesName(), skillAnak[0], elAnak, 0 , loc);
+//        anak.setEngimonSkill(skillAnak);
+//        anak.setIcon(iconAnak);
+//        this.listEngimon.addItem(anak);
+    }
     
     public ArrayList<SkillItem> getSkillItemInventory() {
         return this.listSkill.getInventoryList();
@@ -260,6 +262,7 @@ public class Player {
 
     public void printListEngimon() {
         listEngimon.printInventory();
+
     }
     public void printDataEngimon(Engimon engi) {
         engi.printInfo();
@@ -296,13 +299,10 @@ public class Player {
         listSkill.inventoryList.sort(SkillItem.skillItemComparator);
     }
 
-    public void sortEngimon() {
-//        // TODO belom dites /blm bisa group by
-//        listEngimon.inventoryList.sort(Engimon.engimonLevelComparator);
-//        Map<ElementType,List<Engimon>> byElement = listEngimon.inventoryList.stream(Collectors.groupingBy(Engimon::getFirstElement));
-//        for (Engimon engi : byElement) {
-//            System.out.println(engi);
-//        }
+    public Map<ElementType,List<Engimon>> sortEngimon() {
+        listEngimon.inventoryList.sort(Engimon.engimonLevelComparator);
+        Map<ElementType,List<Engimon>> byElement = listEngimon.inventoryList.stream().collect(Collectors.groupingBy(Engimon::getFirstElement));
+        return byElement;
     }
 
     // TODO delXSkillItem
@@ -366,12 +366,16 @@ public class Player {
         Engimon e3 = new Engimon("e3",Species.Charizard,"daddy e3","mommy e3",arrSkillFire,5,1);
         Engimon e4 = new Engimon("e4",Species.Mudkip,"dad4","mom4",arrSkillWater,30,1);
         // e1.getSkills().add(waterSkill);
+        e1.setLevel(10);
+        e2.setLevel(3);
+        e3.setLevel(20);
+        e4.setLevel(100);
         pemain.listEngimon.addItem(e1);
         pemain.listEngimon.addItem(e2);
         pemain.listEngimon.addItem(e3);
         pemain.listEngimon.addItem(e4);
-        pemain.sortEngimon();
-        pemain.printListEngimon();
+        Map<ElementType,List<Engimon>> sortedEngimon = pemain.sortEngimon();
+        sortedEngimon.forEach((key, value) -> System.out.println(key + ":" + value));
 
     }
 }
