@@ -8,7 +8,6 @@ public class Inventory<T> {
     public ArrayList<T> getInventoryList() {
         return inventoryList;
     }
-    // TODO handle maxCapacity
     public void addItem(T item) {
         inventoryList.add(item);
     }
@@ -21,6 +20,5 @@ public class Inventory<T> {
         }
     }
 
-    // TODO groupBy
 
 }

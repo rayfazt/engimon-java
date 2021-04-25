@@ -1,7 +1,6 @@
 import java.util.*;
-import java.util.stream.Collectors;
-import java.util.stream.Collectors.*;
 import java.util.Map;
+import java.util.stream.Collectors;
 import javafx.util.Pair;
 public class Player {
     private Point location;
@@ -93,6 +92,7 @@ public class Player {
         }
     }
 
+    /* ACTIVE ENGIMON */
     public PlayerEngimon getActiveEngimon() {
         return this.activeEngimon;
     }
@@ -112,14 +112,15 @@ public class Player {
         }
         else {
             // tambahin current active engimon ke inventory
-            listEngimon.add(this.getActiveEngimon());
+            addEngimon(this.getActiveEngimon());
             // remove active engimon yang baru dari inventory
-            listEngimon.remove(this.getActiveEngimon());
+            delEngimon(this.getActiveEngimon());
             // set active engimon baru
             this.activeEngimon = engi;
         }
     }
 
+    /* BREEDING */
     public void breed(Engimon e1, Engimon e2) throws BreedException {
         if (e1.getLevel() < 4 || e2.getLevel() < 4){
             throw new BreedException("Level parent tidak cukup untuk melakukan breeding");
@@ -255,16 +256,8 @@ public class Player {
         return this.listEngimon.getInventoryList();
     }
 
-    public void addSkillItem(SkillItem sk) {
-        getSkillItemInventory().add(sk);
-    }
-    public void addEngimon(Engimon engi) {
-        getEngimonInventory().add(engi);
-    }
-
     public void printListEngimon() {
         listEngimon.printInventory();
-
     }
     public void printDataEngimon(Engimon engi) {
         engi.printInfo();
@@ -288,18 +281,7 @@ public class Player {
         }
     }
 
-    // TODO useSkillItem
-    public void useSkillItem(Engimon engi, SkillItem s) {
-        listSkill.delItem(s);
-        // engimon learn skill
-        // remove dari Inventory terus pake ke engimonnya
-        // listSkill.removeItem(s);
-        // e.learnSkill(s);
-    }
-
-    public void sortSkillItem() {
-        listSkill.inventoryList.sort(SkillItem.skillItemComparator);
-    }
+    /* LIST ENGIMON */
 
     public Map<ElementType,List<Engimon>> sortEngimon() {
         listEngimon.inventoryList.sort(Engimon.engimonLevelComparator);
@@ -307,11 +289,9 @@ public class Player {
         return byElement;
     }
 
-    // TODO delXSkillItem
-    public void delXSkillItem(Skill s, int x) {
-
+    public void addEngimon(Engimon engi) {
+        listEngimon.addItem(engi);
     }
-    
     public void delEngimon(Engimon engi) {
         listEngimon.delItem(engi);
     }
@@ -320,13 +300,12 @@ public class Player {
         engi.setName(newName);
     }
 
-
     public boolean isListEngimonEmpty() {
-        return listEngimon.inventoryList.isEmpty();
+        return getEngimonInventory().isEmpty();
     }
 
     /* LIST SKILLITEM */
-    // TODO Kenapa getSkillName() nya gak berfungsi
+
     public int searchSkillIdx(String skillName) {
         int i = 0;
         for (SkillItem skill : listSkill.getInventoryList()) {
@@ -339,7 +318,7 @@ public class Player {
     public boolean searchSkill(String skillName) {
         boolean found = false;
         for (SkillItem skill : listSkill.getInventoryList()) {
-            if (skill.getSkill().getSkillName().equals(skillName)){
+            if (skillName.equals(skill.getSkill().getSkillName())){
                 found = true;
             }
         }
@@ -347,28 +326,32 @@ public class Player {
     }
     public void addSkill(Skill sk) {
         // kalo udah ada
-        if (searchSkill(sk.getSkillName())) {
-            int idx = searchSkillIdx(sk.getSkillName());
-            SkillItem entry = listSkill.getInventoryList().get(idx);
-            int entryAmount = entry.getSkillAmount();
-            entryAmount += 1;
+        if (!isCapacityFull()) {
+            if (searchSkill(sk.getSkillName())) {
+                int idx = searchSkillIdx(sk.getSkillName());
+                SkillItem entry = listSkill.getInventoryList().get(idx);
+                entry.addSkillAmount(1);
+            }
+            else {
+                listSkill.addItem(new SkillItem(sk,1));
+            }
         }
         else {
-            listSkill.addItem(new SkillItem(sk,1));
+            System.out.println("Inventory sudah penuh");
         }
+
     }
-    // Delete skill sk sebanyak 1
-    public void delSkill(String skillName) {
+    // Delete suatu skill sebanyak X amount
+    public void delXSkillItem(String skillName, int x) {
         if (searchSkill(skillName)) {
             int idx = searchSkillIdx(skillName);
             SkillItem entry = listSkill.getInventoryList().get(idx);
             System.out.println(entry.toString());
-            int entryAmount = entry.getSkillAmount();
-            if (entryAmount == 1) {
+            if (entry.getSkillAmount() == x) {
                 listSkill.getInventoryList().remove(idx);
             }
             else {
-                entryAmount -= 1;
+                entry.subSkillAmount(x);
             }
         }
         else {
@@ -376,14 +359,28 @@ public class Player {
         }
     }
 
+    // TODO useSkillItem
+    public void useSkillItem(Engimon engi, SkillItem s) {
+        // remove dari Inventory terus pake ke engimonnya
+        delXSkillItem(s.getSkill().getSkillName(),1);
+       // engimon learn skill
+       engi.learnSkill(s.getSkill());
+    }
+
+    public void sortSkillItem() {
+        listSkill.inventoryList.sort(SkillItem.skillItemComparator);
+    }
+
+    
     public boolean isCapacityFull() {
         int listSkillSize = 0;
         for (SkillItem skill : listSkill.getInventoryList()) {
             listSkillSize += skill.getSkillAmount();
         }
         int listEngimonSize = listEngimon.getInventoryList().size();
-        return ((listEngimonSize + listSkillSize) == this.maxCapacity);
+        return ((listEngimonSize + listSkillSize) >= this.maxCapacity);
     }
+
     public void printCommands() {
         System.out.println("Command yang tersedia: ");
         System.out.println("w: bergerak satu petak ke atas");
@@ -419,7 +416,7 @@ public class Player {
         pemain.sortSkillItem();
         pemain.printListSkillItem();
         System.out.println("Capacity full? "+pemain.isCapacityFull());
-        pemain.delSkill("FireSkill");
+        pemain.delXSkillItem("FireSkill",2);
         System.out.println("Setelah di delete satu FireSkill: ");
         pemain.printListSkillItem();
         // pemain.printCommands();
@@ -436,10 +433,12 @@ public class Player {
         e2.setLevel(3);
         e3.setLevel(20);
         e4.setLevel(100);
-        pemain.listEngimon.addItem(e1);
-        pemain.listEngimon.addItem(e2);
-        pemain.listEngimon.addItem(e3);
-        pemain.listEngimon.addItem(e4);
+        pemain.changeEngimonName(e4,"eheheh");
+        pemain.addEngimon(e1);
+        pemain.addEngimon(e2);
+        pemain.addEngimon(e3);
+        pemain.addEngimon(e4);
+        pemain.delEngimon(e2);
         Map<ElementType,List<Engimon>> sortedEngimon = pemain.sortEngimon();
         sortedEngimon.forEach((key, value) -> System.out.println(key + ":" + value));
 

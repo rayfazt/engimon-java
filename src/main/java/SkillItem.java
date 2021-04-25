@@ -31,7 +31,13 @@ public class SkillItem {
     }
     public int getSkillAmount() {
         return this.amount;
-    } 
+    }
+    public void addSkillAmount(int x) {
+        this.amount += x;
+    }
+    public void subSkillAmount(int x) {
+        this.amount -= x;
+    }
 
     public static Comparator<SkillItem> skillItemComparator = new Comparator<SkillItem>() {
 

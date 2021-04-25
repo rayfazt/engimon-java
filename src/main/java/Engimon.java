@@ -399,25 +399,24 @@ public class Engimon {
         System.out.println("Icon: " + this.icon);
     }
 
-//    public static void main(String args[]){
-////        Engimon A = new Engimon();
-////        A.printInfo();
-////        A.setX(3);
-////        A.printInfo();
-////        System.out.println();
-//        Skill fireSkill = new Skill("FireSkill", 100, 1, ElementType.FIRE);
-////        A.learnSkill(fireSkill);
-////        System.out.println();
-////        A.printInfo();
-////        System.out.println("NEW ENGIMON");
-//        Skill waterSkill = new Skill("WaterSkill", 100, 1, ElementType.WATER);
-//        Engimon B = new Engimon("Haihai", Species.Mudtle, "New Daddy", "New Mommy",
-//                waterSkill,1, 1);
+    public static void main(String args[]){
+//        Engimon A = new Engimon();
+//        A.printInfo();
+//        A.setX(3);
+//        A.printInfo();
+//        System.out.println();
+        Skill fireSkill = new Skill("FireSkill", 100, 1, ElementType.FIRE);
+//        A.learnSkill(fireSkill);
+//        System.out.println();
+//        A.printInfo();
+//        System.out.println("NEW ENGIMON");
+        Skill waterSkill = new Skill("WaterSkill", 100, 1, ElementType.WATER);
+//        Engimon B = new Engimon("Haihai", Species.Mudtle, "New Daddy", "New Mommy", waterSkill,1, 1);
 //        B.printInfo();
 //        B.setCurrExp(102);
 //        B.updateEngimonLevel();
 //        B.learnSkill(fireSkill);
 //        System.out.println("AFTER LEVEL UP & LEARN NEW SKILL");
 //        B.printInfo();
-//    }
+    }
 }
