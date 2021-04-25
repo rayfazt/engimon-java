@@ -101,21 +101,25 @@ public class PlayerEngimon extends Engimon{
                 '}';
     }
 
-    //    public static void main(String args[]){
-////        PlayerEngimon A = new PlayerEngimon();
-////        A.printInfo();
-////        System.out.println("NEW ENGIMON");
-////        ArrayList<Skill> skill__ = new ArrayList<Skill>();
-////        Skill defSkill = new Skill();
-////        skill__.add(defSkill);
-////        PlayerEngimon B = new PlayerEngimon("Haihai", Species.Mudtle, "New Daddy", "New Mommy",
-////                skill__,1, 1);
-////        B.printInfo();
-//
-//        WildEngimon A = new WildEngimon();
+
+        public static void main(String args[]){
+//        PlayerEngimon A = new PlayerEngimon();
 //        A.printInfo();
-//        System.out.println("CONVERT");
-//        PlayerEngimon B = new PlayerEngimon();
+//        System.out.println("NEW ENGIMON");
+//        ArrayList<Skill> skill__ = new ArrayList<Skill>();
+//        Skill defSkill = new Skill();
+//        skill__.add(defSkill);
+//        PlayerEngimon B = new PlayerEngimon("Haihai", Species.Mudtle, "New Daddy", "New Mommy",
+//                skill__,1, 1);
 //        B.printInfo();
-//    }
+
+        WildEngimon A = new WildEngimon();
+        A.printInfo();
+        System.out.println("CONVERT");
+        PlayerEngimon B = new PlayerEngimon();
+        B.printInfo();
+        double adv = B.battleAdvantage(A);
+        double pwr = B.getPower(adv);
+        System.out.println("Power: "+ pwr);
+    }
 }

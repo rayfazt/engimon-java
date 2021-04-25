@@ -16,6 +16,7 @@ import javafx.util.Duration;
 import javafx.scene.image.Image;
 
 import java.awt.*;
+import java.security.Key;
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -27,14 +28,14 @@ public class Game extends Application {
     private final int ROWS = map.getRow();
     private final int COLUMNS = map.getCol();
     private final int SQUARE_SIZE = 40;
-    private final int WIDTH = SQUARE_SIZE*COLUMNS + SQUARE_SIZE*12;
+    private final int WIDTH = SQUARE_SIZE*COLUMNS + SQUARE_SIZE*13;
     private final int HEIGHT = SQUARE_SIZE*ROWS;
 
     private String text;
     private Player player = new Player();
     private ArrayList<WildEngimon> enemies = new ArrayList<WildEngimon>();
 
-    private static final String playerIcon = "main/resources/player.png";
+    private static final String playerIcon = "player.png";
     private Image playerImage;
 
 
@@ -80,9 +81,12 @@ public class Game extends Application {
                     } catch (Exception e){
                         System.out.println("Bottom border");
                     }
-                }
-                else if (code == KeyCode.H) {
+                } else if (code == KeyCode.H) {
                     setTextCommands();
+                } else if (code == KeyCode.DIGIT1) {
+                    setTextListEngimon();
+                } else if (code == KeyCode.DIGIT3) {
+                    setTextActiveEngimon();
                 }
             }
         });
@@ -102,45 +106,45 @@ public class Game extends Application {
     }
 
     private void moveRight() throws Exception{
-        if (player.getPlayerLocation().getX() + 1 >= map.getCol()) {
+        int x = player.getPlayerLocation().getX();
+        int y = player.getPlayerLocation().getY();
+        if (x + 1 >= map.getCol() || isEnemyPresent(x+1,y)!= null) {
             throw new Exception();
         }
         else {
-            int x = player.getPlayerLocation().getX();
-            int y = player.getPlayerLocation().getY();
             player.setPlayerLocation(x+1, y);
         }
     }
 
     private void moveLeft() throws Exception{
-        if (player.getPlayerLocation().getX() - 1 < 0) {
+        int x = player.getPlayerLocation().getX();
+        int y = player.getPlayerLocation().getY();
+        if (x - 1 < 0 || isEnemyPresent(x-1,y)!= null) {
             throw new Exception();
         }
         else {
-            int x = player.getPlayerLocation().getX();
-            int y = player.getPlayerLocation().getY();
             player.setPlayerLocation(x-1, y);
         }
     }
 
     private void moveUp() throws Exception{
-        if (player.getPlayerLocation().getY() - 1 < 0) {
+        int x = player.getPlayerLocation().getX();
+        int y = player.getPlayerLocation().getY();
+        if (y - 1 < 0 || isEnemyPresent(x,y-1)!= null) {
             throw new Exception();
         }
         else {
-            int x = player.getPlayerLocation().getX();
-            int y = player.getPlayerLocation().getY();
             player.setPlayerLocation(x, y-1);
         }
     }
 
     private void moveDown() throws Exception{
-        if (player.getPlayerLocation().getY() + 1 >= map.getRow()) {
+        int x = player.getPlayerLocation().getX();
+        int y = player.getPlayerLocation().getY();
+        if (y + 1 >= map.getRow() || isEnemyPresent(x,y+1)!= null) {
             throw new Exception();
         }
         else {
-            int x = player.getPlayerLocation().getX();
-            int y = player.getPlayerLocation().getY();
             player.setPlayerLocation(x, y+1);
         }
     }
@@ -149,33 +153,68 @@ public class Game extends Application {
         Skill skillDefault = new Skill();
         ArrayList<Skill> listOfSkill = new ArrayList<Skill>();
 
+        Random randomGenerator = new Random();
         int index, x, y;
         Point location = new Point();
 
         // Random location in mountains
-        Random randomGenerator1 = new Random();
-        index = randomGenerator1.nextInt(map.getMountains().size()-1);
+        index = randomGenerator.nextInt(map.getMountains().size()-1);
         location = map.getMountains().get(index);
         location.printPoint();
         x = location.getX();
         y = location.getY();
-        WildEngimon w1 = new WildEngimon("charizard1", Species.Charizard, "dad", "mom", listOfSkill, x, y);
-        System.out.println(w1.getX());
-        System.out.println(w1.getY());
+        WildEngimon w1 = new WildEngimon("charizard", Species.Charizard, "dad", "mom", listOfSkill, x, y);
         enemies.add(w1);
 
         // Random location in sea
-        Random randomGenerator2 = new Random();
-        index = randomGenerator2.nextInt(map.getSea().size()-1);
+        index = randomGenerator.nextInt(map.getSea().size()-1);
         location = map.getSea().get(index);
         location.printPoint();
         x = location.getX();
         y = location.getY();
         WildEngimon w2 = new WildEngimon("squirtle", Species.Squirtle, "dad", "mom", listOfSkill, x, y);
-        System.out.println(w2.getX());
-        System.out.println(w2.getY());
         enemies.add(w2);
 
+        // Random location in grassland
+        index = randomGenerator.nextInt(map.getGrassland().size()-1);
+        location = map.getGrassland().get(index);
+        location.printPoint();
+        x = location.getX();
+        y = location.getY();
+        WildEngimon w3 = new WildEngimon("pikachu", Species.Pikachu, "dad", "mom", listOfSkill, x, y);
+        enemies.add(w3);
+
+        // Random location in grassland
+        index = randomGenerator.nextInt(map.getGrassland().size()-1);
+        location = map.getGrassland().get(index);
+        location.printPoint();
+        x = location.getX();
+        y = location.getY();
+        WildEngimon w4 = new WildEngimon("mudkip", Species.Mudkip, "dad", "mom", listOfSkill, x, y);
+        enemies.add(w4);
+
+        // Random location in tundra
+        index = randomGenerator.nextInt(map.getTundra().size()-1);
+        location = map.getTundra().get(index);
+        location.printPoint();
+        x = location.getX();
+        y = location.getY();
+        WildEngimon w5 = new WildEngimon("gabumon", Species.Gabumon, "dad", "mom", listOfSkill, x, y);
+        enemies.add(w5);
+
+    }
+
+    private WildEngimon isEnemyPresent(int x, int y) {
+        boolean found = false;
+        int i = 0;
+        while (!found && i < enemies.size()) {
+            if (x == enemies.get(i).getX() && y == enemies.get(i).getY()) {
+                found = true;
+                return enemies.get(i);
+            }
+            i++;
+        }
+        return null;
     }
 
     private void drawBackground(GraphicsContext gc) {
@@ -244,6 +283,14 @@ public class Game extends Application {
 
     private void setTextCommands() {
         text = player.stringCommands();
+    }
+
+    private void setTextListEngimon() {
+        text = player.stringSortedEngimon();
+    }
+
+    private void setTextActiveEngimon() {
+        text = player.stringActiveEngimon();
     }
 
     private void writeText(GraphicsContext gc) {
