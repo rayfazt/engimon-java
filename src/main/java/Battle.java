@@ -71,6 +71,14 @@ public class Battle {
         return power;
     }
 
+    public void increaseExp() {
+        int newExp = this.engimonPlayer.getCurrExp() + 40;
+        this.engimonPlayer.setCurrExp(newExp);
+        if (newExp % (this.engimonPlayer.getLevel() * 100) != 0 || newExp == this.engimonPlayer.getLevel() * 100) {
+            this.engimonPlayer.updateEngimonLevel();
+        }
+    }
+
     public void commenceBattle() {
         boolean playerWin = false;
 
@@ -82,20 +90,54 @@ public class Battle {
             // Jika engimon player menang, player akan mendapatkan engimon yang menjadi lawan jika inventory masih cukup.
             // Active engimon juga akan menerima experience point dengan besaran yang bebas (boleh statik atau menggunakan rumus tertentu).
             // Player juga akan mendapatkan Skill Item yang berada skill di slot pertama dari engimon musuh.
-            //System.out.println("Player wins");
+            //  Exp +40
+            System.out.println("Your " + this.engimonPlayer.getName() + " won! Wild " + this.engimonWild.getName() + " fainted");
+            increaseExp();
+            System.out.println("Current " + this.engimonPlayer.getName() + " exp : " + this.engimonPlayer.getCurrExp());
+            System.out.println("Current " + this.engimonPlayer.getName() + " level : " + this.engimonPlayer.getLevel());
         }
         else {
+            System.out.print("Wild " + this.engimonWild.getName() + " won! Your " + this.engimonPlayer.getName() + " fainted");
             int newLife = this.engimonPlayer.getLife() - 1;
             this.engimonPlayer.setLife(newLife);
-            //System.out.println("Sisa life player : " + newLife);
+            if (newLife == 0) {
+                System.out.println("Commiserations. Your " + this.engimonPlayer.getName() + " has reached 0 life");
+            }
         }
     }
 
 //    public static void main(String[] args) {
 //        Player a = new Player();
 //        WildEngimon w = new WildEngimon();
-//        Battle b = new Battle(a, w);
+//        WildEngimon x = new WildEngimon();
+//        WildEngimon y = new WildEngimon();
+//        WildEngimon z = new WildEngimon();
+//        WildEngimon f = new WildEngimon();
+//        WildEngimon g = new WildEngimon();
+//        WildEngimon h = new WildEngimon();
+//        WildEngimon i = new WildEngimon();
+//        WildEngimon j = new WildEngimon();
+//        WildEngimon k = new WildEngimon();
+//        Battle b = new Battle(a,w);
+//        Battle b1 = new Battle(a,x);
+//        Battle b2 = new Battle(a,y);
+//        Battle b3 = new Battle(a,z);
+//        Battle b4 = new Battle(a,f);
+//        Battle b5 = new Battle(a,g);
+//        Battle b6 = new Battle(a,h);
+//        Battle b7 = new Battle(a,i);
+//        Battle b8 = new Battle(a,j);
+//        Battle b9 = new Battle(a,k);
 //        b.commenceBattle();
+//        b1.commenceBattle();
+//        b2.commenceBattle();
+//        b3.commenceBattle();
+//        b4.commenceBattle();
+//        b5.commenceBattle();
+//        b6.commenceBattle();
+//        b7.commenceBattle();
+//        b8.commenceBattle();
+//        b9.commenceBattle();
 //    }
 
 }
