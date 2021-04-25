@@ -140,6 +140,79 @@ public class Engimon {
         }
     }
 
+    public Engimon(String name_, Species speciesName_, String namaPapa, String namaMama, 
+    Species speciesPapa, Species speciesMama, ArrayList<Skill> skill_, int X_, int Y_){
+        this.name = name_;
+        this.speciesName = speciesName_;
+        this.parent = new ArrayList<Pair<String, Species>>();
+        this.skills = skill_;
+        this.level = 1;
+        this.currExp = 0;
+        this.maxExp = 100;
+        this.location = new Point();
+        if (this.speciesName == Species.Charizard)
+        {
+            this.icon = 'f';
+            this.teksUnik = "charrrizard_";
+            this.elements = new ArrayList<ElementType>();
+            this.elements.add(ElementType.FIRE);
+        }
+        else if (this.speciesName == Species.Squirtle)
+        {
+            this.icon = 'w';
+            this.teksUnik = "squirtle_";
+            this.elements = new ArrayList<ElementType>();
+            this.elements.add(ElementType.WATER);
+        }
+        else if (this.speciesName == Species.Pikachu)
+        {
+            this.icon = 'e';
+            this.teksUnik = "pikachu_";
+            this.elements = new ArrayList<ElementType>();
+            this.elements.add(ElementType.ELECTRIC);
+        }
+        else if (this.speciesName == Species.Mudkip)
+        {
+            this.icon = 'g';
+            this.teksUnik = "mudkip_";
+            this.elements = new ArrayList<ElementType>();
+            this.elements.add(ElementType.GROUND);
+        }
+        else if (this.speciesName == Species.Gabumon)
+        {
+            this.icon = 'i';
+            this.teksUnik = "gabumon_";
+            this.elements = new ArrayList<ElementType>();
+            this.elements.add(ElementType.ICE);
+        }
+        else if (this.speciesName == Species.Charkachu)
+        {
+            this.icon = 'l';
+            this.teksUnik = "charkachu_";
+            this.elements = new ArrayList<ElementType>();
+            this.elements.add(ElementType.FIRE);
+            this.elements.add(ElementType.ELECTRIC);
+        }
+        else if (this.speciesName == Species.Squirmon)
+        {
+            this.icon = 's';
+            this.teksUnik = "squirmon_";
+            this.elements = new ArrayList<ElementType>();
+            this.elements.add(ElementType.WATER);
+            this.elements.add(ElementType.ICE);
+        }
+        else if (this.speciesName == Species.Mudtle)
+        {
+            this.icon = 'n';
+            this.teksUnik = "mudtle_";
+            this.elements = new ArrayList<ElementType>();
+            this.elements.add(ElementType.WATER);
+            this.elements.add(ElementType.GROUND);
+        }
+        this.parent.add(new Pair<String, Species>(namaPapa, speciesPapa));
+        this.parent.add(new Pair<String, Species>(namaMama, speciesMama));
+    }
+
     // Setter & Getter name
     public void setName(String newName){
         this.name = newName;
@@ -397,6 +470,69 @@ public class Engimon {
         System.out.println("X: " + this.location.getX());
         System.out.println("Y: " + this.location.getY());
         System.out.println("Icon: " + this.icon);
+    }
+
+    public Species findDualSpecies(ElementType elType){
+        switch (this.elements.get(0))
+        {
+            case ElementType.FIRE:
+                switch (elType)
+                {
+                case ElementType.ELECTRIC:
+                    return Species.Charkachu;
+                
+                default:
+                    break;
+                }
+                break;
+            
+            case ElementType.WATER:
+                switch (elType)
+                {
+                case ElementType.GROUND:
+                    return Species.Mudtle;
+                
+                case ElementType.ICE:
+                    return Species.Squirmon;
+    
+                default:
+                    break;
+                }
+            
+            case ElementType.ElType.ELECTRIC:
+                switch (elType)
+                {
+                case ElementType.FIRE:
+                    return Species.Charkachu;
+    
+                default:
+                    break;
+                }
+    
+            case ElementType.ICE:
+                switch (elType)
+                {
+                case ElementType.WATER:
+                    return Species.Squirmon;
+    
+                default:
+                    break;
+                }
+    
+            case ElementType.GROUND:
+                switch (elType)
+                {
+                case ElementType.WATER:
+                    return Species.Mudtle;
+    
+                default:
+                    break;
+                }
+            
+            //default: return NULL; null gakebaca di spesies
+            default: return Species.Charkachu;
+        }
+        //default: return NULL
     }
 
     public static void main(String args[]){

@@ -158,23 +158,24 @@ public class Player {
             Species spAnak = e1.getSpeciesName();
 
         }
-//        else{
-//            if(e1.getElements().get(0).getAdvantage(e2.getElements().get(0)) > 1){
-//                elAnak.add(e1.getElements().get(0));
-//                Species spAnak = e1.getSpeciesName();
-//            }
-//            else{
-//                if(e1.getElements().get(0).getAdvantage(e2.getElements().get(0)) == 1){
-//                    elAnak.add(e1.getElements().get(0));
-//                    elAnak.add(e2.getElements().get(0));
-//                    Species spAnak = e1.findDualSpecies(e2.getElements().get(0));
-//                }
-//                else{
-//                    elAnak.add(e2.getElements().get(0));
-//                    Species spAnak = e2.getSpeciesName();
-//                }
-//            }
-//        }
+       else{
+           Element elmt1 = new Element(e1.getElements().get(0));
+           if(elmt1.getAdvantage(e2.getElements().get(0)) > 1){
+               elAnak.add(e1.getElements().get(0));
+               Species spAnak = e1.getSpeciesName();
+           }
+           else{
+               if(elmt1.getAdvantage(e2.getElements().get(0)) == 1){
+                   elAnak.add(e1.getElements().get(0));
+                   elAnak.add(e2.getElements().get(0));
+                   Species spAnak = e1.findDualSpecies(e2.getElements().get(0));
+               }
+               else{
+                   elAnak.add(e2.getElements().get(0));
+                   Species spAnak = e2.getSpeciesName();
+               }
+           }
+       }
 
         //Inherit skill
         for(int i=0; i<e1.getSkills().size()+e2.getSkills().size(); i++){
@@ -257,11 +258,11 @@ public class Player {
                 break;
             }
         }
-//        Point loc = e1.getEngimonLocation();
-//        Engimon anak = new Engimon(namaAnak, spAnak, e1.getEngimonName(), e2.getEngimonName(), e1.getSpeciesName(), e2.getSpeciesName(), skillAnak[0], elAnak, 0 , loc);
-//        anak.setEngimonSkill(skillAnak);
-//        anak.setIcon(iconAnak);
-//        this.listEngimon.addItem(anak);
+       Point loc = e1.getEngimonLocation();
+       Engimon anak = new Engimon(namaAnak, spAnak, e1.getEngimonName(), e2.getEngimonName(), e1.getSpeciesName(), e2.getSpeciesName(), skillAnak[0], elAnak, 0 , loc);
+       anak.setEngimonSkill(skillAnak);
+       anak.setIcon(iconAnak);
+       this.listEngimon.addItem(anak);
     }
     
     public ArrayList<SkillItem> getSkillItemInventory() {
