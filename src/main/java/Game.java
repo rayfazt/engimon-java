@@ -102,45 +102,45 @@ public class Game extends Application {
     }
 
     private void moveRight() throws Exception{
-        if (player.getPlayerLocation().getX() + 1 >= map.getCol()) {
+        int x = player.getPlayerLocation().getX();
+        int y = player.getPlayerLocation().getY();
+        if (x + 1 >= map.getCol() || isEnemyPresent(x+1,y)!= null) {
             throw new Exception();
         }
         else {
-            int x = player.getPlayerLocation().getX();
-            int y = player.getPlayerLocation().getY();
             player.setPlayerLocation(x+1, y);
         }
     }
 
     private void moveLeft() throws Exception{
-        if (player.getPlayerLocation().getX() - 1 < 0) {
+        int x = player.getPlayerLocation().getX();
+        int y = player.getPlayerLocation().getY();
+        if (x - 1 < 0 || isEnemyPresent(x-1,y)!= null) {
             throw new Exception();
         }
         else {
-            int x = player.getPlayerLocation().getX();
-            int y = player.getPlayerLocation().getY();
             player.setPlayerLocation(x-1, y);
         }
     }
 
     private void moveUp() throws Exception{
-        if (player.getPlayerLocation().getY() - 1 < 0) {
+        int x = player.getPlayerLocation().getX();
+        int y = player.getPlayerLocation().getY();
+        if (y - 1 < 0 || isEnemyPresent(x,y-1)!= null) {
             throw new Exception();
         }
         else {
-            int x = player.getPlayerLocation().getX();
-            int y = player.getPlayerLocation().getY();
             player.setPlayerLocation(x, y-1);
         }
     }
 
     private void moveDown() throws Exception{
-        if (player.getPlayerLocation().getY() + 1 >= map.getRow()) {
+        int x = player.getPlayerLocation().getX();
+        int y = player.getPlayerLocation().getY();
+        if (y + 1 >= map.getRow() || isEnemyPresent(x,y+1)!= null) {
             throw new Exception();
         }
         else {
-            int x = player.getPlayerLocation().getX();
-            int y = player.getPlayerLocation().getY();
             player.setPlayerLocation(x, y+1);
         }
     }
@@ -176,6 +176,19 @@ public class Game extends Application {
         System.out.println(w2.getY());
         enemies.add(w2);
 
+    }
+
+    private WildEngimon isEnemyPresent(int x, int y) {
+        boolean found = false;
+        int i = 0;
+        while (!found && i < enemies.size()) {
+            if (x == enemies.get(i).getX() && y == enemies.get(i).getY()) {
+                found = true;
+                return enemies.get(i);
+            }
+            i++;
+        }
+        return null;
     }
 
     private void drawBackground(GraphicsContext gc) {
