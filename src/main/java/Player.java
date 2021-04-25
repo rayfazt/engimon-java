@@ -351,20 +351,20 @@ public class Player {
     }
 
     /* LIST SKILLITEM */
-
-    public int searchSkillIdx(String skillName) {
+    // TODO masteryLevelnya juga disamain
+    public int searchSkillIdx(Skill sk) {
         int i = 0;
         for (SkillItem skill : listSkill.getInventoryList()) {
-            if (skillName.equals(skill.getSkill().getSkillName())) {
+            if (sk.getSkillName().equals(skill.getSkill().getSkillName()) && (sk.getMasteryLevel() == skill.getSkill().getMasteryLevel())) {
                 i = listSkill.getInventoryList().indexOf(skill);
             }
         }
         return i;
     }
-    public boolean searchSkill(String skillName) {
+    public boolean searchSkill(Skill sk) {
         boolean found = false;
         for (SkillItem skill : listSkill.getInventoryList()) {
-            if (skillName.equals(skill.getSkill().getSkillName())){
+            if (sk.getSkillName().equals(skill.getSkill().getSkillName()) && (sk.getMasteryLevel() == skill.getSkill().getMasteryLevel()) ){
                 found = true;
             }
         }
@@ -373,8 +373,8 @@ public class Player {
     public void addSkill(Skill sk) {
         // kalo udah ada
         if (!isCapacityFull()) {
-            if (searchSkill(sk.getSkillName())) {
-                int idx = searchSkillIdx(sk.getSkillName());
+            if (searchSkill(sk)) {
+                int idx = searchSkillIdx(sk);
                 SkillItem entry = listSkill.getInventoryList().get(idx);
                 entry.addSkillAmount(1);
             }
@@ -390,8 +390,8 @@ public class Player {
 
     public void addSkillItem(Skill sk, int x) {
         if (!isCapacityFull()) {
-            if (searchSkill(sk.getSkillName())) {
-                int idx = searchSkillIdx(sk.getSkillName());
+            if (searchSkill(sk)) {
+                int idx = searchSkillIdx(sk);
                 SkillItem entry = listSkill.getInventoryList().get(idx);
                 entry.addSkillAmount(x);
             }
@@ -404,9 +404,9 @@ public class Player {
         }
     }
     // Delete suatu skill sebanyak X amount
-    public void delXSkillItem(String skillName, int x) {
-        if (searchSkill(skillName)) {
-            int idx = searchSkillIdx(skillName);
+    public void delXSkillItem(Skill sk, int x) {
+        if (searchSkill(sk)) {
+            int idx = searchSkillIdx(sk);
             SkillItem entry = listSkill.getInventoryList().get(idx);
             System.out.println(entry.toString());
             if (entry.getSkillAmount() == x) {
@@ -423,7 +423,7 @@ public class Player {
 
     public void useSkillItem(Engimon engi, SkillItem s) {
         // remove dari Inventory terus pake ke engimonnya
-        delXSkillItem(s.getSkill().getSkillName(),1);
+        delXSkillItem(s.getSkill(),1);
        // engimon learn skill
        engi.learnSkill(s.getSkill());
     }
@@ -508,8 +508,8 @@ public class Player {
         // pemain.printListSkillItem();
         System.out.println(pemain.stringListSkillItem());
         System.out.println("Capacity full? "+pemain.isCapacityFull());
-        pemain.delXSkillItem("FireSkill",2);
-        System.out.println("Setelah di delete satu FireSkill: ");
+        pemain.delXSkillItem(fireSkill,2);
+        System.out.println("Setelah di delete dua FireSkill: ");
         // pemain.printListSkillItem();
         System.out.println(pemain.stringListSkillItem());
         // pemain.printCommands();

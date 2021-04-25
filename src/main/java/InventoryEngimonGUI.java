@@ -20,7 +20,7 @@ public class InventoryEngimonGUI extends Application {
     Stage window;
     TableView<Engimon> tableEngimon;
 
-    public ObservableList<Engimon> getEngimon() {
+    public ObservableList<Engimon> getEngimons() {
         Player pemain = new Player();
 
         Skill fireSkill = new Skill("FireSkill", 100, 1, ElementType.FIRE);
@@ -83,6 +83,10 @@ public class InventoryEngimonGUI extends Application {
         nameEngimonColumn.setMinWidth(200);
         nameEngimonColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
         // Species name column
+        TableColumn<Engimon, Species> speciesNameColumn = new TableColumn<>("Species Name");
+        speciesNameColumn.setMinWidth(200);
+        speciesNameColumn.setCellValueFactory(new PropertyValueFactory<>("speciesName"));
+
         // ini nanti pengennya pake gambar gitu sih
 //        TableColumn<Engimon, ImageView> photoEngimonColumn = new TableColumn<Engimon, ImageView>("Photo");
 //        photoEngimonColumn.setMinWidth(200);
@@ -103,13 +107,18 @@ public class InventoryEngimonGUI extends Application {
 //        tableview.getColumns().add(firstColumn);
 //        tableview.setItems(imgList);
 
-        // Teksunik (?) gausah sih
-        TableColumn<Engimon, String> teksUnikColumn = new TableColumn<>("Teks Unik");
-        teksUnikColumn.setMinWidth(200);
-        teksUnikColumn.setCellValueFactory(new PropertyValueFactory<>("teksUnik"));
-        // Parent -> string, species Papa, string species Mama
+//        // Teksunik (?) gausah sih
+//        TableColumn<Engimon, String> teksUnikColumn = new TableColumn<>("Teks Unik");
+//        teksUnikColumn.setMinWidth(200);
+//        teksUnikColumn.setCellValueFactory(new PropertyValueFactory<>("teksUnik"));
 
-        // Skills column
+        // Parent -> string, species Papa, string species Mama
+        TableColumn<Engimon, Species> speciesPapaColumn = new TableColumn<>("Species papa");
+        speciesPapaColumn.setMinWidth(200);
+        speciesPapaColumn.setCellValueFactory(new PropertyValueFactory<>("speciesPapa"));
+        TableColumn<Engimon, Species> speciesMamaColumn = new TableColumn<>("Species mama");
+        speciesMamaColumn.setMinWidth(200);
+        speciesMamaColumn.setCellValueFactory(new PropertyValueFactory<>("speciesMama"));
         // Elements column
         // pake gambar sih hrsnya
         // Level column
@@ -127,8 +136,8 @@ public class InventoryEngimonGUI extends Application {
 
 
         tableEngimon = new TableView<>();
-        tableEngimon.setItems(getEngimon());
-        tableEngimon.getColumns().addAll(nameEngimonColumn,teksUnikColumn,levelColumn, currExpColumn, maxExpColumn);
+        tableEngimon.setItems(getEngimons());
+        tableEngimon.getColumns().addAll(nameEngimonColumn, speciesNameColumn, speciesPapaColumn, speciesMamaColumn, levelColumn, currExpColumn, maxExpColumn);
         VBox vBox = new VBox();
         vBox.getChildren().addAll(tableEngimon);
         Scene scene = new Scene(vBox);
