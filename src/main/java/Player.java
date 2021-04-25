@@ -297,7 +297,7 @@ public class Player {
     }
 
     public void sortEngimon() {
-//        // belom dites /blm bisa
+//        // TODO belom dites /blm bisa group by
 //        listEngimon.inventoryList.sort(Engimon.engimonLevelComparator);
 //        Map<ElementType,List<Engimon>> byElement = listEngimon.inventoryList.stream(Collectors.groupingBy(Engimon::getFirstElement));
 //        for (Engimon engi : byElement) {
@@ -313,7 +313,14 @@ public class Player {
     public void delEngimon(Engimon engi) {
         listEngimon.delItem(engi);
     }
-    
+
+    public void changeEngimonName(Engimon engi, String newName) {
+        engi.setName(newName);
+    }
+
+    public boolean isListEngimonEmpty() {
+        return listEngimon.inventoryList.isEmpty();
+    }
     public void printCommands() {
         System.out.println("Command yang tersedia: ");
         System.out.println("w: bergerak satu petak ke atas");
