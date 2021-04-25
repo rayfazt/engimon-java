@@ -149,32 +149,54 @@ public class Game extends Application {
         Skill skillDefault = new Skill();
         ArrayList<Skill> listOfSkill = new ArrayList<Skill>();
 
+        Random randomGenerator = new Random();
         int index, x, y;
         Point location = new Point();
 
         // Random location in mountains
-        Random randomGenerator1 = new Random();
-        index = randomGenerator1.nextInt(map.getMountains().size()-1);
+        index = randomGenerator.nextInt(map.getMountains().size()-1);
         location = map.getMountains().get(index);
         location.printPoint();
         x = location.getX();
         y = location.getY();
-        WildEngimon w1 = new WildEngimon("charizard1", Species.Charizard, "dad", "mom", listOfSkill, x, y);
-        System.out.println(w1.getX());
-        System.out.println(w1.getY());
+        WildEngimon w1 = new WildEngimon("charizard", Species.Charizard, "dad", "mom", listOfSkill, x, y);
         enemies.add(w1);
 
         // Random location in sea
-        Random randomGenerator2 = new Random();
-        index = randomGenerator2.nextInt(map.getSea().size()-1);
+        index = randomGenerator.nextInt(map.getSea().size()-1);
         location = map.getSea().get(index);
         location.printPoint();
         x = location.getX();
         y = location.getY();
         WildEngimon w2 = new WildEngimon("squirtle", Species.Squirtle, "dad", "mom", listOfSkill, x, y);
-        System.out.println(w2.getX());
-        System.out.println(w2.getY());
         enemies.add(w2);
+
+        // Random location in grassland
+        index = randomGenerator.nextInt(map.getGrassland().size()-1);
+        location = map.getGrassland().get(index);
+        location.printPoint();
+        x = location.getX();
+        y = location.getY();
+        WildEngimon w3 = new WildEngimon("pikachu", Species.Pikachu, "dad", "mom", listOfSkill, x, y);
+        enemies.add(w3);
+
+        // Random location in grassland
+        index = randomGenerator.nextInt(map.getGrassland().size()-1);
+        location = map.getGrassland().get(index);
+        location.printPoint();
+        x = location.getX();
+        y = location.getY();
+        WildEngimon w4 = new WildEngimon("mudkip", Species.Mudkip, "dad", "mom", listOfSkill, x, y);
+        enemies.add(w4);
+
+        // Random location in tundra
+        index = randomGenerator.nextInt(map.getTundra().size()-1);
+        location = map.getTundra().get(index);
+        location.printPoint();
+        x = location.getX();
+        y = location.getY();
+        WildEngimon w5 = new WildEngimon("gabumon", Species.Gabumon, "dad", "mom", listOfSkill, x, y);
+        enemies.add(w5);
 
     }
 
