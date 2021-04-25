@@ -151,28 +151,29 @@ public class Player {
         ArrayList<ElementType> elAnak = new ArrayList<ElementType>();
         ArrayList<Skill> candidateSkill = new ArrayList<Skill>();
         ArrayList<Skill> skillAnak = new ArrayList<Skill>();
+        Species spAnak = Species.Charizard;
 
         // Penentuan elemen dan spesies anak
         if(e1.getElements().get(0) == e2.getElements().get(0)){
             elAnak.add(e1.getElements().get(0));
-            Species spAnak = e1.getSpeciesName();
+            spAnak = e1.getSpeciesName();
 
         }
        else{
            Element elmt1 = new Element(e1.getElements().get(0));
            if(elmt1.getAdvantage(e2.getElements().get(0)) > 1){
                elAnak.add(e1.getElements().get(0));
-               Species spAnak = e1.getSpeciesName();
+               spAnak = e1.getSpeciesName();
            }
            else{
                if(elmt1.getAdvantage(e2.getElements().get(0)) == 1){
                    elAnak.add(e1.getElements().get(0));
                    elAnak.add(e2.getElements().get(0));
-                   Species spAnak = e1.findDualSpecies(e2.getElements().get(0));
+                   spAnak = e1.findDualSpecies(e2.getElements().get(0));
                }
                else{
                    elAnak.add(e2.getElements().get(0));
-                   Species spAnak = e2.getSpeciesName();
+                   spAnak = e2.getSpeciesName();
                }
            }
        }
@@ -224,7 +225,7 @@ public class Player {
             skillAnak.add(candidateSkill.get(masteryAndIndex.get(i).getValue()));
         }
 
-        char iconAnak;
+        char iconAnak = ' ';
         if(elAnak.size()>1){
             if((elAnak.get(0)==ElementType.FIRE && elAnak.get(1)==ElementType.ELECTRIC) || (elAnak.get(1)==ElementType.FIRE && elAnak.get(0)==ElementType.ELECTRIC)){
                 iconAnak = 'l';
@@ -258,9 +259,9 @@ public class Player {
                 break;
             }
         }
-       Point loc = e1.getEngimonLocation();
-       Engimon anak = new Engimon(namaAnak, spAnak, e1.getEngimonName(), e2.getEngimonName(), e1.getSpeciesName(), e2.getSpeciesName(), skillAnak[0], elAnak, 0 , loc);
-       anak.setEngimonSkill(skillAnak);
+       int locX = e1.getX();
+       int locY = e1.getY();
+       Engimon anak = new Engimon(namaAnak, spAnak, e1.getName(), e2.getName(), e1.getSpeciesName(), e2.getSpeciesName(), skillAnak, locX, locY);
        anak.setIcon(iconAnak);
        this.listEngimon.addItem(anak);
     }

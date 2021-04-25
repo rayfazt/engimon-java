@@ -330,6 +330,17 @@ public class Engimon {
         return this.location.getY();
     }
 
+    // Setter & Getter Location
+    public void setLocation(int x, int y){
+        this.location = new Point();
+        setY(y);
+        setX(x);
+    }
+
+    public Point getLocation(){
+        return this.location;
+    }
+
     // Setter & Getter Icon
     public void setIcon(char newIcon){
         this.icon = newIcon;
@@ -475,10 +486,10 @@ public class Engimon {
     public Species findDualSpecies(ElementType elType){
         switch (this.elements.get(0))
         {
-            case ElementType.FIRE:
+            case FIRE:
                 switch (elType)
                 {
-                case ElementType.ELECTRIC:
+                case ELECTRIC:
                     return Species.Charkachu;
                 
                 default:
@@ -486,53 +497,54 @@ public class Engimon {
                 }
                 break;
             
-            case ElementType.WATER:
+            case WATER:
                 switch (elType)
                 {
-                case ElementType.GROUND:
+                case GROUND:
                     return Species.Mudtle;
                 
-                case ElementType.ICE:
+                case ICE:
                     return Species.Squirmon;
     
                 default:
                     break;
                 }
             
-            case ElementType.ElType.ELECTRIC:
+            case ELECTRIC:
                 switch (elType)
                 {
-                case ElementType.FIRE:
+                case FIRE:
                     return Species.Charkachu;
     
                 default:
                     break;
                 }
     
-            case ElementType.ICE:
+            case ICE:
                 switch (elType)
                 {
-                case ElementType.WATER:
+                case WATER:
                     return Species.Squirmon;
     
                 default:
                     break;
                 }
     
-            case ElementType.GROUND:
+            case GROUND:
                 switch (elType)
                 {
-                case ElementType.WATER:
+                case WATER:
                     return Species.Mudtle;
-    
+
                 default:
                     break;
                 }
-            
+
             //default: return NULL; null gakebaca di spesies
-            default: return Species.Charkachu;
+            default: return Species.Charizard;
         }
         //default: return NULL
+        return  Species.Charizard;
     }
 
     public static void main(String args[]){
