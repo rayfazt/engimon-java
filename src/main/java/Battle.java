@@ -33,6 +33,15 @@ public class Battle {
         System.out.println("!!!!!!!!!!POWER COMPARISON!!!!!!!!!!");
         System.out.println("Your Engimon's Power : " + this.powerPlayer);
         System.out.println("Enemy Engimon's Power : " + this.powerWild);
+
+    }
+
+    public String getChoice() {
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Would you like to commence battle(y/n)?");
+        String choice = sc.nextLine();
+
+        return choice;
     }
 
     public double battleAdvantage(Engimon engimonPlayer, Engimon engimonWild) {
@@ -72,6 +81,7 @@ public class Battle {
     }
 
     public void increaseExp() {
+        //  Exp +40
         int newExp = this.engimonPlayer.getCurrExp() + 40;
         this.engimonPlayer.setCurrExp(newExp);
         if (newExp % (this.engimonPlayer.getLevel() * 100) != 0 || newExp == this.engimonPlayer.getLevel() * 100) {
@@ -79,7 +89,7 @@ public class Battle {
         }
     }
 
-    public void commenceBattle() {
+    public boolean commenceBattle() {
         boolean playerWin = false;
 
         if (this.powerPlayer >= this.powerWild) {
@@ -90,7 +100,6 @@ public class Battle {
             // Jika engimon player menang, player akan mendapatkan engimon yang menjadi lawan jika inventory masih cukup.
             // Active engimon juga akan menerima experience point dengan besaran yang bebas (boleh statik atau menggunakan rumus tertentu).
             // Player juga akan mendapatkan Skill Item yang berada skill di slot pertama dari engimon musuh.
-            //  Exp +40
             System.out.println("Your " + this.engimonPlayer.getName() + " won! Wild " + this.engimonWild.getName() + " fainted");
             increaseExp();
             System.out.println("Current " + this.engimonPlayer.getName() + " exp : " + this.engimonPlayer.getCurrExp());
@@ -104,6 +113,8 @@ public class Battle {
                 System.out.println("Commiserations. Your " + this.engimonPlayer.getName() + " has reached 0 life");
             }
         }
+
+        return playerWin;
     }
 
 //    public static void main(String[] args) {
@@ -128,16 +139,26 @@ public class Battle {
 //        Battle b7 = new Battle(a,i);
 //        Battle b8 = new Battle(a,j);
 //        Battle b9 = new Battle(a,k);
-//        b.commenceBattle();
-//        b1.commenceBattle();
-//        b2.commenceBattle();
-//        b3.commenceBattle();
-//        b4.commenceBattle();
-//        b5.commenceBattle();
-//        b6.commenceBattle();
-//        b7.commenceBattle();
-//        b8.commenceBattle();
-//        b9.commenceBattle();
+//        String choice = b.getChoice();
+//        while (!choice.equalsIgnoreCase("y") && !choice.equalsIgnoreCase("n")) {
+//            System.out.println("Invalid input");
+//            choice = b.getChoice();
+//        }
+//        if (choice.equalsIgnoreCase("y")) {
+//            Boolean battlez = b.commenceBattle();
+//        }
+//        else if (choice.equalsIgnoreCase("n")) {
+//            System.out.println("Battle aborted");
+//        }
+//        battlez = b1.commenceBattle();
+//        battlez = b2.commenceBattle();
+//        battlez = b3.commenceBattle();
+//        battlez = b4.commenceBattle();
+//        battlez = b5.commenceBattle();
+//        battlez = b6.commenceBattle();
+//        battlez = b7.commenceBattle();
+//        battlez = b8.commenceBattle();
+//        battlez = b9.commenceBattle();
 //    }
 
 }
