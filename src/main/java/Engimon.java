@@ -1,8 +1,8 @@
 import java.util.*;
 import java.util.ArrayList;
-import javafx.util.Pair;
-import javafx.scene.image.ImageView;
 import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.util.Pair;
 public class Engimon {
     protected String name;
     protected Species speciesName;
@@ -529,70 +529,6 @@ public class Engimon {
         System.out.println("Icon: " + this.icon);
     }
 
-<<<<<<< HEAD
-//    public Species findDualSpecies(ElementType elType){
-//        switch (this.elements.get(0))
-//        {
-//            case FIRE:
-//                switch (elType)
-//                {
-//                case ELECTRIC:
-//                    return Species.Charkachu;
-//
-//                default:
-//                    break;
-//                }
-//                break;
-//
-//            case WATER:
-//                switch (elType)
-//                {
-//                case GROUND:
-//                    return Species.Mudtle;
-//
-//                case ICE:
-//                    return Species.Squirmon;
-//
-//                default:
-//                    break;
-//                }
-//
-//            case ELECTRIC:
-//                switch (elType)
-//                {
-//                case FIRE:
-//                    return Species.Charkachu;
-//
-//                default:
-//                    break;
-//                }
-//
-//            case ICE:
-//                switch (elType)
-//                {
-//                case WATER:
-//                    return Species.Squirmon;
-//
-//                default:
-//                    break;
-//                }
-//
-//            case GROUND:
-//                switch (elType)
-//                {
-//                case WATER:
-//                    return Species.Mudtle;
-//
-//                default:
-//                    break;
-//                }
-//
-//            //default: return NULL; null gakebaca di spesies
-//            default: return Species.Charkachu;
-//        }
-//        //default: return NULL
-//    }
-=======
     public Species findDualSpecies(ElementType elType){
         switch (this.elements.get(0))
         {
@@ -656,7 +592,6 @@ public class Engimon {
         //default: return NULL
         return  Species.Charizard;
     }
->>>>>>> 0f5b9d8223d07b2a550ccac942f6fa9cc8b604e6
 
     public static void main(String args[]){
 //        Engimon A = new Engimon();
