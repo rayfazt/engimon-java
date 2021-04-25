@@ -373,6 +373,17 @@ public class Engimon {
         return this.location.getY();
     }
 
+    // Setter & Getter Location
+    public void setLocation(int x, int y){
+        this.location = new Point();
+        setY(y);
+        setX(x);
+    }
+
+    public Point getLocation(){
+        return this.location;
+    }
+
     // Setter & Getter Icon
     public void setIcon(char newIcon){
         this.icon = newIcon;
@@ -518,6 +529,7 @@ public class Engimon {
         System.out.println("Icon: " + this.icon);
     }
 
+<<<<<<< HEAD
 //    public Species findDualSpecies(ElementType elType){
 //        switch (this.elements.get(0))
 //        {
@@ -580,6 +592,71 @@ public class Engimon {
 //        }
 //        //default: return NULL
 //    }
+=======
+    public Species findDualSpecies(ElementType elType){
+        switch (this.elements.get(0))
+        {
+            case FIRE:
+                switch (elType)
+                {
+                case ELECTRIC:
+                    return Species.Charkachu;
+                
+                default:
+                    break;
+                }
+                break;
+            
+            case WATER:
+                switch (elType)
+                {
+                case GROUND:
+                    return Species.Mudtle;
+                
+                case ICE:
+                    return Species.Squirmon;
+    
+                default:
+                    break;
+                }
+            
+            case ELECTRIC:
+                switch (elType)
+                {
+                case FIRE:
+                    return Species.Charkachu;
+    
+                default:
+                    break;
+                }
+    
+            case ICE:
+                switch (elType)
+                {
+                case WATER:
+                    return Species.Squirmon;
+    
+                default:
+                    break;
+                }
+    
+            case GROUND:
+                switch (elType)
+                {
+                case WATER:
+                    return Species.Mudtle;
+
+                default:
+                    break;
+                }
+
+            //default: return NULL; null gakebaca di spesies
+            default: return Species.Charizard;
+        }
+        //default: return NULL
+        return  Species.Charizard;
+    }
+>>>>>>> 0f5b9d8223d07b2a550ccac942f6fa9cc8b604e6
 
     public static void main(String args[]){
 //        Engimon A = new Engimon();
