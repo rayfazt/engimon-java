@@ -39,13 +39,12 @@ public class Engimon {
         this.maxExp = 100;
         this.location = new Point();
         this.icon = 'f';
-        this.imagePath = "main/resources/pikachu.png";
+        this.imagePath = "pikachu.png";
 //        this.photo = new ImageView(new Image(imagePath));
     }
 
     public Engimon(String name_, Species speciesName_, String namaPapa, String namaMama,
                    ArrayList<Skill> skill_, int X_, int Y_){
-        String path = "main/resources/";
         String png = ".png";
         this.name = name_;
         this.speciesName = speciesName_;
@@ -67,7 +66,7 @@ public class Engimon {
             this.speciesMama = Species.Charizard;
             this.parent.add(new Pair<String, Species>(namaPapa, this.speciesPapa));
             this.parent.add(new Pair<String, Species>(namaMama, this.speciesMama));
-            this.imagePath = path+"charizard"+png;
+            this.imagePath = "charizard"+png;
         }
         else if (this.speciesName == Species.Squirtle)
         {
@@ -79,7 +78,7 @@ public class Engimon {
             this.speciesMama = Species.Squirtle;
             this.parent.add(new Pair<String, Species>(namaPapa, this.speciesPapa));
             this.parent.add(new Pair<String, Species>(namaMama, this.speciesMama));
-            this.imagePath = path+"squirtle"+png;
+            this.imagePath = "squirtle"+png;
 
         }
         else if (this.speciesName == Species.Pikachu)
@@ -92,7 +91,7 @@ public class Engimon {
             this.speciesMama = Species.Pikachu;
             this.parent.add(new Pair<String, Species>(namaPapa, this.speciesPapa));
             this.parent.add(new Pair<String, Species>(namaMama, this.speciesMama));
-            this.imagePath = path+"pikachu"+png;
+            this.imagePath = "pikachu"+png;
 
         }
         else if (this.speciesName == Species.Mudkip)
@@ -105,7 +104,7 @@ public class Engimon {
             this.speciesMama = Species.Mudkip;
             this.parent.add(new Pair<String, Species>(namaPapa, this.speciesPapa));
             this.parent.add(new Pair<String, Species>(namaMama, this.speciesMama));
-            this.imagePath = path+"mudkip"+png;
+            this.imagePath = "mudkip"+png;
 
         }
         else if (this.speciesName == Species.Gabumon)
@@ -118,7 +117,7 @@ public class Engimon {
             this.speciesMama = Species.Gabumon;
             this.parent.add(new Pair<String, Species>(namaPapa, this.speciesPapa));
             this.parent.add(new Pair<String, Species>(namaMama, this.speciesMama));
-            this.imagePath = path+"gabumon"+png;
+            this.imagePath = "gabumon"+png;
         }
         else if (this.speciesName == Species.Charkachu)
         {
@@ -130,7 +129,7 @@ public class Engimon {
             this.speciesPapa = Species.Charizard;
             this.speciesMama = Species.Pikachu;
             this.parent.add(new Pair<String, Species>(namaPapa, this.speciesPapa));
-            this.imagePath = path+"charkachu"+png;
+            this.imagePath = "charkachu"+png;
 
         }
         else if (this.speciesName == Species.Squirmon)
@@ -144,7 +143,7 @@ public class Engimon {
             this.speciesMama = Species.Gabumon;
             this.parent.add(new Pair<String, Species>(namaPapa, this.speciesPapa));
             this.parent.add(new Pair<String, Species>(namaMama, this.speciesMama));
-            this.imagePath = path+"squirmon"+png;
+            this.imagePath = "squirmon"+png;
 
         }
         else if (this.speciesName == Species.Mudtle)
@@ -158,7 +157,7 @@ public class Engimon {
             this.speciesMama = Species.Squirtle;
             this.parent.add(new Pair<String, Species>(namaPapa, this.speciesPapa));
             this.parent.add(new Pair<String, Species>(namaMama, this.speciesMama));
-            this.imagePath = path+"mudtle"+png;
+            this.imagePath = "mudtle"+png;
 
         }
 //        this.photo = new ImageView(new Image(imagePath));
@@ -175,7 +174,6 @@ public class Engimon {
         this.currExp = 0;
         this.maxExp = 100;
         this.location = new Point();
-        String path = "main/resources/";
         String png = ".png";
         if (this.speciesName == Species.Charizard)
         {
@@ -183,7 +181,7 @@ public class Engimon {
             this.teksUnik = "charrrizard_";
             this.elements = new ArrayList<ElementType>();
             this.elements.add(ElementType.FIRE);
-            this.imagePath = path+"charizard"+png;
+            this.imagePath = "charizard"+png;
 
         }
         else if (this.speciesName == Species.Squirtle)
@@ -192,7 +190,7 @@ public class Engimon {
             this.teksUnik = "squirtle_";
             this.elements = new ArrayList<ElementType>();
             this.elements.add(ElementType.WATER);
-            this.imagePath = path+"squirtle"+png;
+            this.imagePath = "squirtle"+png;
 
         }
         else if (this.speciesName == Species.Pikachu)
@@ -201,7 +199,7 @@ public class Engimon {
             this.teksUnik = "pikachu_";
             this.elements = new ArrayList<ElementType>();
             this.elements.add(ElementType.ELECTRIC);
-            this.imagePath = path+"pikachu"+png;
+            this.imagePath = "pikachu"+png;
 
         }
         else if (this.speciesName == Species.Mudkip)
@@ -210,7 +208,7 @@ public class Engimon {
             this.teksUnik = "mudkip_";
             this.elements = new ArrayList<ElementType>();
             this.elements.add(ElementType.GROUND);
-            this.imagePath = path+"mudkip"+png;
+            this.imagePath = "mudkip"+png;
 
         }
         else if (this.speciesName == Species.Gabumon)
@@ -219,7 +217,7 @@ public class Engimon {
             this.teksUnik = "gabumon_";
             this.elements = new ArrayList<ElementType>();
             this.elements.add(ElementType.ICE);
-            this.imagePath = path+"gabumon"+png;
+            this.imagePath = "gabumon"+png;
 
         }
         else if (this.speciesName == Species.Charkachu)
@@ -229,7 +227,7 @@ public class Engimon {
             this.elements = new ArrayList<ElementType>();
             this.elements.add(ElementType.FIRE);
             this.elements.add(ElementType.ELECTRIC);
-            this.imagePath = path+"charkachu"+png;
+            this.imagePath = "charkachu"+png;
 
         }
         else if (this.speciesName == Species.Squirmon)
@@ -239,7 +237,7 @@ public class Engimon {
             this.elements = new ArrayList<ElementType>();
             this.elements.add(ElementType.WATER);
             this.elements.add(ElementType.ICE);
-            this.imagePath = path+"squirmon"+png;
+            this.imagePath = "squirmon"+png;
 
         }
         else if (this.speciesName == Species.Mudtle)
@@ -249,7 +247,7 @@ public class Engimon {
             this.elements = new ArrayList<ElementType>();
             this.elements.add(ElementType.WATER);
             this.elements.add(ElementType.GROUND);
-            this.imagePath = path+"mudtle"+png;
+            this.imagePath = "mudtle"+png;
 
         }
         this.parent.add(new Pair<String, Species>(namaPapa, speciesPapa));

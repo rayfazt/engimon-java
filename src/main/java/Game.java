@@ -34,7 +34,7 @@ public class Game extends Application {
     private Player player = new Player();
     private ArrayList<WildEngimon> enemies = new ArrayList<WildEngimon>();
 
-    private static final String playerIcon = "main/resources/player.png";
+    private static final String playerIcon = "player.png";
     private Image playerImage;
 
 
