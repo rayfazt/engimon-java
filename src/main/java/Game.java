@@ -27,14 +27,14 @@ public class Game extends Application {
     private final int ROWS = map.getRow();
     private final int COLUMNS = map.getCol();
     private final int SQUARE_SIZE = 40;
-    private final int WIDTH = SQUARE_SIZE*COLUMNS + SQUARE_SIZE*5;
+    private final int WIDTH = SQUARE_SIZE*COLUMNS + SQUARE_SIZE*12;
     private final int HEIGHT = SQUARE_SIZE*ROWS;
 
     private String text;
     private Player player = new Player();
     private ArrayList<WildEngimon> enemies = new ArrayList<WildEngimon>();
 
-    private static final String playerIcon = "main/resources/gabumon.png";
+    private static final String playerIcon = "main/resources/player.png";
     private Image playerImage;
 
 
@@ -59,7 +59,6 @@ public class Game extends Application {
                 if (code == KeyCode.RIGHT || code == KeyCode.D) {
                     try {
                         moveRight();
-                        setText();
                     } catch (Exception e){
                         System.out.println("Right border");
                     }
@@ -82,6 +81,9 @@ public class Game extends Application {
                         System.out.println("Bottom border");
                     }
                 }
+                else if (code == KeyCode.H) {
+                    setTextCommands();
+                }
             }
         });
 
@@ -93,10 +95,10 @@ public class Game extends Application {
     }
 
     private void run(GraphicsContext gc) {
+        writeText(gc);
         drawBackground(gc);
         drawPlayer(gc);
         drawWildEngimon(gc);
-        writeText(gc);
     }
 
     private void moveRight() throws Exception{
@@ -222,6 +224,8 @@ public class Game extends Application {
     private void drawPlayer(GraphicsContext gc) {
         playerImage = new Image(playerIcon);
         gc.drawImage(playerImage, player.getPlayerLocation().getX() * SQUARE_SIZE, player.getPlayerLocation().getY() * SQUARE_SIZE, SQUARE_SIZE, SQUARE_SIZE);
+        //Image activeEngimonImage = new Image(player.getActiveEngimon().getImagePath());
+        //gc.drawImage(activeEngimonImage, (player.getPlayerLocation().getX()-1)*SQUARE_SIZE, (player.getPlayerLocation().getY()-1)*SQUARE_SIZE, SQUARE_SIZE, SQUARE_SIZE);
     }
 
     private void drawWildEngimon(GraphicsContext gc) {
@@ -238,11 +242,12 @@ public class Game extends Application {
     }
      */
 
-    private void setText() {
-        text = "Hello";
+    private void setTextCommands() {
+        text = player.stringCommands();
     }
 
     private void writeText(GraphicsContext gc) {
+        gc.clearRect(0, 0, WIDTH, HEIGHT);
         gc.setFill(Color.web("000000"));
         gc.fillText(text, map.getCol()*SQUARE_SIZE+20, SQUARE_SIZE/2);
     }
