@@ -33,6 +33,13 @@ public class Player {
         this.location.setY(y);
     }
 
+    // Getter & Setter activeEngimon location
+    public Point getActiveEngimonLocation() {
+        return this.activeEngimon.location;
+    }
+    public void setActiveEngimonLocation(Point p) {
+        this.activeEngimon.location = p;
+    }
     // Getter & Setter icon
     public char getIcon() {
         return this.icon;
@@ -42,12 +49,14 @@ public class Player {
     }
 
     public void move(char dir) {
+        Point prev = getPlayerLocation();
         if (dir == 'w') {
             try
             {
                 int x = getPlayerLocation().getX();
                 int y = getPlayerLocation().getY() - 1;
                 setPlayerLocation(x, y); // Kalo ga valid dia throw
+                // setActiveEngimonLocation(prev);
             }
             catch(OutOfMapException e)
             {
@@ -60,6 +69,8 @@ public class Player {
                 int x = getPlayerLocation().getX() - 1;
                 int y = getPlayerLocation().getY();
                 setPlayerLocation(x, y);
+                // setActiveEngimonLocation(prev);
+
             }
             catch(OutOfMapException e)
             {
@@ -71,7 +82,9 @@ public class Player {
             {
                 int x = getPlayerLocation().getX();
                 int y = getPlayerLocation().getY() + 1;
-                setPlayerLocation(x, y);          
+                setPlayerLocation(x, y);   
+                // setActiveEngimonLocation(prev);
+       
             }
             catch(OutOfMapException e)
             {
@@ -84,6 +97,8 @@ public class Player {
                 int x = getPlayerLocation().getX() + 1;
                 int y = getPlayerLocation().getY();
                 setPlayerLocation(x, y);          
+                // setActiveEngimonLocation(prev);
+
             }
             catch(OutOfMapException e)
             {
@@ -114,7 +129,7 @@ public class Player {
             // tambahin current active engimon ke inventory
             addEngimon(this.getActiveEngimon());
             // remove active engimon yang baru dari inventory
-            delEngimon(this.getActiveEngimon());
+            delEngimon(engi);
             // set active engimon baru
             this.activeEngimon = engi;
         }
