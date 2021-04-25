@@ -25,11 +25,7 @@ public class Player {
     public Point getPlayerLocation() {
         return this.location;
     }
-    public void setPlayerLocation(int x, int y) throws OutOfMapException{
-        if (x < 0 || x > 9 || y < 0 || y > 11) // NOTE : angkanya nyesuain map
-        {
-            throw new OutOfMapException("Tidak bisa keluar dari map"); // ini kyknya diganti sama kelas exception
-        }
+    public void setPlayerLocation(int x, int y) {
         this.location.setX(x);
         this.location.setY(y);
     }
@@ -49,6 +45,7 @@ public class Player {
         this.icon = icon;
     }
 
+    /*
     public void move(char dir) {
         Point prev = getPlayerLocation();
         if (dir == 'w') {
@@ -107,6 +104,8 @@ public class Player {
             }
         }
     }
+
+     */
 
     /* ACTIVE ENGIMON */
     public PlayerEngimon getActiveEngimon() {

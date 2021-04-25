@@ -1,3 +1,4 @@
+import java.lang.reflect.Array;
 import java.util.*;
 
 public class Map {
@@ -25,8 +26,8 @@ public class Map {
             for (String[] line : lines) {
                 j = 0;
                 for (String point : line) {
-                    int x = i;
-                    int y = j;
+                    int x = j;
+                    int y = i;
                     System.out.println(point);
                     if (point.equals("m")) {
                         Point coord = new Point(x,y,MapType.MOUNTAINS);
@@ -66,6 +67,22 @@ public class Map {
         return map;
     }
 
+    public ArrayList<Point> getMountains() {
+        return mountains;
+    }
+
+    public ArrayList<Point> getSea() {
+        return sea;
+    }
+
+    public ArrayList<Point> getGrassland() {
+        return grassland;
+    }
+
+    public ArrayList<Point> getTundra() {
+        return tundra;
+    }
+
     public int getRow() {
         return row;
     }
@@ -93,10 +110,10 @@ public class Map {
         }
     }
 
-    /*
+
     public static void main(String[] args) {
         Map map = new Map("src/main/resources/test.txt", "");
         map.printMapPoints();
     }
-    */
+
 }

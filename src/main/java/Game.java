@@ -17,6 +17,7 @@ import javafx.scene.image.Image;
 
 import java.awt.*;
 import java.util.ArrayList;
+import java.util.Random;
 
 public class Game extends Application {
 
@@ -30,11 +31,12 @@ public class Game extends Application {
     private final int HEIGHT = SQUARE_SIZE*ROWS;
 
     private String text;
+    private Player player = new Player();
+    private ArrayList<WildEngimon> enemies = new ArrayList<WildEngimon>();
 
-    private static final String pikachu = "main/resources/pikachu.png";
-    private Image engimonImage;
-    private int engimonX = 5;
-    private int engimonY = 7;
+    private static final String playerIcon = "main/resources/gabumon.png";
+    private Image playerImage;
+
 
     private GraphicsContext gc;
 
@@ -83,6 +85,8 @@ public class Game extends Application {
             }
         });
 
+        generateEnemies();
+
         Timeline timeline = new Timeline(new KeyFrame(Duration.millis(130), e -> run(gc)));
         timeline.setCycleCount(Animation.INDEFINITE);
         timeline.play();
@@ -90,44 +94,86 @@ public class Game extends Application {
 
     private void run(GraphicsContext gc) {
         drawBackground(gc);
-        drawEngimon(gc);
+        drawPlayer(gc);
+        drawWildEngimon(gc);
         writeText(gc);
     }
 
     private void moveRight() throws Exception{
-        if (engimonX + 1 >= map.getCol()) {
+        if (player.getPlayerLocation().getX() + 1 >= map.getCol()) {
             throw new Exception();
         }
         else {
-            engimonX++;
+            int x = player.getPlayerLocation().getX();
+            int y = player.getPlayerLocation().getY();
+            player.setPlayerLocation(x+1, y);
         }
     }
 
     private void moveLeft() throws Exception{
-        if (engimonX - 1 < 0) {
+        if (player.getPlayerLocation().getX() - 1 < 0) {
             throw new Exception();
         }
         else {
-            engimonX--;
+            int x = player.getPlayerLocation().getX();
+            int y = player.getPlayerLocation().getY();
+            player.setPlayerLocation(x-1, y);
         }
     }
 
     private void moveUp() throws Exception{
-        if (engimonY - 1 < 0) {
+        if (player.getPlayerLocation().getY() - 1 < 0) {
             throw new Exception();
         }
         else {
-            engimonY--;
+            int x = player.getPlayerLocation().getX();
+            int y = player.getPlayerLocation().getY();
+            player.setPlayerLocation(x, y-1);
         }
     }
 
     private void moveDown() throws Exception{
-        if (engimonY + 1 >= map.getRow()) {
+        if (player.getPlayerLocation().getY() + 1 >= map.getRow()) {
             throw new Exception();
         }
         else {
-            engimonY++;
+            int x = player.getPlayerLocation().getX();
+            int y = player.getPlayerLocation().getY();
+            player.setPlayerLocation(x, y+1);
         }
+    }
+
+    private void generateEnemies() {
+        Skill skillDefault = new Skill();
+        ArrayList<Skill> listOfSkill = new ArrayList<Skill>();
+
+        int index, x, y;
+        Point location = new Point();
+
+        // Random location in mountains
+        Random randomGenerator1 = new Random();
+        index = randomGenerator1.nextInt(map.getMountains().size()-1);
+        location = map.getMountains().get(index);
+        location.printPoint();
+        x = location.getX();
+        y = location.getY();
+        WildEngimon w1 = new WildEngimon("charizard1", Species.Charizard, "dad", "mom", listOfSkill, x, y);
+        System.out.println(w1.getX());
+        System.out.println(w1.getY());
+        enemies.add(w1);
+
+        // Random location in sea
+        Random randomGenerator2 = new Random();
+        index = randomGenerator2.nextInt(map.getSea().size()-1);
+        location = map.getSea().get(index);
+        location.printPoint();
+        x = location.getX();
+        y = location.getY();
+        WildEngimon w2 = new WildEngimon("squirtle", Species.Squirtle, "dad", "mom", listOfSkill, x, y);
+        System.out.println(w2.getX());
+        System.out.println(w2.getY());
+        enemies.add(w2);
+
     }
 
     private void drawBackground(GraphicsContext gc) {
@@ -173,10 +219,24 @@ public class Game extends Application {
         }
     }
 
+    private void drawPlayer(GraphicsContext gc) {
+        playerImage = new Image(playerIcon);
+        gc.drawImage(playerImage, player.getPlayerLocation().getX() * SQUARE_SIZE, player.getPlayerLocation().getY() * SQUARE_SIZE, SQUARE_SIZE, SQUARE_SIZE);
+    }
+
+    private void drawWildEngimon(GraphicsContext gc) {
+        for (WildEngimon enemy: enemies) {
+            Image enemyImage = new Image(enemy.getImagePath());
+            gc.drawImage(enemyImage, enemy.getX() * SQUARE_SIZE, enemy.getY()*SQUARE_SIZE, SQUARE_SIZE, SQUARE_SIZE);
+        }
+    }
+
+    /*
     private void drawEngimon(GraphicsContext gc) {
         engimonImage = new Image(pikachu);
         gc.drawImage(engimonImage, engimonX * SQUARE_SIZE, engimonY * SQUARE_SIZE, SQUARE_SIZE, SQUARE_SIZE);
     }
+     */
 
     private void setText() {
         text = "Hello";

@@ -55,6 +55,8 @@ public class Engimon {
         this.currExp = 0;
         this.maxExp = 100;
         this.location = new Point();
+        this.location.setX(X_);
+        this.location.setY(Y_);
         if (this.speciesName == Species.Charizard)
         {
             this.icon = 'f';
