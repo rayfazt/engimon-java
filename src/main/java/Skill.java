@@ -41,4 +41,13 @@ public class Skill {
         this.masteryLevel = level;
     }
 
+    @Override
+    public String toString() {
+        return "Skill{" +
+                "skillName='" + skillName + '\'' +
+                ", basePower=" + basePower +
+                ", masteryLevel=" + masteryLevel +
+                ", learnableElements=" + learnableElements +
+                '}';
+    }
 }

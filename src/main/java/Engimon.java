@@ -1,7 +1,6 @@
-import javafx.util.Pair;
 import java.util.*;
-import java.util.List;
 import java.util.ArrayList;
+import javafx.util.Pair;
 
 public class Engimon {
     protected String name;
@@ -282,7 +281,7 @@ public class Engimon {
         }
     }
 
-    public static Comparator<Engimon> engimonComparator = new Comparator<Engimon>() {
+    public static Comparator<Engimon> engimonLevelComparator = new Comparator<Engimon>() {
 
         @Override
         public int compare(Engimon e1, Engimon e2) {
@@ -292,6 +291,15 @@ public class Engimon {
             return level2.compareTo(level1);
         }};
 
+//    public static Comparator<Engimon> engimonComparator = new Comparator<Engimon>() {
+//
+//        @Override
+//        public int compare(Engimon e1, Engimon e2) {
+//            Integer level1 = e1.getLevel();
+//            Integer level2 = e2.getLevel();
+//            // descending order
+//            return level2.compareTo(level1);
+//        }};
     public void learnSkill(Skill s){
         int count = 0;
         boolean found = false;
@@ -329,6 +337,18 @@ public class Engimon {
             System.out.println("Skill sudah dipelajari");
         }
 
+    }
+
+    @Override
+    public String toString() {
+        return "Engimon{" +
+                "name='" + name + '\'' +
+                ", speciesName=" + speciesName +
+                ", teksUnik='" + teksUnik + '\'' +
+                ", parent=" + parent +
+                ", skills=" + skills +
+                ", elements=" + elements +
+                '}';
     }
 
     public void printInfo() {
