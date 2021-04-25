@@ -29,6 +29,8 @@ public class Game extends Application {
     private final int WIDTH = SQUARE_SIZE*COLUMNS + SQUARE_SIZE*5;
     private final int HEIGHT = SQUARE_SIZE*ROWS;
 
+    private String text;
+
     private static final String pikachu = "main/resources/pikachu.png";
     private Image engimonImage;
     private int engimonX = 5;
@@ -55,6 +57,7 @@ public class Game extends Application {
                 if (code == KeyCode.RIGHT || code == KeyCode.D) {
                     try {
                         moveRight();
+                        setText();
                     } catch (Exception e){
                         System.out.println("Right border");
                     }
@@ -88,6 +91,7 @@ public class Game extends Application {
     private void run(GraphicsContext gc) {
         drawBackground(gc);
         drawEngimon(gc);
+        writeText(gc);
     }
 
     private void moveRight() throws Exception{
@@ -172,6 +176,15 @@ public class Game extends Application {
     private void drawEngimon(GraphicsContext gc) {
         engimonImage = new Image(pikachu);
         gc.drawImage(engimonImage, engimonX * SQUARE_SIZE, engimonY * SQUARE_SIZE, SQUARE_SIZE, SQUARE_SIZE);
+    }
+
+    private void setText() {
+        text = "Hello";
+    }
+
+    private void writeText(GraphicsContext gc) {
+        gc.setFill(Color.web("000000"));
+        gc.fillText(text, map.getCol()*SQUARE_SIZE+20, SQUARE_SIZE/2);
     }
 
     public static void main(String[] args) {
