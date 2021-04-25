@@ -33,6 +33,15 @@ public class Battle {
         System.out.println("!!!!!!!!!!POWER COMPARISON!!!!!!!!!!");
         System.out.println("Your Engimon's Power : " + this.powerPlayer);
         System.out.println("Enemy Engimon's Power : " + this.powerWild);
+
+    }
+
+    public String getChoice() {
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Would you like to commence battle(y/n)?");
+        String choice = sc.nextLine();
+
+        return choice;
     }
 
     public double battleAdvantage(Engimon engimonPlayer, Engimon engimonWild) {
@@ -71,7 +80,16 @@ public class Battle {
         return power;
     }
 
-    public void commenceBattle() {
+    public void increaseExp() {
+        //  Exp +40
+        int newExp = this.engimonPlayer.getCurrExp() + 40;
+        this.engimonPlayer.setCurrExp(newExp);
+        if (newExp % (this.engimonPlayer.getLevel() * 100) != 0 || newExp == this.engimonPlayer.getLevel() * 100) {
+            this.engimonPlayer.updateEngimonLevel();
+        }
+    }
+
+    public boolean commenceBattle() {
         boolean playerWin = false;
 
         if (this.powerPlayer >= this.powerWild) {
@@ -82,20 +100,65 @@ public class Battle {
             // Jika engimon player menang, player akan mendapatkan engimon yang menjadi lawan jika inventory masih cukup.
             // Active engimon juga akan menerima experience point dengan besaran yang bebas (boleh statik atau menggunakan rumus tertentu).
             // Player juga akan mendapatkan Skill Item yang berada skill di slot pertama dari engimon musuh.
-            //System.out.println("Player wins");
+            System.out.println("Your " + this.engimonPlayer.getName() + " won! Wild " + this.engimonWild.getName() + " fainted");
+            increaseExp();
+            System.out.println("Current " + this.engimonPlayer.getName() + " exp : " + this.engimonPlayer.getCurrExp());
+            System.out.println("Current " + this.engimonPlayer.getName() + " level : " + this.engimonPlayer.getLevel());
         }
         else {
+            System.out.print("Wild " + this.engimonWild.getName() + " won! Your " + this.engimonPlayer.getName() + " fainted");
             int newLife = this.engimonPlayer.getLife() - 1;
             this.engimonPlayer.setLife(newLife);
-            //System.out.println("Sisa life player : " + newLife);
+            if (newLife == 0) {
+                System.out.println("Commiserations. Your " + this.engimonPlayer.getName() + " has reached 0 life");
+            }
         }
+
+        return playerWin;
     }
 
 //    public static void main(String[] args) {
 //        Player a = new Player();
 //        WildEngimon w = new WildEngimon();
-//        Battle b = new Battle(a, w);
-//        b.commenceBattle();
+//        WildEngimon x = new WildEngimon();
+//        WildEngimon y = new WildEngimon();
+//        WildEngimon z = new WildEngimon();
+//        WildEngimon f = new WildEngimon();
+//        WildEngimon g = new WildEngimon();
+//        WildEngimon h = new WildEngimon();
+//        WildEngimon i = new WildEngimon();
+//        WildEngimon j = new WildEngimon();
+//        WildEngimon k = new WildEngimon();
+//        Battle b = new Battle(a,w);
+//        Battle b1 = new Battle(a,x);
+//        Battle b2 = new Battle(a,y);
+//        Battle b3 = new Battle(a,z);
+//        Battle b4 = new Battle(a,f);
+//        Battle b5 = new Battle(a,g);
+//        Battle b6 = new Battle(a,h);
+//        Battle b7 = new Battle(a,i);
+//        Battle b8 = new Battle(a,j);
+//        Battle b9 = new Battle(a,k);
+//        String choice = b.getChoice();
+//        while (!choice.equalsIgnoreCase("y") && !choice.equalsIgnoreCase("n")) {
+//            System.out.println("Invalid input");
+//            choice = b.getChoice();
+//        }
+//        if (choice.equalsIgnoreCase("y")) {
+//            Boolean battlez = b.commenceBattle();
+//        }
+//        else if (choice.equalsIgnoreCase("n")) {
+//            System.out.println("Battle aborted");
+//        }
+//        battlez = b1.commenceBattle();
+//        battlez = b2.commenceBattle();
+//        battlez = b3.commenceBattle();
+//        battlez = b4.commenceBattle();
+//        battlez = b5.commenceBattle();
+//        battlez = b6.commenceBattle();
+//        battlez = b7.commenceBattle();
+//        battlez = b8.commenceBattle();
+//        battlez = b9.commenceBattle();
 //    }
 
 }
