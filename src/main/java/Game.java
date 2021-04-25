@@ -16,6 +16,7 @@ import javafx.util.Duration;
 import javafx.scene.image.Image;
 
 import java.awt.*;
+import java.security.Key;
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -27,7 +28,7 @@ public class Game extends Application {
     private final int ROWS = map.getRow();
     private final int COLUMNS = map.getCol();
     private final int SQUARE_SIZE = 40;
-    private final int WIDTH = SQUARE_SIZE*COLUMNS + SQUARE_SIZE*12;
+    private final int WIDTH = SQUARE_SIZE*COLUMNS + SQUARE_SIZE*13;
     private final int HEIGHT = SQUARE_SIZE*ROWS;
 
     private String text;
@@ -83,6 +84,12 @@ public class Game extends Application {
                 }
                 else if (code == KeyCode.H) {
                     setTextCommands();
+                }
+                else if (code == KeyCode.DIGIT1) {
+                    setTextListEngimon();
+                }
+                else if (code == KeyCode.DIGIT3) {
+                    setTextActiveEngimon();
                 }
             }
         });
@@ -279,6 +286,14 @@ public class Game extends Application {
 
     private void setTextCommands() {
         text = player.stringCommands();
+    }
+
+    private void setTextListEngimon() {
+        text = player.stringSortedEngimon();
+    }
+
+    private void setTextActiveEngimon() {
+        text = player.stringActiveEngimon();
     }
 
     private void writeText(GraphicsContext gc) {
