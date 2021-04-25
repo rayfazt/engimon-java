@@ -81,14 +81,11 @@ public class Game extends Application {
                     } catch (Exception e){
                         System.out.println("Bottom border");
                     }
-                }
-                else if (code == KeyCode.H) {
+                } else if (code == KeyCode.H) {
                     setTextCommands();
-                }
-                else if (code == KeyCode.DIGIT1) {
+                } else if (code == KeyCode.DIGIT1) {
                     setTextListEngimon();
-                }
-                else if (code == KeyCode.DIGIT3) {
+                } else if (code == KeyCode.DIGIT3) {
                     setTextActiveEngimon();
                 }
             }
