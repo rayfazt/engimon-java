@@ -606,12 +606,13 @@ public class Game extends Application {
     private void drawPlayer(GraphicsContext gc) {
         playerImage = new Image(playerIcon);
         gc.drawImage(playerImage, player.getPlayerLocation().getX() * SQUARE_SIZE, player.getPlayerLocation().getY() * SQUARE_SIZE, SQUARE_SIZE, SQUARE_SIZE);
-        //Image activeEngimonImage = new Image(player.getActiveEngimon().getImagePath());
-        //gc.drawImage(activeEngimonImage, (player.getPlayerLocation().getX()-1)*SQUARE_SIZE, (player.getPlayerLocation().getY()-1)*SQUARE_SIZE, SQUARE_SIZE, SQUARE_SIZE);
+//        Image activeEngimonImage = new Image(player.getActiveEngimon().getImagePath());
+//        gc.drawImage(activeEngimonImage, (player.getPlayerLocation().getX()-1)*SQUARE_SIZE, (player.getPlayerLocation().getY()-1)*SQUARE_SIZE, SQUARE_SIZE, SQUARE_SIZE);
     }
 
     private void drawWildEngimon(GraphicsContext gc) {
         for (WildEngimon enemy: enemies) {
+            enemy.updateImage(player.getActiveEngimon());
             Image enemyImage = new Image(enemy.getImagePath());
             gc.drawImage(enemyImage, enemy.getX() * SQUARE_SIZE, enemy.getY()*SQUARE_SIZE, SQUARE_SIZE, SQUARE_SIZE);
         }

@@ -108,6 +108,11 @@ public class Player implements java.io.Serializable{
 
     /* ACTIVE ENGIMON */
     public PlayerEngimon getActiveEngimon() {
+        for (int i = 0; i < this.getEngimonInventory().size(); i++) {
+            if (this.getEngimonInventory().get(i).getActive()){
+                this.activeEngimon = this.getEngimonInventory().get(i);
+            }
+        }
         return this.activeEngimon;
     }
 
