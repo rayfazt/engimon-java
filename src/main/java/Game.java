@@ -389,13 +389,14 @@ public class Game extends Application {
     private void addEnemiesEXP() {
         for (WildEngimon enemy: enemies) {
             enemy.setCurrExp(enemy.getCurrExp() + 100);
-            enemy.udpateEngimonLevel();
+            enemy.updateEngimonLevel();
         }
     }
 
     private void randomMoveEnemies() {
         Random randomGenerator = new Random();
         Point location;
+        int index;
         for (WildEngimon enemy : enemies) {
             if (enemy.getSpeciesName() == Species.Charizard) {
                 index = randomGenerator.nextInt(map.getMountains().size() - 1);
