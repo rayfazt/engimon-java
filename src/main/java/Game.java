@@ -110,8 +110,7 @@ public class Game extends Application {
         int y = player.getPlayerLocation().getY();
         if (x + 1 >= map.getCol() || isEnemyPresent(x+1,y)!= null) {
             throw new Exception();
-        }
-        else {
+        } else {
             player.setPlayerLocation(x+1, y);
         }
     }
@@ -121,8 +120,7 @@ public class Game extends Application {
         int y = player.getPlayerLocation().getY();
         if (x - 1 < 0 || isEnemyPresent(x-1,y)!= null) {
             throw new Exception();
-        }
-        else {
+        } else {
             player.setPlayerLocation(x-1, y);
         }
     }
@@ -132,8 +130,7 @@ public class Game extends Application {
         int y = player.getPlayerLocation().getY();
         if (y - 1 < 0 || isEnemyPresent(x,y-1)!= null) {
             throw new Exception();
-        }
-        else {
+        } else {
             player.setPlayerLocation(x, y-1);
         }
     }
@@ -143,8 +140,7 @@ public class Game extends Application {
         int y = player.getPlayerLocation().getY();
         if (y + 1 >= map.getRow() || isEnemyPresent(x,y+1)!= null) {
             throw new Exception();
-        }
-        else {
+        } else {
             player.setPlayerLocation(x, y+1);
         }
     }
@@ -155,7 +151,7 @@ public class Game extends Application {
 
         Random randomGenerator = new Random();
         int index, x, y;
-        Point location = new Point();
+        Point location;
 
         // Random location in mountains
         index = randomGenerator.nextInt(map.getMountains().size()-1);
