@@ -3,7 +3,7 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.stream.Collectors;
 import javafx.util.Pair;
-public class Player {
+public class Player implements java.io.Serializable{
     private Point location;
     private char icon;
     private PlayerEngimon activeEngimon;

@@ -3,7 +3,7 @@ import java.util.Comparator;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
-public class SkillItem {
+public class SkillItem implements java.io.Serializable{
     private Skill skill;
     private int skillAmount;
     private String imagePath;

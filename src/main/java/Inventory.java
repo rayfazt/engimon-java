@@ -1,6 +1,6 @@
 import java.util.ArrayList;
 
-public class Inventory<T> {
+public class Inventory<T> implements java.io.Serializable{
     ArrayList<T> inventoryList;
     public Inventory() {
         inventoryList = new ArrayList<T>();
