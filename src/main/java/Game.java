@@ -270,6 +270,11 @@ public class Game extends Application {
                     FileSaverAndLoader.saveWildEngimons(enemies);
                     setTextSaveSuccess();
                 }
+                else if (code == KeyCode.L) {
+                    player = FileSaverAndLoader.loadPlayer();
+                    enemies = FileSaverAndLoader.loadWildEngimons();
+                    setTextLoad();
+                }
                 else if (code == KeyCode.B) {
                     int x = player.getPlayerLocation().getX();
                     int y = player.getPlayerLocation().getY();
@@ -634,6 +639,10 @@ public class Game extends Application {
 
     private void setTextSaveSuccess() {
         text = "Game saved successfully";
+    }
+
+    private void setTextLoad() {
+        text = "Loaded successfully";
     }
 
     private void writeText(GraphicsContext gc) {
