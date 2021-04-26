@@ -1,4 +1,4 @@
-public class Element {
+public class Element implements java.io.Serializable{
     private ElementType type;
 
     public Element(ElementType type) {

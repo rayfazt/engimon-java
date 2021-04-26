@@ -1,6 +1,6 @@
 import java.util.*;
 
-public class Battle {
+public class Battle implements java.io.Serializable{
     private Player player;
     private PlayerEngimon engimonPlayer;
     private WildEngimon engimonWild;

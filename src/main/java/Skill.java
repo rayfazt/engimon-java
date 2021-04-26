@@ -2,7 +2,7 @@ import java.util.ArrayList;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
-public class Skill {
+public class Skill implements java.io.Serializable{
     private String skillName;
     private int basePower;
     private int masteryLevel;
