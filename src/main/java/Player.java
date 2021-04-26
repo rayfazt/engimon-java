@@ -158,24 +158,24 @@ public class Player implements java.io.Serializable{
             spAnak = e1.getSpeciesName();
 
         }
-       else{
-           Element elmt1 = new Element(e1.getElements().get(0));
-           if(elmt1.getAdvantage(e2.getElements().get(0)) > 1){
-               elAnak.add(e1.getElements().get(0));
-               spAnak = e1.getSpeciesName();
-           }
-           else{
-               if(elmt1.getAdvantage(e2.getElements().get(0)) == 1){
-                   elAnak.add(e1.getElements().get(0));
-                   elAnak.add(e2.getElements().get(0));
-                   spAnak = e1.findDualSpecies(e2.getElements().get(0));
-               }
-               else{
-                   elAnak.add(e2.getElements().get(0));
-                   spAnak = e2.getSpeciesName();
-               }
-           }
-       }
+        else{
+            Element elmt1 = new Element(e1.getElements().get(0));
+            if(elmt1.getAdvantage(e2.getElements().get(0)) > 1){
+                elAnak.add(e1.getElements().get(0));
+                spAnak = e1.getSpeciesName();
+            }
+            else{
+                if(elmt1.getAdvantage(e2.getElements().get(0)) == 1){
+                    elAnak.add(e1.getElements().get(0));
+                    elAnak.add(e2.getElements().get(0));
+                    spAnak = e1.findDualSpecies(e2.getElements().get(0));
+                }
+                else{
+                    elAnak.add(e2.getElements().get(0));
+                    spAnak = e2.getSpeciesName();
+                }
+            }
+        }
 
         //Inherit skill
         for(int i=0; i<e1.getSkills().size()+e2.getSkills().size(); i++){
@@ -193,7 +193,7 @@ public class Player implements java.io.Serializable{
 
                         if(e2.getSkills().get(i-e1.getSkills().size()).getMasteryLevel() == candidateSkill.get(j).getMasteryLevel()){
                             Skill updatedSkill = candidateSkill.get(j);
-                            updatedSkill.setMasteryLevel(candidateSkill.get(j).getMasteryLevel() + 1);
+                            updatedSkill.setMasteryLevel(Math.min(candidateSkill.get(j).getMasteryLevel() + 1, 3));
                             candidateSkill.set(j, updatedSkill);
                         }
                         //Mastery level berbeda
@@ -220,7 +220,7 @@ public class Player implements java.io.Serializable{
 
         Collections.sort(masteryAndIndex, Comparator.comparing(p -> -p.getKey()));
 
-        for(int i=0; i<4; i++){
+        for(int i=0; i<candidateSkill.size(); i++){
             skillAnak.add(candidateSkill.get(masteryAndIndex.get(i).getValue()));
         }
 
@@ -241,33 +241,33 @@ public class Player implements java.io.Serializable{
         else{
             switch (elAnak.get(0))
             {
-            case FIRE:
-                iconAnak = 'f';
-                break;
-            case WATER:
-                iconAnak = 'w';
-                break;
-            case ELECTRIC:
-                iconAnak = 'e';
-                break;
-            case ICE:
-                iconAnak = 'i';
-                break;
-            case GROUND:
-                iconAnak = 'g';
-                break;
+                case FIRE:
+                    iconAnak = 'f';
+                    break;
+                case WATER:
+                    iconAnak = 'w';
+                    break;
+                case ELECTRIC:
+                    iconAnak = 'e';
+                    break;
+                case ICE:
+                    iconAnak = 'i';
+                    break;
+                case GROUND:
+                    iconAnak = 'g';
+                    break;
             }
         }
-       int locX = e1.getX();
-       int locY = e1.getY();
+        int locX = e1.getX();
+        int locY = e1.getY();
 
-    //  ganti jadi PlayerEngimon semoga gakenapa2
-    //    Engimon anak = new Engimon(namaAnak, spAnak, e1.getName(), e2.getName(), e1.getSpeciesName(), e2.getSpeciesName(), skillAnak, locX, locY);
-    //    anak.setIcon(iconAnak);
-    //    this.listEngimon.addItem(anak);
-       PlayerEngimon anak = new PlayerEngimon(namaAnak, spAnak, e1.getName(), e2.getName(), e1.getSpeciesName(), e2.getSpeciesName(), skillAnak, locX, locY);
-       anak.setIcon(iconAnak);
-       this.addEngimon(anak);
+        //  ganti jadi PlayerEngimon semoga gakenapa2
+        //    Engimon anak = new Engimon(namaAnak, spAnak, e1.getName(), e2.getName(), e1.getSpeciesName(), e2.getSpeciesName(), skillAnak, locX, locY);
+        //    anak.setIcon(iconAnak);
+        //    this.listEngimon.addItem(anak);
+        PlayerEngimon anak = new PlayerEngimon(namaAnak, spAnak, e1.getName(), e2.getName(), e1.getSpeciesName(), e2.getSpeciesName(), skillAnak, locX, locY);
+        anak.setIcon(iconAnak);
+        this.addEngimon(anak);
     }
     
     public ArrayList<SkillItem> getSkillItemInventory() {
@@ -358,6 +358,15 @@ public class Player implements java.io.Serializable{
 
     public boolean isListEngimonEmpty() {
         return getEngimonInventory().isEmpty();
+    }
+
+    public PlayerEngimon searchEngimonInList(String engimonName){
+        for(PlayerEngimon engi : listEngimon.getInventoryList()){
+            if(engi.getName() == engimonName){
+                return engi;
+            }
+        }
+        return null;
     }
 
     /* LIST SKILLITEM */
