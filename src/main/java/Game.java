@@ -137,7 +137,7 @@ public class Game extends Application {
         for (int i = currButtonSize; i < listOfPlayerEngimon.size(); i++){
             Button btn = new Button(listOfPlayerEngimon.get(i).getSpeciesName().toString());
             btn.setLayoutX(900);
-            btn.setLayoutY(0 + 50*i);
+            btn.setLayoutY(300 + 50*i);
             int finalI = i;
             btn.setOnAction(new EventHandler<ActionEvent>(){
                 @Override
