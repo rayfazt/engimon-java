@@ -1,28 +1,23 @@
-import javafx.application.Application;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
-import javafx.scene.Group;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
-import javafx.scene.canvas.Canvas;
-import javafx.scene.canvas.GraphicsContext;
-import javafx.scene.control.Tooltip;
-import javafx.scene.input.KeyCode;
-import javafx.scene.input.KeyEvent;
-import javafx.scene.paint.Color;
-import javafx.stage.Stage;
-import javafx.animation.Timeline;
-import javafx.animation.Animation;
-import javafx.animation.KeyFrame;
-import javafx.util.Duration;
-import javafx.scene.image.Image;
-import javafx.scene.control.Button;
-
-import java.awt.*;
-import java.security.Key;
 import java.util.ArrayList;
 import java.util.Random;
 import java.util.Scanner;
+import javafx.animation.Animation;
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
+import javafx.scene.Group;
+import javafx.scene.Scene;
+import javafx.scene.canvas.Canvas;
+import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.control.Button;
+import javafx.scene.control.Tooltip;
+import javafx.scene.image.Image;
+import javafx.scene.input.KeyEvent;
+import javafx.scene.paint.Color;
+import javafx.stage.Stage;
+import javafx.util.Duration;
+
 public class Game extends Application {
 
     private String mapFile = "src/main/resources/test.txt";
@@ -316,6 +311,7 @@ public class Game extends Application {
 
     }
 
+    // Check if a particular point contains Wild Engimon
     private WildEngimon isEnemyPresent(int x, int y) {
         boolean found = false;
         int i = 0;
@@ -327,6 +323,36 @@ public class Game extends Application {
             i++;
         }
         return null;
+    }
+
+    // Check if player's surrounding cells contain Wild Engimon
+    private ArrayList<WildEngimon> isBattleFeasible() {
+        ArrayList<WildEngimon> surroundingEnemies = new ArrayList<WildEngimon>();
+
+        int x = player.getPlayerLocation().getX();
+        int y = player.getPlayerLocation().getY();
+
+        WildEngimon top = isEnemyPresent(x,y-1);
+        if (top != null) {
+            surroundingEnemies.add(top);
+        }
+
+        WildEngimon bottom = isEnemyPresent(x,y+1);
+        if (bottom != null) {
+            surroundingEnemies.add(bottom);
+        }
+
+        WildEngimon right = isEnemyPresent(x+1,y);
+        if (right != null) {
+            surroundingEnemies.add(right);
+        }
+
+        WildEngimon left = isEnemyPresent(x-1,y);
+        if (left != null) {
+            surroundingEnemies.add(left);
+        }
+
+        return surroundingEnemies;
     }
 
     private void drawBackground(GraphicsContext gc) {
