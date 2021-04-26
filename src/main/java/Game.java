@@ -1,3 +1,4 @@
+import javafx.application.Application;
 import java.util.ArrayList;
 import java.util.Random;
 import java.util.Scanner;
@@ -13,6 +14,7 @@ import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Button;
 import javafx.scene.control.Tooltip;
 import javafx.scene.image.Image;
+import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
@@ -112,18 +114,41 @@ public class Game extends Application {
                     engi.printInfo();
                 }
                 else if (code == KeyCode.DIGIT3) {
-                    setTextActiveEngimon();
+                    for (int k = 0; k < listOfPlayerEngimon.size(); k++){
+                        if (listOfPlayerEngimon.get(k).getActive() == true){
+                            System.out.println(listOfPlayerEngimon.get(k).getName() + " aktif");
+                        }
+                    }
+
                 }
 
                 else if (code == KeyCode.DIGIT4) {
-                    // TODO Mengganti active engimon
+//                    // TODO Mengganti active engimon
+//                    Scanner scanner = new Scanner(System.in);
+//                    System.out.println("Nama active engimon baru: ");
+//                    String newName = scanner.nextLine();
+//                    PlayerEngimon newEngimon = player.getEngimonFromName(newName);
+//                    player.setActiveEngimon(newEngimon);
+//                    // Ini asumsi namanya bener ajalah
+//                    System.out.println("Active engimon berhasil diganti");
+                    for (int i = 0; i < listOfPlayerEngimon.size(); i++){
+                        System.out.println((i+1) + ". " + listOfPlayerEngimon.get(i).getName());
+                    }
+                    System.out.println("Masukkan nama engimon yang ingin diaktifkan: ");
                     Scanner scanner = new Scanner(System.in);
-                    System.out.println("Nama active engimon baru: ");
-                    String newName = scanner.nextLine();
-                    PlayerEngimon newEngimon = player.getEngimonFromName(newName);
-                    player.setActiveEngimon(newEngimon);
-                    // Ini asumsi namanya bener ajalah
-                    System.out.println("Active engimon berhasil diganti");
+                    Integer nomorEngimon = scanner.nextInt();
+                    System.out.println(nomorEngimon);
+                    listOfPlayerEngimon.get(nomorEngimon-1).setActiveTrue();
+                    for (int k = 0; k < listOfPlayerEngimon.size(); k++){
+                        if (k != nomorEngimon-1){
+                            listOfPlayerEngimon.get(k).setActiveFalse();
+                        }
+                    }
+                    if (listOfPlayerEngimon.get(nomorEngimon-1).getActive() == true){
+                        System.out.println(listOfPlayerEngimon.get(nomorEngimon-1).getName() + " sudah aktif");
+                    }
+
+
                 }
                 else if (code == KeyCode.DIGIT5) {
                     // TODO Menggunakan skill item pada suatu engimon
