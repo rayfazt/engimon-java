@@ -1,6 +1,5 @@
 import java.util.*;
 import java.util.Map;
-import java.util.Map.Entry;
 import java.util.stream.Collectors;
 import javafx.util.Pair;
 public class Player implements java.io.Serializable{
@@ -8,7 +7,7 @@ public class Player implements java.io.Serializable{
     private char icon;
     private PlayerEngimon activeEngimon;
     private Inventory<SkillItem> listSkill;
-    private Inventory<Engimon> listEngimon;
+    private Inventory<PlayerEngimon> listEngimon;
     private int maxCapacity;
 
     public Player() {
@@ -17,7 +16,7 @@ public class Player implements java.io.Serializable{
         icon = 'P';
         activeEngimon = new PlayerEngimon();
         listSkill = new Inventory<SkillItem>();
-        listEngimon = new Inventory<Engimon>();
+        listEngimon = new Inventory<PlayerEngimon>();
         maxCapacity = 20;
     }
 
@@ -115,9 +114,9 @@ public class Player implements java.io.Serializable{
     public void setActiveEngimon(PlayerEngimon engi) {
         // Cari engimon
         boolean found = false;
-        ArrayList<Engimon> listEngimon = this.getEngimonInventory();
+        ArrayList<PlayerEngimon> listEngimon = this.getEngimonInventory();
         
-        for (Engimon engimon : listEngimon) {
+        for (PlayerEngimon engimon : listEngimon) {
             if (engimon.getName().equals(engi.getName())){
                 found = true;
             }
@@ -136,7 +135,7 @@ public class Player implements java.io.Serializable{
     }
 
     /* BREEDING */
-    public void breed(Engimon e1, Engimon e2) throws BreedException {
+    public void breed(PlayerEngimon e1, PlayerEngimon e2) throws BreedException {
         if (e1.getLevel() < 4 || e2.getLevel() < 4){
             throw new BreedException("Level parent tidak cukup untuk melakukan breeding");
         }
@@ -261,22 +260,27 @@ public class Player implements java.io.Serializable{
         }
        int locX = e1.getX();
        int locY = e1.getY();
-       Engimon anak = new Engimon(namaAnak, spAnak, e1.getName(), e2.getName(), e1.getSpeciesName(), e2.getSpeciesName(), skillAnak, locX, locY);
+
+    //  ganti jadi PlayerEngimon semoga gakenapa2
+    //    Engimon anak = new Engimon(namaAnak, spAnak, e1.getName(), e2.getName(), e1.getSpeciesName(), e2.getSpeciesName(), skillAnak, locX, locY);
+    //    anak.setIcon(iconAnak);
+    //    this.listEngimon.addItem(anak);
+       PlayerEngimon anak = new PlayerEngimon(namaAnak, spAnak, e1.getName(), e2.getName(), skillAnak, locX, locY);
        anak.setIcon(iconAnak);
-       this.listEngimon.addItem(anak);
+       this.addEngimon(anak);
     }
     
     public ArrayList<SkillItem> getSkillItemInventory() {
         return this.listSkill.getInventoryList();
     }
-    public ArrayList<Engimon> getEngimonInventory() {
+    public ArrayList<PlayerEngimon> getEngimonInventory() {
         return this.listEngimon.getInventoryList();
     }
 
     public void printListEngimon() {
         listEngimon.printInventory();
     }
-    public void printDataEngimon(Engimon engi) {
+    public void printDataEngimon(PlayerEngimon engi) {
         engi.printInfo();
     }
     public void printListSkillItem() {
@@ -292,7 +296,7 @@ public class Player implements java.io.Serializable{
     public String stringListEngimon() {
         return listEngimon.toString();
     }
-    public String stringDataEngimon(Engimon engi) {
+    public String stringDataEngimon(PlayerEngimon engi) {
         return engi.toString();
     }
     public String stringListSkillItem() {
@@ -301,12 +305,12 @@ public class Player implements java.io.Serializable{
     public String stringActiveEngimon() {
         return this.getActiveEngimon().toString();
     }
-    // TODO getName() getTeksUnik() ga kedetect
+
     public String stringInteract() {
         return this.getActiveEngimon().getName()+ ": "+ this.getActiveEngimon().getTeksUnik();
     }
 
-    public void replaceSkillEngimon(Engimon engi, Skill skillLama, Skill skillBaru) {
+    public void replaceSkillEngimon(PlayerEngimon engi, Skill skillLama, Skill skillBaru) {
         if (engi.isSkillFull()) {
             engi.replace(skillLama, skillBaru);
         }
@@ -317,38 +321,38 @@ public class Player implements java.io.Serializable{
 
     /* LIST ENGIMON */
 
-    public Map<ArrayList<ElementType>,List<Engimon>> sortEngimon() {
+    public Map<ArrayList<ElementType>,List<PlayerEngimon>> sortEngimon() {
         listEngimon.inventoryList.sort(Engimon.engimonLevelComparator);
-        Map< ArrayList<ElementType>,List<Engimon>> byElement = listEngimon.inventoryList.stream().collect(Collectors.groupingBy(Engimon::getElements));
+        Map< ArrayList<ElementType>,List<PlayerEngimon>> byElement = listEngimon.inventoryList.stream().collect(Collectors.groupingBy(Engimon::getElements));
         return byElement;
     }
 //    public void sortEngimonProc() {
 //        listEngimon.inventoryList.sort(Engimon.engimonLevelComparator);
-//        Map< ArrayList<ElementType>,List<Engimon>> byElement = listEngimon.inventoryList.stream().collect(Collectors.groupingBy(Engimon::getElements));
+//        Map< ArrayList<ElementType>,List<PlayerEngimon>> byElement = listEngimon.inventoryList.stream().collect(Collectors.groupingBy(Engimon::getElements));
 //        return byElement;
 //    }
 
     public void printSortedEngimon() {
-        Map<ArrayList<ElementType>,List<Engimon>> sortedEngimon = sortEngimon();
+        Map<ArrayList<ElementType>,List<PlayerEngimon>> sortedEngimon = sortEngimon();
         sortedEngimon.forEach((key, value) -> System.out.println(key + ":" + value));
     }
     public String stringSortedEngimon() {
         String result = "";
-        Map<ArrayList<ElementType>,List<Engimon>> sortedEngimon = sortEngimon();
-        for (Map.Entry<ArrayList<ElementType>, List<Engimon>> entry : sortedEngimon.entrySet()) {
+        Map<ArrayList<ElementType>,List<PlayerEngimon>> sortedEngimon = sortEngimon();
+        for (Map.Entry<ArrayList<ElementType>, List<PlayerEngimon>> entry : sortedEngimon.entrySet()) {
             String entryString = entry.toString();
             result += entryString+'\n';
         }
         return result;
     }
-    public void addEngimon(Engimon engi) {
+    public void addEngimon(PlayerEngimon engi) {
         listEngimon.addItem(engi);
     }
-    public void delEngimon(Engimon engi) {
+    public void delEngimon(PlayerEngimon engi) {
         listEngimon.delItem(engi);
     }
 
-    public void changeEngimonName(Engimon engi, String newName) {
+    public void changeEngimonName(PlayerEngimon engi, String newName) {
         engi.setName(newName);
     }
 
@@ -427,7 +431,7 @@ public class Player implements java.io.Serializable{
         }
     }
 
-    public void useSkillItem(Engimon engi, SkillItem s) {
+    public void useSkillItem(PlayerEngimon engi, SkillItem s) {
         // remove dari Inventory terus pake ke engimonnya
         delXSkillItem(s.getSkill(),1);
        // engimon learn skill
@@ -483,9 +487,9 @@ public class Player implements java.io.Serializable{
         return command+commandW+commandA+commandS+commandD+command1+command2+command3+command4
                 +command5+command6+command7+command8+command9;
     }
-    public Engimon getEngimonFromName(String name) {
-        Engimon engimon = new Engimon();
-        for (Engimon engi:getEngimonInventory()) {
+    public PlayerEngimon getEngimonFromName(String name) {
+        PlayerEngimon engimon = new PlayerEngimon();
+        for (PlayerEngimon engi:getEngimonInventory()) {
             if (engi.getName().equals(name)) {
                 engimon = engi;
             }
@@ -504,51 +508,51 @@ public class Player implements java.io.Serializable{
                 '}';
     }
 
-    public static void main(String[] args) {
-        Player pemain = new Player();
-        Skill fireSkill = new Skill("FireSkill", 100, 1, ElementType.FIRE);
-        Skill waterSkill = new Skill("WaterSkill", 50, 1, ElementType.WATER);
-        Skill electricSkill = new Skill("electric",250,1, ElementType.ELECTRIC);
-        SkillItem sk1 = new SkillItem(fireSkill,3);
-        SkillItem sk2 = new SkillItem(waterSkill,5);
-        SkillItem sk3 = new SkillItem(electricSkill,2);
-//        Inventory<SkillItem> invSkill = new Inventory<>();
-//        invSkill.addItem(sk1);
-//        invSkill.addItem(sk2);
-//        invSkill.addItem(sk3);
-        pemain.addSkillItem(sk1.getSkill(),sk1.getSkillAmount());
-        pemain.addSkillItem(sk2.getSkill(),sk2.getSkillAmount());
-        pemain.addSkillItem(sk3.getSkill(),sk3.getSkillAmount());
-        pemain.sortSkillItem();
-        // pemain.printListSkillItem();
-        System.out.println(pemain.stringListSkillItem());
-        System.out.println("Capacity full? "+pemain.isCapacityFull());
-        pemain.delXSkillItem(fireSkill,2);
-        System.out.println("Setelah di delete dua FireSkill: ");
-        // pemain.printListSkillItem();
-        System.out.println(pemain.stringListSkillItem());
-        // pemain.printCommands();
-        //System.out.print(pemain.stringCommands());
-        ArrayList<Skill> arrSkillWater = new ArrayList<>();
-        arrSkillWater.add(waterSkill);
-        ArrayList<Skill> arrSkillFire = new ArrayList<>();
-        arrSkillWater.add(fireSkill);
-        Engimon e1 = new Engimon("Haihai", Species.Mudtle, "New Daddy", "New Mommy", arrSkillWater,1, 1);
-        Engimon e2 = new Engimon();
-        Engimon e3 = new Engimon("e3",Species.Charizard,"daddy e3","mommy e3",arrSkillFire,5,1);
-        Engimon e4 = new Engimon("e4",Species.Mudkip,"dad4","mom4",arrSkillWater,30,1);
-        // e1.getSkills().add(waterSkill);
-        e1.setLevel(10);
-        e2.setLevel(3);
-        e3.setLevel(20);
-        e4.setLevel(100);
-        pemain.changeEngimonName(e4,"eheheh");
-        pemain.addEngimon(e1);
-        pemain.addEngimon(e2);
-        pemain.addEngimon(e3);
-        pemain.addEngimon(e4);
-        pemain.delEngimon(e2);
-        pemain.stringDataEngimon(e1);
-        System.out.println(pemain.stringSortedEngimon());
-    }
+//     public static void main(String[] args) {
+//         Player pemain = new Player();
+//         Skill fireSkill = new Skill("FireSkill", 100, 1, ElementType.FIRE);
+//         Skill waterSkill = new Skill("WaterSkill", 50, 1, ElementType.WATER);
+//         Skill electricSkill = new Skill("electric",250,1, ElementType.ELECTRIC);
+//         SkillItem sk1 = new SkillItem(fireSkill,3);
+//         SkillItem sk2 = new SkillItem(waterSkill,5);
+//         SkillItem sk3 = new SkillItem(electricSkill,2);
+// //        Inventory<SkillItem> invSkill = new Inventory<>();
+// //        invSkill.addItem(sk1);
+// //        invSkill.addItem(sk2);
+// //        invSkill.addItem(sk3);
+//         pemain.addSkillItem(sk1.getSkill(),sk1.getSkillAmount());
+//         pemain.addSkillItem(sk2.getSkill(),sk2.getSkillAmount());
+//         pemain.addSkillItem(sk3.getSkill(),sk3.getSkillAmount());
+//         pemain.sortSkillItem();
+//         // pemain.printListSkillItem();
+//         System.out.println(pemain.stringListSkillItem());
+//         System.out.println("Capacity full? "+pemain.isCapacityFull());
+//         pemain.delXSkillItem(fireSkill,2);
+//         System.out.println("Setelah di delete dua FireSkill: ");
+//         // pemain.printListSkillItem();
+//         System.out.println(pemain.stringListSkillItem());
+//         // pemain.printCommands();
+//         //System.out.print(pemain.stringCommands());
+//         ArrayList<Skill> arrSkillWater = new ArrayList<>();
+//         arrSkillWater.add(waterSkill);
+//         ArrayList<Skill> arrSkillFire = new ArrayList<>();
+//         arrSkillWater.add(fireSkill);
+//         Engimon e1 = new Engimon("Haihai", Species.Mudtle, "New Daddy", "New Mommy", arrSkillWater,1, 1);
+//         Engimon e2 = new Engimon();
+//         Engimon e3 = new Engimon("e3",Species.Charizard,"daddy e3","mommy e3",arrSkillFire,5,1);
+//         Engimon e4 = new Engimon("e4",Species.Mudkip,"dad4","mom4",arrSkillWater,30,1);
+//         // e1.getSkills().add(waterSkill);
+//         e1.setLevel(10);
+//         e2.setLevel(3);
+//         e3.setLevel(20);
+//         e4.setLevel(100);
+//         pemain.changeEngimonName(e4,"eheheh");
+//         pemain.addEngimon(e1);
+//         pemain.addEngimon(e2);
+//         pemain.addEngimon(e3);
+//         pemain.addEngimon(e4);
+//         pemain.delEngimon(e2);
+//         pemain.stringDataEngimon(e1);
+//         System.out.println(pemain.stringSortedEngimon());
+//     }
 }

@@ -68,6 +68,7 @@ public class Game extends Application {
         listOfPlayerEngimon.add(B);
         player.addEngimon(A);
         player.addEngimon(B);
+
         gc = canvas.getGraphicsContext2D();
 
         scene.setOnKeyPressed(new EventHandler<KeyEvent>() {
