@@ -92,6 +92,8 @@ public class Game extends Application {
                         moveRight();
                         turn++;
                         randomMoveEnemies();
+                        addEnemiesEXP();
+                        killEnemies();
                     } catch (Exception e){
                         System.out.println("Right border");
                     }
@@ -100,6 +102,8 @@ public class Game extends Application {
                         moveLeft();
                         turn++;
                         randomMoveEnemies();
+                        addEnemiesEXP();
+                        killEnemies();
                     } catch (Exception e){
                         System.out.println("Left border");
                     }
@@ -108,6 +112,8 @@ public class Game extends Application {
                         moveUp();
                         turn++;
                         randomMoveEnemies();
+                        addEnemiesEXP();
+                        killEnemies();
                     } catch (Exception e){
                         System.out.println("Top border");
                     }
@@ -116,6 +122,8 @@ public class Game extends Application {
                         moveDown();
                         turn++;
                         randomMoveEnemies();
+                        addEnemiesEXP();
+                        killEnemies();
                     } catch (Exception e){
                         System.out.println("Bottom border");
                     }
@@ -467,6 +475,16 @@ public class Game extends Application {
             for (WildEngimon enemy: enemies) {
                 enemy.setCurrExp(enemy.getCurrExp() + 100);
                 enemy.updateEngimonLevel();
+            }
+        }
+    }
+
+    private void killEnemies() {
+        if (turn % 5 == 0) {
+            for (WildEngimon enemy: enemies) {
+                if (enemy.getCurrExp() >= MAXEXP) {
+                    enemies.remove(enemy);
+                }
             }
         }
     }
