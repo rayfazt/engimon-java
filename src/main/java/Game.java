@@ -91,6 +91,7 @@ public class Game extends Application {
                     try {
                         moveRight();
                         turn++;
+                        randomMoveEnemies();
                     } catch (Exception e){
                         System.out.println("Right border");
                     }
@@ -98,6 +99,7 @@ public class Game extends Application {
                     try {
                         moveLeft();
                         turn++;
+                        randomMoveEnemies();
                     } catch (Exception e){
                         System.out.println("Left border");
                     }
@@ -105,6 +107,7 @@ public class Game extends Application {
                     try {
                         moveUp();
                         turn++;
+                        randomMoveEnemies();
                     } catch (Exception e){
                         System.out.println("Top border");
                     }
@@ -112,6 +115,7 @@ public class Game extends Application {
                     try {
                         moveDown();
                         turn++;
+                        randomMoveEnemies();
                     } catch (Exception e){
                         System.out.println("Bottom border");
                     }
@@ -425,61 +429,65 @@ public class Game extends Application {
     }
 
     private void addEnemiesEXP() {
-        for (WildEngimon enemy: enemies) {
-            enemy.setCurrExp(enemy.getCurrExp() + 100);
-            enemy.updateEngimonLevel();
+        if (turn % 5 == 0) {
+            for (WildEngimon enemy: enemies) {
+                enemy.setCurrExp(enemy.getCurrExp() + 100);
+                enemy.updateEngimonLevel();
+            }
         }
     }
 
     private void randomMoveEnemies() {
-        Random randomGenerator = new Random();
-        Point location;
-        int index;
-        for (WildEngimon enemy : enemies) {
-            if (enemy.getSpeciesName() == Species.Charizard) {
-                index = randomGenerator.nextInt(map.getMountains().size() - 1);
-                location = map.getMountains().get(index);
-                enemy.setX(location.getX());
-                enemy.setY(location.getY());
-            } else if (enemy.getSpeciesName() == Species.Squirtle) {
-                index = randomGenerator.nextInt(map.getSea().size() - 1);
-                location = map.getSea().get(index);
-                enemy.setX(location.getX());
-                enemy.setY(location.getY());
-            } else if (enemy.getSpeciesName() == Species.Pikachu || enemy.getSpeciesName() == Species.Mudkip) {
-                index = randomGenerator.nextInt(map.getGrassland().size() - 1);
-                location = map.getGrassland().get(index);
-                enemy.setX(location.getX());
-                enemy.setY(location.getY());
-            } else if (enemy.getSpeciesName() == Species.Gabumon) {
-                index = randomGenerator.nextInt(map.getTundra().size() - 1);
-                location = map.getTundra().get(index);
-                enemy.setX(location.getX());
-                enemy.setY(location.getY());
-            } else if (enemy.getSpeciesName() == Species.Charkachu) {
-                ArrayList<Point> mountainsGrassland = new ArrayList<Point>();
-                mountainsGrassland.addAll(map.getMountains());
-                mountainsGrassland.addAll(map.getGrassland());
-                index = randomGenerator.nextInt(mountainsGrassland.size() - 1);
-                location = mountainsGrassland.get(index);
-                enemy.setX(location.getX());
-                enemy.setY(location.getY());
-            } else if (enemy.getSpeciesName() == Species.Squirmon) {
-                ArrayList<Point> seaTundra = new ArrayList<Point>();
-                seaTundra.addAll(map.getSea());
-                seaTundra.addAll(map.getTundra());
-                index = randomGenerator.nextInt(seaTundra.size() - 1);
-                location = seaTundra.get(index);
-                enemy.setX(location.getX());
-                enemy.setY(location.getY());
-            } else if (enemy.getSpeciesName() == Species.Mudtle) {
-                ArrayList<Point> seaGrassland = new ArrayList<Point>();
-                seaGrassland.addAll(map.getSea());
-                seaGrassland.addAll(map.getGrassland());
-                index = randomGenerator.nextInt(seaGrassland.size() - 1);
-                location = seaGrassland.get(index);
-                enemy.setX(location.getX());
-                enemy.setY(location.getY());
+        if (turn % 5 == 0) {
+            Random randomGenerator = new Random();
+            Point location;
+            int index;
+            for (WildEngimon enemy : enemies) {
+                if (enemy.getSpeciesName() == Species.Charizard) {
+                    index = randomGenerator.nextInt(map.getMountains().size() - 1);
+                    location = map.getMountains().get(index);
+                    enemy.setX(location.getX());
+                    enemy.setY(location.getY());
+                } else if (enemy.getSpeciesName() == Species.Squirtle) {
+                    index = randomGenerator.nextInt(map.getSea().size() - 1);
+                    location = map.getSea().get(index);
+                    enemy.setX(location.getX());
+                    enemy.setY(location.getY());
+                } else if (enemy.getSpeciesName() == Species.Pikachu || enemy.getSpeciesName() == Species.Mudkip) {
+                    index = randomGenerator.nextInt(map.getGrassland().size() - 1);
+                    location = map.getGrassland().get(index);
+                    enemy.setX(location.getX());
+                    enemy.setY(location.getY());
+                } else if (enemy.getSpeciesName() == Species.Gabumon) {
+                    index = randomGenerator.nextInt(map.getTundra().size() - 1);
+                    location = map.getTundra().get(index);
+                    enemy.setX(location.getX());
+                    enemy.setY(location.getY());
+                } else if (enemy.getSpeciesName() == Species.Charkachu) {
+                    ArrayList<Point> mountainsGrassland = new ArrayList<Point>();
+                    mountainsGrassland.addAll(map.getMountains());
+                    mountainsGrassland.addAll(map.getGrassland());
+                    index = randomGenerator.nextInt(mountainsGrassland.size() - 1);
+                    location = mountainsGrassland.get(index);
+                    enemy.setX(location.getX());
+                    enemy.setY(location.getY());
+                } else if (enemy.getSpeciesName() == Species.Squirmon) {
+                    ArrayList<Point> seaTundra = new ArrayList<Point>();
+                    seaTundra.addAll(map.getSea());
+                    seaTundra.addAll(map.getTundra());
+                    index = randomGenerator.nextInt(seaTundra.size() - 1);
+                    location = seaTundra.get(index);
+                    enemy.setX(location.getX());
+                    enemy.setY(location.getY());
+                } else if (enemy.getSpeciesName() == Species.Mudtle) {
+                    ArrayList<Point> seaGrassland = new ArrayList<Point>();
+                    seaGrassland.addAll(map.getSea());
+                    seaGrassland.addAll(map.getGrassland());
+                    index = randomGenerator.nextInt(seaGrassland.size() - 1);
+                    location = seaGrassland.get(index);
+                    enemy.setX(location.getX());
+                    enemy.setY(location.getY());
+                }
             }
         }
     }
