@@ -483,6 +483,15 @@ public class Player {
         return command+commandW+commandA+commandS+commandD+command1+command2+command3+command4
                 +command5+command6+command7+command8+command9;
     }
+    public Engimon getEngimonFromName(String name) {
+        Engimon engimon = new Engimon();
+        for (Engimon engi:getEngimonInventory()) {
+            if (engi.getName().equals(name)) {
+                engimon = engi;
+            }
+        }
+        return engimon;
+    }
     @Override
     public String toString() {
         return "Player{" +

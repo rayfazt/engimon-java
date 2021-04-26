@@ -21,7 +21,7 @@ import java.awt.*;
 import java.security.Key;
 import java.util.ArrayList;
 import java.util.Random;
-
+import java.util.Scanner;
 public class Game extends Application {
 
     private String mapFile = "src/main/resources/test.txt";
@@ -65,6 +65,8 @@ public class Game extends Application {
         PlayerEngimon A = new PlayerEngimon();
         listOfPlayerEngimon.add(A);
         listOfPlayerEngimon.add(B);
+        player.addEngimon(A);
+        player.addEngimon(B);
         gc = canvas.getGraphicsContext2D();
 
         scene.setOnKeyPressed(new EventHandler<KeyEvent>() {
@@ -103,16 +105,48 @@ public class Game extends Application {
                     setTextCommands();
                 } else if (code == KeyCode.DIGIT1) {
                     setTextListEngimon();
-                } else if (code == KeyCode.DIGIT3) {
+                }
+                else if (code == KeyCode.DIGIT2) {
+                    // TODO Menampilkan data lengkap suatu engimon
+                }
+                else if (code == KeyCode.DIGIT3) {
                     setTextActiveEngimon();
                 }
+
+                else if (code == KeyCode.DIGIT4) {
+                    // TODO Mengganti active engimon
+                }
+                else if (code == KeyCode.DIGIT5) {
+                    // TODO Menggunakan skill item pada suatu engimon
+                }
+                else if (code == KeyCode.DIGIT6) {
+                    // player.breed(A,B);
+                }
+                else if (code == KeyCode.DIGIT7) {
+                    // TODO Membuang X amount dari suatu skill item atau melepaskan engimon inventory
+                }
+                else if (code == KeyCode.DIGIT8) {
+                    // TODO Mengganti nama dari suatu engimon yang ada di inventory
+                    Scanner scanner = new Scanner(System.in);
+                    System.out.println("Nama engimon lama: ");
+                    String oldName = scanner.nextLine();
+                    System.out.println("Nama engimon baru: ");
+                    String newName = scanner.nextLine();
+                    Engimon oldEngimon = player.getEngimonFromName(oldName);
+                    player.changeEngimonName(oldEngimon,newName);
+                    // Ini asumsi namanya bener ajalah
+                    System.out.println("Berhasil diganti");
+                }
+                else if (code == KeyCode.DIGIT9) {
+                    // TODO Save game
+                }
                 /* TEST SHOW INVENTORY */
-//                else if (code == KeyCode.I) {
+                else if (code == KeyCode.I) {
 //                    InventorySkillItemGUI inv = new InventorySkillItemGUI();
 //                    inv.showInventorySkillItem(player);
-//                    InventoryEngimonGUI inv2 = new InventoryEngimonGUI();
-//                    inv2.showInventoryEngimon(player);
-//                }
+                    InventoryEngimonGUI inv2 = new InventoryEngimonGUI();
+                    inv2.showInventoryEngimon(player);
+                }
             }
         });
 
