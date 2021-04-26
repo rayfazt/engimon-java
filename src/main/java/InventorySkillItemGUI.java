@@ -19,6 +19,7 @@ public class InventorySkillItemGUI extends Application {
     Stage window;
     TableView<SkillItem> tableSkillItem;
 
+
     public ObservableList<SkillItem> getSkillItems() {
         Player pemain = new Player();
 
@@ -64,34 +65,12 @@ public class InventorySkillItemGUI extends Application {
         TableColumn<SkillItem, Integer> amountColumn = new TableColumn<>("Amount");
         amountColumn.setMinWidth(200);
         amountColumn.setCellValueFactory(new PropertyValueFactory<>("skillAmount"));
-        // TODO Skill icon column gimana caranya ya
-        TableColumn<SkillItem, Image> skillIconColumn = new TableColumn<>("Icon");
+        // SkillIcon Column
+        // TODO udah bisa, tapi kayaknya path masih jadi masalah
+        TableColumn<SkillItem, String> skillIconColumn = new TableColumn<>("Icon");
         skillIconColumn.setMinWidth(200);
-//        skillIconColumn.setCellFactory(new Image());
-//        skillIconColumn.setCellFactory(tc -> {
-//            imageView.setImage();
-//            setGraphic(imageView);
-//            final Image activeImage = new Image(...);
-//            final Image passiveImage = new Image(...);
-//            TableCell<User, Boolean> cell = new TableCell<User, Boolean>() {
-//                private ImageView imageView = new ImageView();
-//                @Override
-//                protected void updateItem(Boolean active, boolean empty) {
-//                    super.updateItem(active, empty);
-//                    if (empty) {
-//                        setGraphic(null);
-//                    } else {
-//                        if (active) {
-//                            imageView.setImage(activeImage);
-//                        } else {
-//                            imageView.setImage(passiveImage);
-//                        }
-//                        setGraphic(imageView);
-//                    }
-//                }
-//            };
-//            return cell ;
-//        });
+        skillIconColumn.setCellValueFactory(new PropertyValueFactory<>("photo"));
+
         tableSkillItem = new TableView<>();
         tableSkillItem.setItems(getSkillItems());
         tableSkillItem.getColumns().addAll(skillColumn,amountColumn,skillIconColumn);
