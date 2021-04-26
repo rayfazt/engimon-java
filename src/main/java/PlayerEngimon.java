@@ -19,12 +19,14 @@ public class PlayerEngimon extends Engimon{
         this.life = 3;
         this.status = EngimonStatus.PLAYER;
         this.active = false;
+        this.imagePath = this.getSpeciesName().toString()+"Player.png";
     }
     public PlayerEngimon(WildEngimon wEngimon){
         super(wEngimon.getName(), wEngimon.getSpeciesName(), wEngimon.getNamaPapa(), wEngimon.getNamaMama(), wEngimon.getSkills(), wEngimon.getX(), wEngimon.getY());
         this.life = 3;
         this.status = EngimonStatus.PLAYER;
         this.active = false;
+        this.imagePath = this.getSpeciesName().toString()+"Player.png";
     }
 
     // Setter & Getter life
@@ -49,6 +51,11 @@ public class PlayerEngimon extends Engimon{
     }
     public boolean getActive(){
         return this.active;
+    }
+
+    // Getter Image Path
+    public String getImagePath(){
+        return this.imagePath;
     }
 
     @Override
