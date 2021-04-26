@@ -252,6 +252,23 @@ public class Game extends Application {
                     FileSaverAndLoader.saveWildEngimons(enemies);
                     setTextSaveSuccess();
                 }
+                else if (code == KeyCode.B) {
+                    int x = player.getPlayerLocation().getX();
+                    int y = player.getPlayerLocation().getY();
+                    if (isEnemyPresent(x+1,y)!=null || isEnemyPresent(x-1,y)!=null || isEnemyPresent(x,y+1)!=null || isEnemyPresent(x,y-1)!=null) {
+                        ArrayList<WildEngimon> enemies = isBattleFeasible();
+                        for (WildEngimon enemy : enemies) {
+                            Battle war = new Battle(player, enemy);
+                            boolean win = war.commenceBattle();
+                            if (win)  {
+                                player.setPlayerLocation(enemy.getX(), enemy.getY());
+                            }
+                        }
+                    }
+                    else {
+                        text = "No enemy nearby";
+                    }
+                }
                 /* SHOW INVENTORY */
                 else if (code == KeyCode.I) {
                     InventorySkillItemGUI inv = new InventorySkillItemGUI();
