@@ -1,16 +1,27 @@
+import java.awt.*;
 import java.util.Comparator;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+
 public class SkillItem {
     private Skill skill;
     private int skillAmount;
-
+    private String imagePath;
+    private ImageView photo;
     public SkillItem() {
         Skill defaultSkill = new Skill();
         this.skill = defaultSkill;
         this.skillAmount = 1;
+        this.imagePath = "/main/resources/"+defaultSkill.getMasteryLevel() + ".png";
+        this.photo = new ImageView(new Image(this.getClass().getResourceAsStream(getImagePath())));
     }
     public SkillItem(Skill skill, int amount) {
         this.skill = skill;
         this.skillAmount = amount;
+        // this.imagePath = skill.getMasteryLevel() + ".png";
+        this.imagePath = "/main/resources/"+ skill.getMasteryLevel() + ".png";
+        this.photo = new ImageView(new Image(this.getClass().getResourceAsStream(getImagePath())));
+
     }
     public void addSkillItem(int amount) {
         this.skillAmount += amount;
@@ -49,10 +60,18 @@ public class SkillItem {
            // descending order
            return basePower2.compareTo(basePower1);
         }};
-
-    public static void main(String[] args) {
-        SkillItem a = new SkillItem();
-        System.out.println(a.toString());
-
+    public String getImagePath() {
+        return this.imagePath;
     }
+    public void setImagePath(String imagePath) {
+        this.imagePath = imagePath;
+    }
+    public ImageView getPhoto() {
+        return this.photo;
+    }
+//    public static void main(String[] args) {
+//        SkillItem a = new SkillItem();
+//        System.out.println(a.toString());
+//
+//    }
 }
