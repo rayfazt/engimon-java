@@ -12,7 +12,7 @@ public class Inventory<T> {
         inventoryList.add(item);
     }
     public void delItem(T item) {
-        inventoryList.remove(item); // kenapa ambiguous tadi
+        inventoryList.remove(item);
     }
     public void printInventory() {
         for (T t : inventoryList) {
