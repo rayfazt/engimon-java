@@ -136,14 +136,6 @@ public class Game extends Application {
                 }
 
                 else if (code == KeyCode.DIGIT4) {
-//                    // TODO Mengganti active engimon
-//                    Scanner scanner = new Scanner(System.in);
-//                    System.out.println("Nama active engimon baru: ");
-//                    String newName = scanner.nextLine();
-//                    PlayerEngimon newEngimon = player.getEngimonFromName(newName);
-//                    player.setActiveEngimon(newEngimon);
-//                    // Ini asumsi namanya bener ajalah
-//                    System.out.println("Active engimon berhasil diganti");
                     for (int i = 0; i < listOfPlayerEngimon.size(); i++){
                         System.out.println((i+1) + ". " + listOfPlayerEngimon.get(i).getName());
                     }
