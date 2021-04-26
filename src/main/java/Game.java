@@ -102,6 +102,8 @@ public class Game extends Application {
                         moveRight();
                         turn++;
                         randomMoveEnemies();
+                        addEnemiesEXP();
+                        killEnemies();
                     } catch (Exception e){
                         System.out.println("Right border");
                     }
@@ -110,6 +112,8 @@ public class Game extends Application {
                         moveLeft();
                         turn++;
                         randomMoveEnemies();
+                        addEnemiesEXP();
+                        killEnemies();
                     } catch (Exception e){
                         System.out.println("Left border");
                     }
@@ -118,6 +122,8 @@ public class Game extends Application {
                         moveUp();
                         turn++;
                         randomMoveEnemies();
+                        addEnemiesEXP();
+                        killEnemies();
                     } catch (Exception e){
                         System.out.println("Top border");
                     }
@@ -126,6 +132,8 @@ public class Game extends Application {
                         moveDown();
                         turn++;
                         randomMoveEnemies();
+                        addEnemiesEXP();
+                        killEnemies();
                     } catch (Exception e){
                         System.out.println("Bottom border");
                     }
@@ -261,6 +269,23 @@ public class Game extends Application {
                     FileSaverAndLoader.savePlayer(player);
                     FileSaverAndLoader.saveWildEngimons(enemies);
                     setTextSaveSuccess();
+                }
+                else if (code == KeyCode.B) {
+                    int x = player.getPlayerLocation().getX();
+                    int y = player.getPlayerLocation().getY();
+                    if (isEnemyPresent(x+1,y)!=null || isEnemyPresent(x-1,y)!=null || isEnemyPresent(x,y+1)!=null || isEnemyPresent(x,y-1)!=null) {
+                        ArrayList<WildEngimon> enemies = isBattleFeasible();
+                        for (WildEngimon enemy : enemies) {
+                            Battle war = new Battle(player, enemy);
+                            boolean win = war.commenceBattle();
+                            if (win)  {
+                                player.setPlayerLocation(enemy.getX(), enemy.getY());
+                            }
+                        }
+                    }
+                    else {
+                        text = "No enemy nearby";
+                    }
                 }
                 /* SHOW INVENTORY */
                 else if (code == KeyCode.I) {
@@ -460,6 +485,16 @@ public class Game extends Application {
             for (WildEngimon enemy: enemies) {
                 enemy.setCurrExp(enemy.getCurrExp() + 100);
                 enemy.updateEngimonLevel();
+            }
+        }
+    }
+
+    private void killEnemies() {
+        if (turn % 5 == 0) {
+            for (WildEngimon enemy: enemies) {
+                if (enemy.getCurrExp() >= MAXEXP) {
+                    enemies.remove(enemy);
+                }
             }
         }
     }
