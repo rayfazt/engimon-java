@@ -326,11 +326,6 @@ public class Player implements java.io.Serializable{
         Map< ArrayList<ElementType>,List<PlayerEngimon>> byElement = listEngimon.inventoryList.stream().collect(Collectors.groupingBy(Engimon::getElements));
         return byElement;
     }
-//    public void sortEngimonProc() {
-//        listEngimon.inventoryList.sort(Engimon.engimonLevelComparator);
-//        Map< ArrayList<ElementType>,List<PlayerEngimon>> byElement = listEngimon.inventoryList.stream().collect(Collectors.groupingBy(Engimon::getElements));
-//        return byElement;
-//    }
 
     public void printSortedEngimon() {
         Map<ArrayList<ElementType>,List<PlayerEngimon>> sortedEngimon = sortEngimon();
@@ -370,7 +365,6 @@ public class Player implements java.io.Serializable{
     }
 
     /* LIST SKILLITEM */
-    // TODO masteryLevelnya juga disamain
     public int searchSkillIdx(Skill sk) {
         int i = 0;
         for (SkillItem skill : listSkill.getInventoryList()) {
@@ -516,18 +510,17 @@ public class Player implements java.io.Serializable{
         }
         return skill;
     }
+
     @Override
     public String toString() {
-        return "Player{" +
-                "location=" + location +
-//                ", icon=" + icon +
-                ", activeEngimon=" + activeEngimon +
-                ", listSkill=" + listSkill +
-                ", listEngimon=" + listEngimon +
-                ", maxCapacity=" + maxCapacity +
-                '}';
+        return "PLAYER" +
+                "\nlocation=" + location +
+                ",\nicon=" + icon +
+                ",\nactiveEngimon=" + activeEngimon +
+                ",\nlistSkill=" + listSkill +
+                ",\nlistEngimon=" + listEngimon +
+                ",\nmaxCapacity=" + maxCapacity;
     }
-
 //     public static void main(String[] args) {
 //         Player pemain = new Player();
 //         Skill fireSkill = new Skill("FireSkill", 100, 1, ElementType.FIRE);

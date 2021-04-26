@@ -478,22 +478,21 @@ public class Engimon implements java.io.Serializable{
 
     @Override
     public String toString() {
-        return "Engimon{" +
-                "name='" + name + '\'' +
-                ", speciesName=" + speciesName +
-                ", teksUnik='" + teksUnik + '\'' +
-                ", parent=" + parent +
-                ", skills=" + skills +
-                ", elements=" + elements +
-                ", speciesPapa=" + speciesPapa +
-                ", speciesMama=" + speciesMama +
-                ", level=" + level +
-                ", currExp=" + currExp +
-                ", maxExp=" + maxExp +
+        return "ENGIMON " +
+                "\nname ='" + name + '\'' +
+                ",\n speciesName=" + speciesName +
+                ",\n teksUnik='" + teksUnik + '\'' +
+                ",\n parent=" + parent +
+                ",\n skills=" + skills +
+                ",\n elements=" + elements +
+                ",\nspeciesPapa=" + speciesPapa +
+                ",\n speciesMama=" + speciesMama +
+                ",\n level=" + level +
+                ",\n currExp=" + currExp +
+                ",\n maxExp=" + maxExp;
 //                ", location=" + location +
 //                ", icon=" + icon +
 //                ", imagePath='" + imagePath + '\'' +
-                '}';
     }
 
     public void printInfo() {

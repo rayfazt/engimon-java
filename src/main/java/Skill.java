@@ -51,13 +51,14 @@ public class Skill implements java.io.Serializable{
 
     @Override
     public String toString() {
-        return "Skill{" +
-                "skillName='" + skillName + '\'' +
-                ", basePower=" + basePower +
-                ", masteryLevel=" + masteryLevel +
-                ", learnableElements=" + learnableElements +
-                '}';
+        return "SKILL" +
+                "\nskillName='" + skillName + '\'' +
+                ",\nbasePower=" + basePower +
+                ",\nmasteryLevel=" + masteryLevel +
+                ",\nlearnableElements=" + learnableElements;
     }
+
+
 
 //    public static void main(String[] args) {
 //        Skill a = new Skill();

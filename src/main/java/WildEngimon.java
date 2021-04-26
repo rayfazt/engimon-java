@@ -102,10 +102,9 @@ public class WildEngimon extends Engimon{
     @Override
     public String toString() {
         String engimonString = super.toString();
-        return engimonString + "\nWildEngimon{" +
-                "life=" + life +
-                ", status=" + status +
-                '}';
+        return engimonString + "\nWILD ENGIMON" +
+                "\nlife=" + life +
+                ",\nstatus=" + status;
     }
         public static void main(String args[]){
         WildEngimon A = new WildEngimon();

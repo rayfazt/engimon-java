@@ -153,11 +153,10 @@ public class PlayerEngimon extends Engimon{
     @Override
     public String toString() {
         String engimonString = super.toString();
-        return engimonString + "\nPlayerEngimon{" +
-                "life=" + life +
-                ", status=" + status +
-                ", active=" + active +
-                '}';
+        return engimonString + "\nPlayer Engimon" +
+                "\nlife=" + life +
+                ",\nstatus=" + status +
+                ",\n active=" + active;
     }
 
 

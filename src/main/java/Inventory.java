@@ -22,8 +22,6 @@ public class Inventory<T> implements java.io.Serializable{
 
     @Override
     public String toString() {
-        return "Inventory{" +
-                "inventoryList=" + inventoryList +
-                '}';
+        return "Inventory =\n " + inventoryList;
     }
 }

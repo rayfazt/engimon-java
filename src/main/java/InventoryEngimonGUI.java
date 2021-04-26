@@ -1,22 +1,13 @@
-import javafx.application.Application;
+import java.util.ArrayList;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.Scene;
-import javafx.scene.control.*;
-import javafx.scene.control.cell.ComboBoxListCell;
-import javafx.scene.control.cell.MapValueFactory;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
-import javafx.util.Pair;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-import java.util.stream.Collectors;
 
 public class InventoryEngimonGUI {
 
@@ -37,8 +28,8 @@ public class InventoryEngimonGUI {
         speciesNameColumn.setCellValueFactory(new PropertyValueFactory<>("speciesName"));
         // Elements  column
         TableColumn<Engimon, ArrayList<ElementType>> elementsColumn = new TableColumn<>("Elements");
-        speciesNameColumn.setMinWidth(200);
-        speciesNameColumn.setCellValueFactory(new PropertyValueFactory<>("elements"));
+        elementsColumn.setMinWidth(200);
+        elementsColumn.setCellValueFactory(new PropertyValueFactory<>("elements"));
         // Parent -> string, species Papa, string species Mama
         TableColumn<Engimon, Species> speciesPapaColumn = new TableColumn<>("Species papa");
         speciesPapaColumn.setMinWidth(200);
@@ -61,7 +52,7 @@ public class InventoryEngimonGUI {
 
         tableEngimon = new TableView<>();
         tableEngimon.setItems(getEngimons(p));
-        tableEngimon.getColumns().addAll(nameEngimonColumn,speciesNameColumn,speciesPapaColumn,speciesMamaColumn,currExpColumn,maxExpColumn);
+        tableEngimon.getColumns().addAll(nameEngimonColumn,speciesNameColumn,elementsColumn,speciesPapaColumn,speciesMamaColumn,currExpColumn,maxExpColumn);
         VBox vBox = new VBox();
         vBox.getChildren().addAll(tableEngimon);
         Scene scene = new Scene(vBox);

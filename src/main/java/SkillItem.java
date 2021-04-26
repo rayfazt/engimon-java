@@ -31,7 +31,7 @@ public class SkillItem implements java.io.Serializable{
     }
     @Override
     public String toString() {
-        return "Skill: " + this.getSkill().getSkillName() + "\nJumlah: "+this.getSkillAmount();
+        return "Nama Skill: " + this.getSkill().getSkillName() + "\nJumlah: "+this.getSkillAmount();
     }
     // public void printInfo() {
     //     System.out.println("Skill: "+ this.getSkill().getSkillName());
