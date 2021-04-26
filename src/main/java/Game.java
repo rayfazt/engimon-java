@@ -165,7 +165,7 @@ public class Game extends Application {
                     for (int i = 0; i < player.getEngimonInventory().size(); i++){
                         System.out.println((i+1) + ". " + player.getEngimonInventory().get(i).getName());
                     }
-                    System.out.println("Masukkan nama engimon yang ingin diaktifkan: ");
+                    System.out.println("Masukkan nomor engimon yang ingin diaktifkan: ");
                     Scanner scanner = new Scanner(System.in);
                     int nomorEngimon = scanner.nextInt();
                     System.out.println(nomorEngimon);
