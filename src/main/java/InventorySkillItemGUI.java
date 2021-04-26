@@ -19,6 +19,7 @@ public class InventorySkillItemGUI extends Application {
     Stage window;
     TableView<SkillItem> tableSkillItem;
 
+
     public ObservableList<SkillItem> getSkillItems() {
         Player pemain = new Player();
 
@@ -57,19 +58,22 @@ public class InventorySkillItemGUI extends Application {
         window = primaryStage;
         window.setTitle("Inventory SkillItem");
 
-
-
         // Skill column
-        TableColumn<SkillItem, String> skillColumn = new TableColumn<>("Skill");
+        TableColumn<SkillItem, String> skillColumn = new TableColumn<>("Skill Name");
         skillColumn.setCellValueFactory(new PropertyValueFactory<>("skill"));
         // Amount column
         TableColumn<SkillItem, Integer> amountColumn = new TableColumn<>("Amount");
         amountColumn.setMinWidth(200);
         amountColumn.setCellValueFactory(new PropertyValueFactory<>("skillAmount"));
+        // SkillIcon Column
+        // TODO udah bisa, tapi kayaknya path masih jadi masalah
+        TableColumn<SkillItem, String> skillIconColumn = new TableColumn<>("Icon");
+        skillIconColumn.setMinWidth(200);
+        skillIconColumn.setCellValueFactory(new PropertyValueFactory<>("photo"));
 
         tableSkillItem = new TableView<>();
         tableSkillItem.setItems(getSkillItems());
-        tableSkillItem.getColumns().addAll(skillColumn,amountColumn);
+        tableSkillItem.getColumns().addAll(skillColumn,amountColumn,skillIconColumn);
         VBox vBox = new VBox();
         vBox.getChildren().addAll(tableSkillItem);
         Scene scene = new Scene(vBox);

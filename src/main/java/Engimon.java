@@ -599,6 +599,43 @@ public class Engimon {
         return  Species.Charizard;
     }
 
+    public double battleAdvantage(Engimon engimonWild) {
+        List<ElementType> elementsPlayer = this.getElements();
+        List<ElementType> elementsWild = engimonWild.getElements();
+
+        double maxAdv = 0;
+        double currAdv;
+        for (ElementType elementPlayer : elementsPlayer) {
+            Element elP = new Element(elementPlayer);
+            for (ElementType elementWild : elementsWild) {
+                currAdv = elP.getAdvantage(elementWild);
+                if (currAdv > maxAdv) {
+                    maxAdv = currAdv;
+                }
+            }
+        }
+
+        return maxAdv;
+    }
+
+    public double getPower(double advantage) {
+        List<Skill> skills = this.getSkills();
+        int base;
+        int mastery;
+        int sumSkill = 0;
+
+        for (Skill skill : skills) {
+            base = skill.getBasePower();
+            mastery = skill.getMasteryLevel();
+            sumSkill += base * mastery;
+        }
+
+        double power = this.getLevel() * advantage + sumSkill;
+
+        return power;
+    }
+
+
 
 
     public static void main(String args[]){

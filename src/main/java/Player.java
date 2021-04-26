@@ -322,6 +322,12 @@ public class Player {
         Map< ArrayList<ElementType>,List<Engimon>> byElement = listEngimon.inventoryList.stream().collect(Collectors.groupingBy(Engimon::getElements));
         return byElement;
     }
+//    public void sortEngimonProc() {
+//        listEngimon.inventoryList.sort(Engimon.engimonLevelComparator);
+//        Map< ArrayList<ElementType>,List<Engimon>> byElement = listEngimon.inventoryList.stream().collect(Collectors.groupingBy(Engimon::getElements));
+//        return byElement;
+//    }
+
     public void printSortedEngimon() {
         Map<ArrayList<ElementType>,List<Engimon>> sortedEngimon = sortEngimon();
         sortedEngimon.forEach((key, value) -> System.out.println(key + ":" + value));

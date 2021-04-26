@@ -19,6 +19,32 @@ public class WildEngimon extends Engimon{
         // this.imagePath = ""; //  image buat wildEngimon (gausah deng)
 
     }
+    public WildEngimon(String name_, Species species_, String namaPapa_, String namaMama,
+                       ArrayList<Skill> skill_, int X_, int Y_, PlayerEngimon player){
+        super(name_, species_, namaPapa_, namaMama, skill_, X_, Y_);
+        this.life = 1;
+        this.status = EngimonStatus.WILD;
+        this.updateImage(player);
+
+    }
+
+    //Update Image Wild Engimon
+    public void updateImage(PlayerEngimon player){
+        if (player.getActive()){
+            double advWild = this.battleAdvantage(player);
+            double pwrWild = this.getPower(advWild);
+
+            double advPlayer = player.battleAdvantage(this);
+            double pwrPlayer = player.getPower(advPlayer);
+
+            if (pwrPlayer > pwrWild){
+                this.setImagePath(getSpeciesName().toString()+"High.png");
+            }
+            else{
+                this.setImagePath(getSpeciesName().toString()+"Low.png");
+            }
+        }
+    }
 
     // Setter & Getter life
     public void setLife(int newLife){
