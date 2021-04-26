@@ -6,6 +6,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.control.Tooltip;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.paint.Color;
@@ -134,7 +135,7 @@ public class Game extends Application {
                     String oldName = scanner.nextLine();
                     System.out.println("Nama engimon baru: ");
                     String newName = scanner.nextLine();
-                    Engimon oldEngimon = player.getEngimonFromName(oldName);
+                    PlayerEngimon oldEngimon = player.getEngimonFromName(oldName);
                     player.changeEngimonName(oldEngimon,newName);
                     // Ini asumsi namanya bener ajalah
                     System.out.println("Berhasil diganti");
