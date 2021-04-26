@@ -12,14 +12,14 @@ public class SkillItem {
         Skill defaultSkill = new Skill();
         this.skill = defaultSkill;
         this.skillAmount = 1;
-        this.imagePath = "/main/resources/"+defaultSkill.getMasteryLevel() + ".png";
+        this.imagePath = defaultSkill.getMasteryLevel() + ".png";
         this.photo = new ImageView(new Image(this.getClass().getResourceAsStream(getImagePath())));
     }
     public SkillItem(Skill skill, int amount) {
         this.skill = skill;
         this.skillAmount = amount;
         // this.imagePath = skill.getMasteryLevel() + ".png";
-        this.imagePath = "/main/resources/"+ skill.getMasteryLevel() + ".png";
+        this.imagePath = skill.getMasteryLevel() + ".png";
         this.photo = new ImageView(new Image(this.getClass().getResourceAsStream(getImagePath())));
 
     }

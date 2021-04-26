@@ -41,9 +41,6 @@ public class Skill {
         return this.masteryLevel;
     }
 
-//    public String getImagePath() {
-//        return this.imagePath;
-//    }
     public ArrayList<ElementType> getLearnableElements() {
         return this.learnableElements;
     }
@@ -51,13 +48,6 @@ public class Skill {
     public void setMasteryLevel(int level) {
         this.masteryLevel = level;
     }
-
-//    public void setImagePath(String imagePath) {
-//        this.imagePath = imagePath;
-//    }
-//    public ImageView getPhoto() {
-//        return this.photo;
-//    }
 
     @Override
     public String toString() {

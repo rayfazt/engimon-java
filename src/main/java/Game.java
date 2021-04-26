@@ -106,6 +106,13 @@ public class Game extends Application {
                 } else if (code == KeyCode.DIGIT3) {
                     setTextActiveEngimon();
                 }
+                /* TEST SHOW INVENTORY */
+//                else if (code == KeyCode.I) {
+//                    InventorySkillItemGUI inv = new InventorySkillItemGUI();
+//                    inv.showInventorySkillItem(player);
+//                    InventoryEngimonGUI inv2 = new InventoryEngimonGUI();
+//                    inv2.showInventoryEngimon(player);
+//                }
             }
         });
 
