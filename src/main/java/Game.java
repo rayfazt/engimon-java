@@ -14,6 +14,7 @@ import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
 import javafx.util.Duration;
 import javafx.scene.image.Image;
+import javafx.scene.control.Button;
 
 import java.awt.*;
 import java.security.Key;
@@ -37,6 +38,9 @@ public class Game extends Application {
 
     private static final String playerIcon = "player.png";
     private Image playerImage;
+
+    private ArrayList<Integer> listOfPlayerEngimon = new ArrayList<Integer>();
+    private Integer turn = 0;
 
 
     private GraphicsContext gc;
@@ -93,17 +97,31 @@ public class Game extends Application {
 
         generateEnemies();
 
-        Timeline timeline = new Timeline(new KeyFrame(Duration.millis(130), e -> run(gc)));
+        Timeline timeline = new Timeline(new KeyFrame(Duration.millis(130), e -> run(gc, root)));
         timeline.setCycleCount(Animation.INDEFINITE);
         timeline.play();
     }
 
-    private void run(GraphicsContext gc) {
+    private void run(GraphicsContext gc, Group root) {
         writeText(gc);
         drawBackground(gc);
         drawPlayer(gc);
         drawWildEngimon(gc);
+        EngimonButton(listOfPlayerEngimon, turn, root);
+        turn++;
     }
+
+    private void EngimonButton(ArrayList<Integer> listOfPlayerEngimon, Integer turn, Group root){
+        int size = listOfPlayerEngimon.size();
+        listOfPlayerEngimon.add(turn);
+        for (int i = size; i < listOfPlayerEngimon.size(); i++){
+            Button btn = new Button(turn.toString());
+            btn.setLayoutX(900);
+            btn.setLayoutY(200 + 50*turn);
+            root.getChildren().add(btn);
+        }
+    }
+
 
     private void moveRight() throws Exception{
         int x = player.getPlayerLocation().getX();
