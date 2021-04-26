@@ -97,7 +97,7 @@ public class Game extends Application {
             @Override
             public void handle(KeyEvent event) {
                 KeyCode code = event.getCode();
-                if (code == KeyCode.RIGHT || code == KeyCode.D) {
+                if (code == KeyCode.D) {
                     try {
                         moveRight();
                         turn++;
@@ -107,7 +107,7 @@ public class Game extends Application {
                     } catch (Exception e){
                         System.out.println("Right border");
                     }
-                } else if (code == KeyCode.LEFT || code == KeyCode.A) {
+                } else if (code == KeyCode.A) {
                     try {
                         moveLeft();
                         turn++;
@@ -117,7 +117,7 @@ public class Game extends Application {
                     } catch (Exception e){
                         System.out.println("Left border");
                     }
-                } else if (code == KeyCode.UP || code == KeyCode.W) {
+                } else if (code == KeyCode.W) {
                     try {
                         moveUp();
                         turn++;
@@ -127,7 +127,7 @@ public class Game extends Application {
                     } catch (Exception e){
                         System.out.println("Top border");
                     }
-                } else if (code == KeyCode.DOWN || code == KeyCode.S) {
+                } else if (code == KeyCode.S) {
                     try {
                         moveDown();
                         turn++;
@@ -323,7 +323,7 @@ public class Game extends Application {
         int currButtonSize = playerEngimonButton.size();
         int size = listOfPlayerEngimon.size();
         for (int i = currButtonSize; i < listOfPlayerEngimon.size(); i++){
-            Button btn = new Button(listOfPlayerEngimon.get(i).getSpeciesName().toString());
+            Button btn = new Button(listOfPlayerEngimon.get(i).getName().toString());
             btn.setLayoutX(900);
             btn.setLayoutY(300 + 50*i);
             btn.setTooltip(new Tooltip(listOfPlayerEngimon.get(i).printInfoTooltip()));
@@ -337,7 +337,8 @@ public class Game extends Application {
                             listOfPlayerEngimon.get(j).setActiveFalse();
                         }
                     }
-                    System.out.println(listOfPlayerEngimon.get(finalI).getSpeciesName().toString() + " is active");
+                    System.out.println(listOfPlayerEngimon.get(finalI).getName().toString() + " is active");
+                    text = listOfPlayerEngimon.get(finalI).getSpeciesName().toString() + " is active";
                 }
             });
             root.getChildren().add(btn);

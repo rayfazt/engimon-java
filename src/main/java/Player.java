@@ -474,10 +474,10 @@ public class Player implements java.io.Serializable{
     }
     public String stringCommands() {
         String command = "Command yang tersedia: ";
-        String commandW = "\nw/up: bergerak satu petak ke atas";
-        String commandA = "\na/left: bergerak satu petak ke kiri";
-        String commandS = "\ns/down: bergerak satu petak ke bawah";
-        String commandD = "\nd/right: bergerak satu petak ke kanan";
+        String commandW = "\nw: bergerak satu petak ke atas";
+        String commandA = "\na: bergerak satu petak ke kiri";
+        String commandS = "\ns: bergerak satu petak ke bawah";
+        String commandD = "\nd: bergerak satu petak ke kanan";
         String command1 = "\n1: Menampilkan list engimon yang dimiliki";
         String command2 = "\n2: Menampilkan data lengkap suatu engimon";
         String command3 = "\n3: Mengecek active engimon";
