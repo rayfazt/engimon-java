@@ -484,9 +484,10 @@ public class Player implements java.io.Serializable{
         String command7 = "\n7: Membuang X amount dari suatu skill item atau melepaskan engimon inventory";
         String command8 = "\n8: Mengganti nama dari suatu engimon yang ada di inventory";
         String command9 = "\n9: Save game";
-        String commandI = "\nI: Menampilkan inventory\n";
+        String commandI = "\nI: Menampilkan inventory skill";
+        String commandE = "\nE: Menampilkan inventory engimon\n";
         return command+commandW+commandA+commandS+commandD+command1+command2+command3+command4
-                +command5+command6+command7+command8+command9+commandI;
+                +command5+command6+command7+command8+command9+commandI+commandE;
     }
     public PlayerEngimon getEngimonFromName(String name) {
         PlayerEngimon engimon = new PlayerEngimon();

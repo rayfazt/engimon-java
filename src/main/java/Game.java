@@ -4,6 +4,7 @@ import java.util.Scanner;
 import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
+import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.Group;
@@ -13,6 +14,7 @@ import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Button;
 import javafx.scene.control.Tooltip;
 import javafx.scene.image.Image;
+import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
@@ -109,7 +111,8 @@ public class Game extends Application {
                     System.out.println("Nama engimon yang ingin dilihat: ");
                     String name = scanner.nextLine();
                     PlayerEngimon engi = player.getEngimonFromName(name);
-                    engi.printInfo();
+                    // engi.printInfo();
+                    setText(engi.toString());
                 }
                 else if (code == KeyCode.DIGIT3) {
                     setTextActiveEngimon();
@@ -140,14 +143,45 @@ public class Game extends Application {
                     player.setActiveEngimon(newEngimon);
                     player.useSkillItem(newEngimon,newSkill);
                     // Ini asumsi namanya bener ajalah
-                    System.out.println("Skill item berhasil digunakan");
+                    setText("Skill item "+newSkillName+ " berhasil digunakan pada engimon"+newEngimonName);
                 }
                 else if (code == KeyCode.DIGIT6) {
                     // player.breed(A,B);
                 }
                 else if (code == KeyCode.DIGIT7) {
-                    // TODO Membuang X amount dari suatu skill item atau melepaskan engimon inventory
-
+                    // TODO Membuang X amount dari suatu skill item
+                    // TODO Melepaskan engimon inventory
+                    // SEMUA ASUMSIIN BERHASIL GA ADA ERROR
+                    Scanner scanner = new Scanner(System.in);
+                    System.out.println("Commands:\n1. Membuang X amount dari suatu skill item\n2. Melepaskan engimon inventory");
+                    System.out.println("Masukkan input (1/2): ");
+                    int input = scanner.nextInt();
+                    if (input == 1) {
+                        Scanner scanner1 = new Scanner(System.in);
+                        System.out.println("Nama skill item yang ingin dihapus: ");
+                        String newSkillName = scanner1.nextLine();
+                        System.out.println("Mastery levelnya: ");
+                        int masteryLevel = scanner1.nextInt();
+                        SkillItem newSkill = player.getSkillItemFromName(newSkillName,masteryLevel);
+                        System.out.println("Jumlah amount skill item: ");
+                        int amountNewSkill = scanner1.nextInt();
+                        player.delXSkillItem(newSkill.getSkill(),amountNewSkill);
+                        // System.out.println("Berhasil dihapus");
+                        setText("Skill" + newSkillName + " sebanyak "+amountNewSkill+" berhasil dihapus");
+                    }
+                    else if (input == 2) {
+                        Scanner scanner2 = new Scanner(System.in);
+                        System.out.println("Nama engimon yang ingin dilepaskan: ");
+                        String newName = scanner2.nextLine();
+                        PlayerEngimon newEngimon = player.getEngimonFromName(newName);
+                        player.delEngimon(newEngimon);
+                        // System.out.println("Engimon berhasil dihapus");
+                        setText("Engimon "+newName+ " berhasil dihapus.");
+                    }
+                    else {
+                        // System.out.println("Invalid command!");
+                        setText("Invalid command!");
+                    }
                 }
                 else if (code == KeyCode.DIGIT8) {
                     // TODO Mengganti nama dari suatu engimon yang ada di inventory
@@ -159,15 +193,18 @@ public class Game extends Application {
                     PlayerEngimon oldEngimon = player.getEngimonFromName(oldName);
                     player.changeEngimonName(oldEngimon, newName);
                     // Ini asumsi namanya bener ajalah
-                    System.out.println("Berhasil diganti");
+                    // System.out.println("Berhasil diganti");
+                    setText("Nama engimon berhasil diganti dari" + oldName+" menjadi "+newName+"\nTekan tombol E untuk melihat inventory.\n");
                 }
                 else if (code == KeyCode.DIGIT9) {
                     // TODO Save game
                 }
-                /* TEST SHOW INVENTORY */
+                /* SHOW INVENTORY */
                 else if (code == KeyCode.I) {
-//                    InventorySkillItemGUI inv = new InventorySkillItemGUI();
-//                    inv.showInventorySkillItem(player);
+                    InventorySkillItemGUI inv = new InventorySkillItemGUI();
+                    inv.showInventorySkillItem(player);
+                }
+                else if (code == KeyCode.E) {
                     InventoryEngimonGUI inv2 = new InventoryEngimonGUI();
                     inv2.showInventoryEngimon(player);
                 }
@@ -418,7 +455,9 @@ public class Game extends Application {
         gc.drawImage(engimonImage, engimonX * SQUARE_SIZE, engimonY * SQUARE_SIZE, SQUARE_SIZE, SQUARE_SIZE);
     }
      */
-
+    private void setText(String teks) {
+        text = teks;
+    }
     private void setTextCommands() {
         text = player.stringCommands();
     }
