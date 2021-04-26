@@ -131,6 +131,7 @@ public class Game extends Application {
                     for (int k = 0; k < listOfPlayerEngimon.size(); k++){
                         if (listOfPlayerEngimon.get(k).getActive() == true){
                             System.out.println(listOfPlayerEngimon.get(k).getName() + " aktif");
+                            text = listOfPlayerEngimon.get(k).getName() + " aktif";
                         }
                     }
 
@@ -152,6 +153,7 @@ public class Game extends Application {
                     }
                     if (listOfPlayerEngimon.get(nomorEngimon-1).getActive() == true){
                         System.out.println(listOfPlayerEngimon.get(nomorEngimon-1).getName() + " sudah aktif");
+                        text = listOfPlayerEngimon.get(nomorEngimon-1).getName() + " sudah aktif";
                     }
 
 
