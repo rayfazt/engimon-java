@@ -6,6 +6,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.control.Tooltip;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.paint.Color;
@@ -109,6 +110,11 @@ public class Game extends Application {
                 }
                 else if (code == KeyCode.DIGIT2) {
                     // TODO Menampilkan data lengkap suatu engimon
+                    Scanner scanner = new Scanner(System.in);
+                    System.out.println("Nama engimon yang ingin dilihat: ");
+                    String name = scanner.nextLine();
+                    PlayerEngimon engi = player.getEngimonFromName(name);
+                    engi.printInfo();
                 }
                 else if (code == KeyCode.DIGIT3) {
                     setTextActiveEngimon();
@@ -116,15 +122,37 @@ public class Game extends Application {
 
                 else if (code == KeyCode.DIGIT4) {
                     // TODO Mengganti active engimon
+                    Scanner scanner = new Scanner(System.in);
+                    System.out.println("Nama active engimon baru: ");
+                    String newName = scanner.nextLine();
+                    PlayerEngimon newEngimon = player.getEngimonFromName(newName);
+                    player.setActiveEngimon(newEngimon);
+                    // Ini asumsi namanya bener ajalah
+                    System.out.println("Active engimon berhasil diganti");
                 }
                 else if (code == KeyCode.DIGIT5) {
                     // TODO Menggunakan skill item pada suatu engimon
+                    Scanner scanner = new Scanner(System.in);
+                    System.out.println("Nama engimon: ");
+                    String newEngimonName = scanner.nextLine();
+                    System.out.println("Nama skill item yang ingin digunakan: ");
+                    String newSkillName = scanner.nextLine();
+                    System.out.println("Mastery levelnya: ");
+                    int newMastery = scanner.nextInt();
+                    // harus sesuai ya
+                    PlayerEngimon newEngimon = player.getEngimonFromName(newEngimonName);
+                    SkillItem newSkill = player.getSkillItemFromName(newSkillName,newMastery);
+                    player.setActiveEngimon(newEngimon);
+                    player.useSkillItem(newEngimon,newSkill);
+                    // Ini asumsi namanya bener ajalah
+                    System.out.println("Skill item berhasil digunakan");
                 }
                 else if (code == KeyCode.DIGIT6) {
                     // player.breed(A,B);
                 }
                 else if (code == KeyCode.DIGIT7) {
                     // TODO Membuang X amount dari suatu skill item atau melepaskan engimon inventory
+
                 }
                 else if (code == KeyCode.DIGIT8) {
                     // TODO Mengganti nama dari suatu engimon yang ada di inventory
@@ -133,8 +161,8 @@ public class Game extends Application {
                     String oldName = scanner.nextLine();
                     System.out.println("Nama engimon baru: ");
                     String newName = scanner.nextLine();
-                    Engimon oldEngimon = player.getEngimonFromName(oldName);
-                    player.changeEngimonName(oldEngimon,newName);
+                    PlayerEngimon oldEngimon = player.getEngimonFromName(oldName);
+                    player.changeEngimonName(oldEngimon, newName);
                     // Ini asumsi namanya bener ajalah
                     System.out.println("Berhasil diganti");
                 }
@@ -163,7 +191,7 @@ public class Game extends Application {
         drawBackground(gc);
         drawPlayer(gc);
         drawWildEngimon(gc);
-        EngimonButton(listOfPlayerEngimon, root, playerEngimonButton);
+        EngimonButton(player.getEngimonInventory(), root, playerEngimonButton);
     }
 
     private void EngimonButton(ArrayList<PlayerEngimon> listOfPlayerEngimon, Group root, ArrayList<Button> playerEngimonButton){

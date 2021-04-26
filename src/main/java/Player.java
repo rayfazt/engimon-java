@@ -483,9 +483,10 @@ public class Player implements java.io.Serializable{
         String command6 = "\n6: Melaksanakan breeding antara dua engimon";
         String command7 = "\n7: Membuang X amount dari suatu skill item atau melepaskan engimon inventory";
         String command8 = "\n8: Mengganti nama dari suatu engimon yang ada di inventory";
-        String command9 = "\n9: Save game\n";
+        String command9 = "\n9: Save game";
+        String commandI = "\nI: Menampilkan inventory\n";
         return command+commandW+commandA+commandS+commandD+command1+command2+command3+command4
-                +command5+command6+command7+command8+command9;
+                +command5+command6+command7+command8+command9+commandI;
     }
     public PlayerEngimon getEngimonFromName(String name) {
         PlayerEngimon engimon = new PlayerEngimon();
@@ -495,6 +496,15 @@ public class Player implements java.io.Serializable{
             }
         }
         return engimon;
+    }
+    public SkillItem getSkillItemFromName(String skillName, int masteryLevel) {
+        SkillItem skill = new SkillItem();
+        for (SkillItem ski : getSkillItemInventory()) {
+            if ((ski.getSkill().getSkillName().equals(skillName) && (ski.getSkill().getMasteryLevel() == masteryLevel))) {
+                skill = ski;
+            }
+        }
+        return skill;
     }
     @Override
     public String toString() {
