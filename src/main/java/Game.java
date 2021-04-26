@@ -1,4 +1,5 @@
 import javafx.application.Application;
+import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.Group;
 import javafx.scene.Parent;
@@ -14,6 +15,7 @@ import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
 import javafx.util.Duration;
 import javafx.scene.image.Image;
+import javafx.scene.control.Button;
 
 import java.awt.*;
 import java.security.Key;
@@ -38,6 +40,10 @@ public class Game extends Application {
     private static final String playerIcon = "player.png";
     private Image playerImage;
 
+    private ArrayList<PlayerEngimon> listOfPlayerEngimon = new ArrayList<PlayerEngimon>();
+    private ArrayList<Button> playerEngimonButton = new ArrayList<Button>();
+    private Integer turn = 0;
+
 
     private GraphicsContext gc;
 
@@ -51,6 +57,14 @@ public class Game extends Application {
         primaryStage.setScene(scene);
         primaryStage.show();
 
+        ArrayList<Skill> skill__ = new ArrayList<Skill>();
+        Skill defSkill = new Skill();
+        skill__.add(defSkill);
+        PlayerEngimon B = new PlayerEngimon("Haihai", Species.Mudtle, "New Daddy", "New Mommy",
+                skill__,1, 1);
+        PlayerEngimon A = new PlayerEngimon();
+        listOfPlayerEngimon.add(A);
+        listOfPlayerEngimon.add(B);
         gc = canvas.getGraphicsContext2D();
 
         scene.setOnKeyPressed(new EventHandler<KeyEvent>() {
@@ -60,24 +74,28 @@ public class Game extends Application {
                 if (code == KeyCode.RIGHT || code == KeyCode.D) {
                     try {
                         moveRight();
+                        turn++;
                     } catch (Exception e){
                         System.out.println("Right border");
                     }
                 } else if (code == KeyCode.LEFT || code == KeyCode.A) {
                     try {
                         moveLeft();
+                        turn++;
                     } catch (Exception e){
                         System.out.println("Left border");
                     }
                 } else if (code == KeyCode.UP || code == KeyCode.W) {
                     try {
                         moveUp();
+                        turn++;
                     } catch (Exception e){
                         System.out.println("Top border");
                     }
                 } else if (code == KeyCode.DOWN || code == KeyCode.S) {
                     try {
                         moveDown();
+                        turn++;
                     } catch (Exception e){
                         System.out.println("Bottom border");
                     }
@@ -100,17 +118,44 @@ public class Game extends Application {
 
         generateEnemies();
 
-        Timeline timeline = new Timeline(new KeyFrame(Duration.millis(130), e -> run(gc)));
+        Timeline timeline = new Timeline(new KeyFrame(Duration.millis(130), e -> run(gc, root)));
         timeline.setCycleCount(Animation.INDEFINITE);
         timeline.play();
     }
 
-    private void run(GraphicsContext gc) {
+    private void run(GraphicsContext gc, Group root) {
         writeText(gc);
         drawBackground(gc);
         drawPlayer(gc);
         drawWildEngimon(gc);
+        EngimonButton(listOfPlayerEngimon, root, playerEngimonButton);
     }
+
+    private void EngimonButton(ArrayList<PlayerEngimon> listOfPlayerEngimon, Group root, ArrayList<Button> playerEngimonButton){
+        int currButtonSize = playerEngimonButton.size();
+        int size = listOfPlayerEngimon.size();
+        for (int i = currButtonSize; i < listOfPlayerEngimon.size(); i++){
+            Button btn = new Button(listOfPlayerEngimon.get(i).getSpeciesName().toString());
+            btn.setLayoutX(900);
+            btn.setLayoutY(0 + 50*i);
+            int finalI = i;
+            btn.setOnAction(new EventHandler<ActionEvent>(){
+                @Override
+                public void handle(ActionEvent eventEngimon){
+                    listOfPlayerEngimon.get(finalI).setActiveTrue();
+                    for (int j = 0; j < listOfPlayerEngimon.size(); j++){
+                        if (j != finalI){
+                            listOfPlayerEngimon.get(j).setActiveFalse();
+                        }
+                    }
+                    System.out.println(listOfPlayerEngimon.get(finalI).getSpeciesName().toString() + " is active");
+                }
+            });
+            root.getChildren().add(btn);
+            playerEngimonButton.add(btn);
+        }
+    }
+
 
     private void moveRight() throws Exception{
         int x = player.getPlayerLocation().getX();
