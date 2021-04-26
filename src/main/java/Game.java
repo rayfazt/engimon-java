@@ -76,8 +76,18 @@ public class Game extends Application {
         PlayerEngimon B = new PlayerEngimon("Haihai", Species.Mudtle, "New Daddy", "New Mommy",
                 skill__,1, 1);
         PlayerEngimon A = new PlayerEngimon();
-        listOfPlayerEngimon.add(A);
-        listOfPlayerEngimon.add(B);
+//        listOfPlayerEngimon.add(A);
+//        listOfPlayerEngimon.add(B);
+         Skill fireSkill = new Skill("FireSkill", 100, 1, ElementType.FIRE);
+         Skill waterSkill = new Skill("WaterSkill", 50, 1, ElementType.WATER);
+         Skill electricSkill = new Skill("electric",250,1, ElementType.ELECTRIC);
+         SkillItem sk1 = new SkillItem(fireSkill,3);
+         SkillItem sk2 = new SkillItem(waterSkill,5);
+         SkillItem sk3 = new SkillItem(electricSkill,2);
+         player.addSkillItem(sk1.getSkill(),sk1.getSkillAmount());
+         player.addSkillItem(sk2.getSkill(),sk2.getSkillAmount());
+         player.addSkillItem(sk3.getSkill(),sk3.getSkillAmount());
+         player.sortSkillItem();
         player.addEngimon(A);
         player.addEngimon(B);
 
@@ -144,22 +154,22 @@ public class Game extends Application {
                 }
 
                 else if (code == KeyCode.DIGIT4) {
-                    for (int i = 0; i < listOfPlayerEngimon.size(); i++){
-                        System.out.println((i+1) + ". " + listOfPlayerEngimon.get(i).getName());
+                    for (int i = 0; i < player.getEngimonInventory().size(); i++){
+                        System.out.println((i+1) + ". " + player.getEngimonInventory().get(i).getName());
                     }
                     System.out.println("Masukkan nama engimon yang ingin diaktifkan: ");
                     Scanner scanner = new Scanner(System.in);
-                    Integer nomorEngimon = scanner.nextInt();
+                    int nomorEngimon = scanner.nextInt();
                     System.out.println(nomorEngimon);
-                    listOfPlayerEngimon.get(nomorEngimon-1).setActiveTrue();
-                    for (int k = 0; k < listOfPlayerEngimon.size(); k++){
+                    player.getEngimonInventory().get(nomorEngimon-1).setActiveTrue();
+                    for (int k = 0; k < player.getEngimonInventory().size(); k++){
                         if (k != nomorEngimon-1){
-                            listOfPlayerEngimon.get(k).setActiveFalse();
+                            player.getEngimonInventory().get(k).setActiveFalse();
                         }
                     }
-                    if (listOfPlayerEngimon.get(nomorEngimon-1).getActive() == true){
-                        System.out.println(listOfPlayerEngimon.get(nomorEngimon-1).getName() + " sudah aktif");
-                        text = listOfPlayerEngimon.get(nomorEngimon-1).getName() + " sudah aktif";
+                    if (player.getEngimonInventory().get(nomorEngimon-1).getActive() == true){
+                        System.out.println(player.getEngimonInventory().get(nomorEngimon-1).getName() + " sudah aktif");
+                        text = player.getEngimonInventory().get(nomorEngimon-1).getName() + " sudah aktif";
                     }
 
 
