@@ -1,3 +1,4 @@
+import javafx.application.Application;
 import java.util.ArrayList;
 import java.util.Random;
 import java.util.Scanner;
@@ -8,17 +9,30 @@ import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.Group;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
-import javafx.scene.control.Button;
 import javafx.scene.control.Tooltip;
 import javafx.scene.image.Image;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
+import javafx.animation.Timeline;
+import javafx.animation.Animation;
+import javafx.animation.KeyFrame;
 import javafx.util.Duration;
+import javafx.scene.image.Image;
+import javafx.scene.control.Button;
+
+import java.awt.*;
+import java.lang.reflect.Array;
+import java.security.Key;
+import java.util.ArrayList;
+import java.util.Random;
+import java.util.Scanner;
+
 
 public class Game extends Application {
 
@@ -41,6 +55,7 @@ public class Game extends Application {
     private ArrayList<PlayerEngimon> listOfPlayerEngimon = new ArrayList<PlayerEngimon>();
     private ArrayList<Button> playerEngimonButton = new ArrayList<Button>();
     private Integer turn = 0;
+    private static final int MAXEXP = 10000;
 
 
     private GraphicsContext gc;
@@ -115,18 +130,35 @@ public class Game extends Application {
                     setText(engi.toString());
                 }
                 else if (code == KeyCode.DIGIT3) {
-                    setTextActiveEngimon();
+                    for (int k = 0; k < listOfPlayerEngimon.size(); k++){
+                        if (listOfPlayerEngimon.get(k).getActive() == true){
+                            System.out.println(listOfPlayerEngimon.get(k).getName() + " aktif");
+                            text = listOfPlayerEngimon.get(k).getName() + " aktif";
+                        }
+                    }
+
                 }
 
                 else if (code == KeyCode.DIGIT4) {
-                    // TODO Mengganti active engimon
+                    for (int i = 0; i < listOfPlayerEngimon.size(); i++){
+                        System.out.println((i+1) + ". " + listOfPlayerEngimon.get(i).getName());
+                    }
+                    System.out.println("Masukkan nama engimon yang ingin diaktifkan: ");
                     Scanner scanner = new Scanner(System.in);
-                    System.out.println("Nama active engimon baru: ");
-                    String newName = scanner.nextLine();
-                    PlayerEngimon newEngimon = player.getEngimonFromName(newName);
-                    player.setActiveEngimon(newEngimon);
-                    // Ini asumsi namanya bener ajalah
-                    System.out.println("Active engimon berhasil diganti");
+                    Integer nomorEngimon = scanner.nextInt();
+                    System.out.println(nomorEngimon);
+                    listOfPlayerEngimon.get(nomorEngimon-1).setActiveTrue();
+                    for (int k = 0; k < listOfPlayerEngimon.size(); k++){
+                        if (k != nomorEngimon-1){
+                            listOfPlayerEngimon.get(k).setActiveFalse();
+                        }
+                    }
+                    if (listOfPlayerEngimon.get(nomorEngimon-1).getActive() == true){
+                        System.out.println(listOfPlayerEngimon.get(nomorEngimon-1).getName() + " sudah aktif");
+                        text = listOfPlayerEngimon.get(nomorEngimon-1).getName() + " sudah aktif";
+                    }
+
+
                 }
                 else if (code == KeyCode.DIGIT5) {
                     // TODO Menggunakan skill item pada suatu engimon
@@ -390,6 +422,66 @@ public class Game extends Application {
         }
 
         return surroundingEnemies;
+    }
+
+    private void addEnemiesEXP() {
+        for (WildEngimon enemy: enemies) {
+            enemy.setCurrExp(enemy.getCurrExp() + 100);
+            enemy.updateEngimonLevel();
+        }
+    }
+
+    private void randomMoveEnemies() {
+        Random randomGenerator = new Random();
+        Point location;
+        int index;
+        for (WildEngimon enemy : enemies) {
+            if (enemy.getSpeciesName() == Species.Charizard) {
+                index = randomGenerator.nextInt(map.getMountains().size() - 1);
+                location = map.getMountains().get(index);
+                enemy.setX(location.getX());
+                enemy.setY(location.getY());
+            } else if (enemy.getSpeciesName() == Species.Squirtle) {
+                index = randomGenerator.nextInt(map.getSea().size() - 1);
+                location = map.getSea().get(index);
+                enemy.setX(location.getX());
+                enemy.setY(location.getY());
+            } else if (enemy.getSpeciesName() == Species.Pikachu || enemy.getSpeciesName() == Species.Mudkip) {
+                index = randomGenerator.nextInt(map.getGrassland().size() - 1);
+                location = map.getGrassland().get(index);
+                enemy.setX(location.getX());
+                enemy.setY(location.getY());
+            } else if (enemy.getSpeciesName() == Species.Gabumon) {
+                index = randomGenerator.nextInt(map.getTundra().size() - 1);
+                location = map.getTundra().get(index);
+                enemy.setX(location.getX());
+                enemy.setY(location.getY());
+            } else if (enemy.getSpeciesName() == Species.Charkachu) {
+                ArrayList<Point> mountainsGrassland = new ArrayList<Point>();
+                mountainsGrassland.addAll(map.getMountains());
+                mountainsGrassland.addAll(map.getGrassland());
+                index = randomGenerator.nextInt(mountainsGrassland.size() - 1);
+                location = mountainsGrassland.get(index);
+                enemy.setX(location.getX());
+                enemy.setY(location.getY());
+            } else if (enemy.getSpeciesName() == Species.Squirmon) {
+                ArrayList<Point> seaTundra = new ArrayList<Point>();
+                seaTundra.addAll(map.getSea());
+                seaTundra.addAll(map.getTundra());
+                index = randomGenerator.nextInt(seaTundra.size() - 1);
+                location = seaTundra.get(index);
+                enemy.setX(location.getX());
+                enemy.setY(location.getY());
+            } else if (enemy.getSpeciesName() == Species.Mudtle) {
+                ArrayList<Point> seaGrassland = new ArrayList<Point>();
+                seaGrassland.addAll(map.getSea());
+                seaGrassland.addAll(map.getGrassland());
+                index = randomGenerator.nextInt(seaGrassland.size() - 1);
+                location = seaGrassland.get(index);
+                enemy.setX(location.getX());
+                enemy.setY(location.getY());
+            }
+        }
     }
 
     private void drawBackground(GraphicsContext gc) {
