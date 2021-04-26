@@ -98,6 +98,48 @@ public class PlayerEngimon extends Engimon{
         System.out.println("Status: " + this.status);
     }
 
+    public String printInfoTooltip(){
+        String info = new String();
+        info = info + ("Engimon Name: " + getName().toString() + "\n");
+        info = info + ("Species: " + getSpeciesName() + "\n");
+        info = info + ("TeksUnik: " + getTeksUnik().toString() + "\n");
+        info = info + ("Parent: " + "Parent1: " + getNamaPapa().toString()+ ", Species1: " + getSpeciesPapa().toString()
+        + ". Parent2: " + getNamaMama().toString() + ", Species2: " + getSpeciesMama() + "\n");
+        info = info + ("Skill(s): ");
+        for (int i = 0; i < this.skills.size(); i++){
+            if (i != this.skills.size()-1){
+                info = info + (this.skills.get(i).getSkillName()+" (lv. " + this.skills.get(i).getMasteryLevel() + ")" +", ");
+            }
+            else{
+                info = info + (this.skills.get(i).getSkillName()+" (lv. " + this.skills.get(i).getMasteryLevel() + ")\n");
+            }
+
+        }
+
+        info = info + ("Element(s): ");
+        for (int i = 0; i < this.elements.size(); i++){
+            if (i != this.elements.size()-1){
+                info = info + (this.elements.get(i).toString()+", ");
+            }
+            else{
+                info = info + (this.elements.get(i).toString() + "\n");
+            }
+
+        }
+
+        info = info + ("Level: " + getLevel() + "\n");
+        info = info + ("Current EXP: " + getCurrExp() + "\n");
+        info = info + ("Max EXP: " + this.maxExp + "\n");
+        info = info + ("X: " + this.location.getX() + "\n");
+        info = info + ("Y: " + this.location.getY() + "\n");
+        info = info + ("Icon: " + this.icon + "\n");
+        info = info + ("Life: " + this.life + "\n");
+        info = info + ("Status: " + this.status + "\n");
+        info = info + ("Active: " + this.active + "\n");
+
+        return info;
+    }
+
     @Override
     public String toString() {
         String engimonString = super.toString();

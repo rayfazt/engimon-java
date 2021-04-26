@@ -1,9 +1,7 @@
 import java.util.*;
 import java.util.ArrayList;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.util.Pair;
-public class Engimon {
+public class Engimon implements java.io.Serializable{
     protected String name;
     protected Species speciesName;
     protected String teksUnik;
