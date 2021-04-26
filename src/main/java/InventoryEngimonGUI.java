@@ -9,7 +9,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
-import javafx.util.Pair;i
+import javafx.util.Pair;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
