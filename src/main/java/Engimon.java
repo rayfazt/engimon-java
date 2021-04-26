@@ -402,7 +402,7 @@ public class Engimon {
     }
 
     public void updateEngimonLevel(){
-        if (this.currExp > this.maxExp){
+        if (this.currExp >= this.maxExp){
             // int currExp_ = this.currExp % this.maxExp;
             // setCurrExp(currExp_);
             setLevel(getLevel() + 1);

@@ -106,7 +106,7 @@ public class Battle {
         System.out.println("Current " + this.engimonPlayer.getName() + " level : " + this.engimonPlayer.getLevel());
     }
 
-    public void addEngimon() {
+    public void addEnemyEngimon() {
         PlayerEngimon e = new PlayerEngimon(this.engimonWild);
         if (!this.player.isCapacityFull()) {
             this.player.addEngimon(e);
@@ -116,6 +116,11 @@ public class Battle {
             System.out.print("Inventory full, cannot add Engimon");
         }
     }
+
+//    public void addEnemySkill() {
+//        Skill s = this.engimonWild.getSkills().get(0);
+//        this.player.addSkill(s);
+//    }
 
     public void loseBattle() {
         int newLife = this.engimonPlayer.getLife() - 1;
@@ -137,8 +142,8 @@ public class Battle {
             // Player juga akan mendapatkan Skill Item yang berada skill di slot pertama dari engimon musuh.
             System.out.println("Your " + this.engimonPlayer.getName() + " won! Wild " + this.engimonWild.getName() + " fainted");
             increaseExp();
-            addEngimon();
-
+            addEnemyEngimon();
+//            addEnemySkill();
         }
         else {
             System.out.print("Wild " + this.engimonWild.getName() + " won! Your " + this.engimonPlayer.getName() + " fainted");
@@ -155,21 +160,21 @@ public class Battle {
 //        WildEngimon y = new WildEngimon();
 //        WildEngimon z = new WildEngimon();
 //        WildEngimon f = new WildEngimon();
-////        WildEngimon g = new WildEngimon();
-////        WildEngimon h = new WildEngimon();
-////        WildEngimon i = new WildEngimon();
-////        WildEngimon j = new WildEngimon();
-////        WildEngimon k = new WildEngimon();
+//        WildEngimon g = new WildEngimon();
+//        WildEngimon h = new WildEngimon();
+//        WildEngimon i = new WildEngimon();
+//        WildEngimon j = new WildEngimon();
+//        WildEngimon k = new WildEngimon();
 //        Battle b = new Battle(a,w);
 //        Battle b1 = new Battle(a,x);
 //        Battle b2 = new Battle(a,y);
 //        Battle b3 = new Battle(a,z);
 //        Battle b4 = new Battle(a,f);
-////        Battle b5 = new Battle(a,g);
-////        Battle b6 = new Battle(a,h);
-////        Battle b7 = new Battle(a,i);
-////        Battle b8 = new Battle(a,j);
-////        Battle b9 = new Battle(a,k);
+//        Battle b5 = new Battle(a,g);
+//        Battle b6 = new Battle(a,h);
+//        Battle b7 = new Battle(a,i);
+//        Battle b8 = new Battle(a,j);
+//        Battle b9 = new Battle(a,k);
 //        String choice = b.getChoice();
 //        while (!choice.equalsIgnoreCase("y") && !choice.equalsIgnoreCase("n")) {
 //            System.out.println("Invalid input");
@@ -181,15 +186,15 @@ public class Battle {
 //            battlez = b2.commenceBattle();
 //            battlez = b3.commenceBattle();
 //            battlez = b4.commenceBattle();
+//            battlez = b5.commenceBattle();
+//            battlez = b6.commenceBattle();
+//            battlez = b7.commenceBattle();
+//            battlez = b8.commenceBattle();
+//            battlez = b9.commenceBattle();
 //        }
 //        else if (choice.equalsIgnoreCase("n")) {
 //            System.out.println("Battle aborted");
 //        }
-////        battlez = b5.commenceBattle();
-////        battlez = b6.commenceBattle();
-////        battlez = b7.commenceBattle();
-////        battlez = b8.commenceBattle();
-////        battlez = b9.commenceBattle();
 //    }
 
 }
