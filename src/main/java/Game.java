@@ -182,7 +182,22 @@ public class Game extends Application {
                     setText("Skill item "+newSkillName+ " berhasil digunakan pada engimon"+newEngimonName);
                 }
                 else if (code == KeyCode.DIGIT6) {
-                    // player.breed(A,B);
+                    Scanner scanner = new Scanner(System.in);
+                    System.out.println("Nama parent pertama: ");
+                    String parent1Name = scanner.nextLine();
+                    System.out.println("Nama parent kedua: ");
+                    String parent2Name = scanner.nextLine();
+                    PlayerEngimon parent1 = player.searchEngimonInList(parent1Name);
+                    PlayerEngimon parent2 = player.searchEngimonInList(parent2Name);
+                    if (parent1 != null && parent2 != null) {
+                        try {
+                            player.breed(parent1, parent2);
+                        } catch (BreedException e) {
+                            System.out.println(e.getMessage());
+                        }
+                    } else {
+                        System.out.println("Tidak ada engimon dengan nama yang dimasukkan");
+                    }
                 }
                 else if (code == KeyCode.DIGIT7) {
                     // TODO Membuang X amount dari suatu skill item
@@ -233,7 +248,9 @@ public class Game extends Application {
                     setText("Nama engimon berhasil diganti dari" + oldName+" menjadi "+newName+"\nTekan tombol E untuk melihat inventory.\n");
                 }
                 else if (code == KeyCode.DIGIT9) {
-                    // TODO Save game
+                    FileSaverAndLoader.savePlayer(player);
+                    FileSaverAndLoader.saveWildEngimons(enemies);
+                    setTextSaveSuccess();
                 }
                 /* SHOW INVENTORY */
                 else if (code == KeyCode.I) {
@@ -568,6 +585,10 @@ public class Game extends Application {
 
     private void setTextActiveEngimon() {
         text = player.stringActiveEngimon();
+    }
+
+    private void setTextSaveSuccess() {
+        text = "Game saved successfully";
     }
 
     private void writeText(GraphicsContext gc) {

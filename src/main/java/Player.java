@@ -362,7 +362,7 @@ public class Player implements java.io.Serializable{
 
     public PlayerEngimon searchEngimonInList(String engimonName){
         for(PlayerEngimon engi : listEngimon.getInventoryList()){
-            if(engi.getName() == engimonName){
+            if(engi.getName().equals(engimonName)){
                 return engi;
             }
         }
