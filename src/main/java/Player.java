@@ -265,7 +265,7 @@ public class Player implements java.io.Serializable{
     //    Engimon anak = new Engimon(namaAnak, spAnak, e1.getName(), e2.getName(), e1.getSpeciesName(), e2.getSpeciesName(), skillAnak, locX, locY);
     //    anak.setIcon(iconAnak);
     //    this.listEngimon.addItem(anak);
-       PlayerEngimon anak = new PlayerEngimon(namaAnak, spAnak, e1.getName(), e2.getName(), skillAnak, locX, locY);
+       PlayerEngimon anak = new PlayerEngimon(namaAnak, spAnak, e1.getName(), e2.getName(), e1.getSpeciesName(), e2.getSpeciesName(), skillAnak, locX, locY);
        anak.setIcon(iconAnak);
        this.addEngimon(anak);
     }

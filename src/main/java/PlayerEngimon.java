@@ -21,6 +21,16 @@ public class PlayerEngimon extends Engimon{
         this.active = false;
         this.imagePath = this.getSpeciesName().toString()+"Player.png";
     }
+
+    public PlayerEngimon(String name_, Species speciesName_, String namaPapa, String namaMama,
+                         Species speciesPapa, Species speciesMama, ArrayList<Skill> skill_, int X_, int Y_){
+        super(name_, speciesName_, namaPapa, namaMama, speciesPapa, speciesMama, skill_, X_, Y_);
+        this.life = 3;
+        this.status = EngimonStatus.PLAYER;
+        this.active = false;
+        this.imagePath = this.getSpeciesName().toString()+"Player.png";
+    }
+
     public PlayerEngimon(WildEngimon wEngimon){
         super(wEngimon.getName(), wEngimon.getSpeciesName(), wEngimon.getNamaPapa(), wEngimon.getNamaMama(), wEngimon.getSkills(), wEngimon.getX(), wEngimon.getY());
         this.life = 3;
